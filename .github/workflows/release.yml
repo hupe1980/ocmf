@@ -108,22 +108,44 @@ jobs:
       - uses: actions/checkout@v4
       - uses: EmbarkStudios/cargo-deny-action@v2
 
-  # ── 4. API drift, blocking here rather than advisory ─────────────────────
+  # ── 4. API drift, blocking once there is anything to drift from ─────────
   #
-  # CI treats this as a dry run because nothing is published yet. A release is
-  # the moment it starts to mean something: the first tag establishes the
-  # baseline, and every later one is checked against the crates.io version.
+  # CI runs this advisory because a semver check needs a *baseline* — the
+  # version already on crates.io — and until the first release there is none.
+  # So the question is not "which version is this?" but "is the crate
+  # published?", asked of crates.io rather than assumed from a number. Once the
+  # answer is yes, the check is blocking, with no `continue-on-error` to soften
+  # it.
+  #
+  # The skip is a *step* condition, not a job one: a skipped job skips
+  # everything that needs it, and `publish` needs this.
   semver:
     name: semver-checks
     needs: verify
     runs-on: ubuntu-latest
-    continue-on-error: ${{ needs.verify.outputs.version == '0.1.0' }}
     steps:
       - uses: actions/checkout@v4
-      - uses: obi1kenobi/cargo-semver-checks-action@v2
+      - id: baseline
+        run: |
+          if curl -sSfI -A "$UA" "$API/ocmf" > /dev/null 2>&1; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::ocmf is not on crates.io yet, so there is no \
+            baseline to compare against. This release establishes it; every \
+            later one is checked against it."
+          fi
+        env:
+          API: https://crates.io/api/v1/crates
+          UA: ocmf-release-workflow (https://github.com/hupe1980/ocmf)
+      # `full` and not `--all-features`: `backend-openssl` adds no public item,
+      # and `vendored-openssl` would build OpenSSL from source to tell us so.
+      - if: steps.baseline.outputs.run == 'true'
+        uses: obi1kenobi/cargo-semver-checks-action@v2
         with:
           package: ocmf
-          feature-group: all-features
+          feature-group: only-explicit-features
+          features: full
 
   # ── 5. Binaries ─────────────────────────────────────────────────────────
   #
@@ -214,33 +236,69 @@ jobs:
 
   # ── 6. crates.io, in dependency order ────────────────────────────────────
   #
-  # `ocmf-cli` depends on `ocmf` by version, so the library goes first and the
-  # binary waits for the index to catch up. Neither step can be taken back.
+  # The only step here that cannot be taken back, and the one place a partial
+  # failure hurts: `ocmf-cli` depends on `ocmf` by version, so the library goes
+  # first and the binary waits for the sparse index — the thing cargo actually
+  # reads — to catch up.
+  #
+  # Both publishes are therefore **idempotent**. If the index wait times out, or
+  # the runner dies between the two, re-running the workflow picks up where it
+  # stopped instead of failing on "crate version already exists" and leaving the
+  # CLI unpublished. That property matters more here than anywhere else in this
+  # file.
   publish:
     name: crates.io
     needs: [verify, gate, deny, semver, binaries]
     if: needs.verify.outputs.publish == 'true'
     runs-on: ubuntu-latest
     environment: crates-io
+    env:
+      VERSION: ${{ needs.verify.outputs.version }}
+      CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - run: cargo publish -p ocmf --locked
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
-      - name: wait for the index
+      - name: publish ocmf, then ocmf-cli
         run: |
-          for _ in $(seq 1 30); do
-            if cargo info "ocmf@${{ needs.verify.outputs.version }}" > /dev/null 2>&1; then
+          # Where cargo looks a crate up. 1-, 2- and 3-character names are
+          # special-cased by the sparse-index layout; everything else is
+          # `{first two}/{next two}/{name}`.
+          index_url() {
+            local n="$1"
+            case ${#n} in
+              1) echo "https://index.crates.io/1/$n" ;;
+              2) echo "https://index.crates.io/2/$n" ;;
+              3) echo "https://index.crates.io/3/${n:0:1}/$n" ;;
+              *) echo "https://index.crates.io/${n:0:2}/${n:2:2}/$n" ;;
+            esac
+          }
+          in_index() {
+            curl -sSf "$(index_url "$1")" 2>/dev/null | grep -q "\"vers\":\"$2\""
+          }
+
+          publish() {
+            if in_index "$1" "$VERSION"; then
+              echo "::notice::$1 $VERSION is already on crates.io; nothing to do"
+              return 0
+            fi
+            cargo publish -p "$1" --locked
+          }
+
+          publish ocmf
+
+          # `ocmf-cli` resolves `ocmf` from the index, not from this checkout.
+          echo "waiting for ocmf $VERSION to appear in the index"
+          for _ in $(seq 1 60); do
+            if in_index ocmf "$VERSION"; then
+              publish ocmf-cli
               exit 0
             fi
             sleep 10
           done
-          echo "::error::ocmf ${{ needs.verify.outputs.version }} did not appear in the index"
+          echo "::error::ocmf $VERSION did not appear in the index within ten \
+          minutes. ocmf-cli is not published; re-run this workflow — the \
+          library publish is skipped when it is already there."
           exit 1
-      - run: cargo publish -p ocmf-cli --locked
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 
   # ── 7. The GitHub release ────────────────────────────────────────────────
   release:
