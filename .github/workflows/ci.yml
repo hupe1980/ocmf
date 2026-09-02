@@ -38,9 +38,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # `rust-toolchain.toml` decides the toolchain, its components and its
+      # targets — it overrides `rustup default`, so anything asked of the
+      # action here would be installed into a channel this job never uses.
       - uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: thumbv7em-none-eabihf, wasm32-unknown-unknown
       - uses: Swatinem/rust-cache@v2
       # The embedded promise is a CI job, not a sentence in the README.
       - run: |
@@ -57,9 +58,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # `rust-toolchain.toml` decides the toolchain, its components and its
+      # targets — it overrides `rustup default`, so anything asked of the
+      # action here would be installed into a channel this job never uses.
       - uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy, rustfmt
       - uses: Swatinem/rust-cache@v2
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --features "full,backend-openssl"
@@ -111,12 +113,19 @@ jobs:
         continue-on-error: true   # nothing is published yet; this is a dry run
 
   msrv:
+    name: MSRV 1.88
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@1.88.0
       - uses: Swatinem/rust-cache@v2
-      - run: cargo check -p ocmf --features full
+      # `rust-toolchain.toml` beats `rustup default`, so the toolchain has to be
+      # named on the command line — a bare `cargo check` here silently checks
+      # the pinned channel instead, and the gate proves nothing. The assertion
+      # is there so that stops being a comment nobody rereads.
+      - name: the compiler in use really is 1.88
+        run: cargo +1.88.0 --version | tee /dev/stderr | grep -q ' 1\.88'
+      - run: cargo +1.88.0 check -p ocmf --features full
 
   deny:
     runs-on: ubuntu-latest

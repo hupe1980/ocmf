@@ -60,10 +60,10 @@ jobs:
       RUSTFLAGS: "-D warnings"
     steps:
       - uses: actions/checkout@v4
+      # `rust-toolchain.toml` decides the toolchain, its components and its
+      # targets — it overrides `rustup default`, so anything asked of the
+      # action here would be installed into a channel this job never uses.
       - uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy, rustfmt
-          targets: thumbv7em-none-eabihf, wasm32-unknown-unknown
       - uses: Swatinem/rust-cache@v2
 
       - run: cargo fmt --all -- --check
@@ -173,9 +173,16 @@ jobs:
             os: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: ${{ matrix.target }}
+      # No `dtolnay/rust-toolchain` here on purpose. `rust-toolchain.toml`
+      # overrides `rustup default`, so the action would install a target into
+      # `stable` and the build would then run under the pinned channel without
+      # it — which is exactly the shape of "target may not be installed". The
+      # pinned toolchain is also the right one for a release artefact: the one
+      # the project is tested with, not whatever `stable` is on the day.
+      - name: add ${{ matrix.target }} to the pinned toolchain
+        run: |
+          rustup show active-toolchain
+          rustup target add ${{ matrix.target }}
       - uses: Swatinem/rust-cache@v2
         with:
           key: ${{ matrix.target }}

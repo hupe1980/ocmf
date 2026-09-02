@@ -1,4 +1,11 @@
 [toolchain]
+# **This file overrides the toolchain a workflow selects.** `rustup default`,
+# and therefore `dtolnay/rust-toolchain@<version>`, loses to a directory
+# override — so a CI job that installs 1.88 and then runs a bare `cargo check`
+# is checking 1.98. Naming the toolchain on the command line (`cargo +1.88.0`)
+# or setting `RUSTUP_TOOLCHAIN` is the only way past it, and a target this file
+# does not list has to be added to *this* toolchain, not to `stable`.
+#
 # The channel everything here is built and tested with. It is deliberately not
 # the same number as the MSRV. `rust-version = "1.88"` in Cargo.toml is the
 # promise made to consumers, and `just msrv` proves it against that toolchain
