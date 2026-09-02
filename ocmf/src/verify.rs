@@ -225,7 +225,13 @@ pub fn verify_with<'r, 'a>(
 
     let digest = sha256(record.signed_bytes());
 
-    if is_high_s(curve, &s) {
+    // `(r, s)` and `(r, n - s)` are the same statement — that is ECDSA's
+    // malleability, and OCMF says nothing about it. `BouncyCastle`, and so the
+    // legally recognised verifier, accepts either; `k256` accepts only the low
+    // form, by Bitcoin convention, and two authentic secp256k1 records in the
+    // reference corpus are high-`s`. So the crate states the rule once, here,
+    // rather than leaving each backend to its own library's convention.
+    let s = if is_high_s(curve, &s) {
         if options.malleability == Malleability::RejectHighS {
             return Err(VerifyError::HighSSignature {
                 curve: curve.name(),
@@ -235,7 +241,10 @@ pub fn verify_with<'r, 'a>(
             DeviationKind::HighSSignature,
             Location::at(0),
         ));
-    }
+        crate::scalar::negate(&s, curve.order())
+    } else {
+        s
+    };
 
     let ok = backend_verify(curve, key.sec1_bytes(), &digest, &r, &s)?;
     if !ok {
@@ -427,15 +436,6 @@ mod pure {
             let Ok(sig) = Signature::from_slice(&[r, s].concat()) else {
                 return Some(Err(VerifyError::SignatureScalars));
             };
-            // `(r, s)` and `(r, n − s)` are both valid signatures of the same
-            // message — that is ECDSA's malleability, and OCMF says nothing
-            // about it. Some RustCrypto curves (k256 above all, by Bitcoin
-            // convention) will only *verify* the low-`s` form, while
-            // BouncyCastle — and so the legally recognised verifier — accepts
-            // either. Two secp256k1 records in the reference corpus are high-`s`
-            // and authentic. Normalising here is not laxity: it is the same
-            // statement, spelled the other way.
-            let sig = sig.normalize_s().unwrap_or(sig);
             // An invalid point is a broken key, not a failed signature. The
             // crate makes that distinction everywhere else; the one place it
             // can actually be *decided* is here, where the field arithmetic is.

@@ -108,6 +108,10 @@ pub mod number;
 pub mod obis;
 pub mod payload;
 pub mod record;
+/// Everything ECDSA needs to know about a signature scalar, derived from the
+/// curve's own order. Nothing outside verification and signing has a use for
+/// it, and both of those are behind `verify`.
+#[cfg(feature = "verify")]
 mod scalar;
 pub mod signature;
 pub mod summary;

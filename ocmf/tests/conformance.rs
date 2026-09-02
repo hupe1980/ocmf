@@ -14,6 +14,14 @@ use std::collections::BTreeSet;
 use ocmf::PublicKey;
 use ocmf::{Limits, Record, json};
 
+#[cfg_attr(
+    not(feature = "verify"),
+    allow(
+        dead_code,
+        reason = "a case's key and expected verdict are read only where signatures can be checked; \
+                  the other four expectations still run"
+    )
+)]
 struct Case {
     id: String,
     group: String,
@@ -191,12 +199,20 @@ fn every_case_holds() {
         // only discoverable while checking the signature. Where verification
         // did not run — no `verify` feature, an unsupported curve — the
         // observed set can only be a subset, and that is what is required.
+        // The three bindings below are only ever *reassigned* by the block
+        // behind `verify`, so a build without it needs no `mut`.
+        #[cfg_attr(
+            not(feature = "verify"),
+            allow(unused_mut, reason = "reassigned only where signatures are checked")
+        )]
         let mut verified_deviations = false;
+        #[cfg_attr(not(feature = "verify"), allow(unused_mut))]
         let mut got: BTreeSet<String> = record
             .deviations()
             .iter()
             .map(|d| d.kind.name().to_string())
             .collect();
+        #[cfg_attr(not(feature = "verify"), allow(unused_mut))]
         let mut compare_deviations = true;
 
         #[cfg(feature = "verify")]

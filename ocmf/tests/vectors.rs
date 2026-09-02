@@ -16,6 +16,13 @@ use std::collections::BTreeSet;
 use ocmf::PublicKey;
 use ocmf::{Curve, Limits, Profile, Record, json};
 
+#[cfg_attr(
+    not(feature = "verify"),
+    allow(
+        dead_code,
+        reason = "the key and the expected verdict are read only where signatures can be checked"
+    )
+)]
 struct Vector {
     curve: String,
     algorithm: String,

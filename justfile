@@ -1,3 +1,8 @@
+# CI sets this for every job. A local gate that does not deny warnings is a
+# local gate that cannot reproduce a CI failure — dead code under one feature
+# combination is invisible without it.
+export RUSTFLAGS := "-D warnings"
+
 default: ci
 
 # Everything CI gates on, runnable locally.
@@ -12,6 +17,10 @@ matrix:
     for f in "std" "std,verify,curve-p256" "std,verify,curves-pure" "full" "full,backend-openssl"; do \
         echo "── $f"; cargo test -q -p ocmf --no-default-features --features "$f"; \
     done
+    cargo build -p ocmf --no-default-features \
+        --features alloc,verify,curve-p256,sign,session,ocpp \
+        --target thumbv7em-none-eabihf
+    cargo build -p ocmf --features full --target wasm32-unknown-unknown
 
 # The pure-Rust build, and the two targets that are not this machine.
 test-pure:
@@ -37,7 +46,7 @@ house:
 # The performance budget. Verification is roughly 50x the parse; the benchmarks
 # exist to show where the time goes, not to chase a number.
 bench:
-    cargo bench -p ocmf --features "full,backend-openssl"
+    cargo bench -p ocmf --features "full,backend-openssl" --bench parse
 
 # Mutation testing where a surviving mutant is a wrong answer about money.
 mutants:

@@ -97,8 +97,10 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       # Not a performance gate — a compile gate. A benchmark that stops
-      # building is a budget nobody is measuring.
-      - run: cargo bench -p ocmf --features "full,backend-openssl" -- --sample-count 1
+      # building is a budget nobody is measuring. `--bench parse` names divan's
+      # target: a bare `cargo bench` also runs the libtest harnesses, and
+      # `--sample-count` is divan's flag, not theirs.
+      - run: cargo bench -p ocmf --features "full,backend-openssl" --bench parse -- --sample-count 1
 
   semver:
     name: semver-checks

@@ -18,6 +18,13 @@ use std::collections::BTreeMap;
 
 use ocmf::{Curve, Limits, PublicKey, Record, json};
 
+#[cfg_attr(
+    not(feature = "verify"),
+    allow(
+        dead_code,
+        reason = "OpenSSL's verdict is the oracle for verification, and this build does none"
+    )
+)]
 struct Entry {
     source: String,
     record: String,
