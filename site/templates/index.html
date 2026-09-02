@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% set t = false %}
+  {% set d = section.description %}
+  {% set u = section.permalink %}
+  {% set is_article = false %}
+  {% include "partials/head.html" %}
+{% endblock %}
+
+
+{% block content %}
+<div class="wrap">
+
+  <section class="hero">
+    <p class="eyebrow">Rust · no_std · {{ config.extra.algorithms }} signature algorithms</p>
+    <h1>Signed meter records, read without disturbing the bytes.</h1>
+    <p class="lede">
+      <strong>ocmf</strong> is the Rust implementation of the Open Charge Metering
+      Format — the container a certified meter in an EV charging station signs a
+      reading into, and the working answer to German calibration law
+      (<i lang="de">Mess- und Eichrecht</i>) for e-mobility.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="{{ get_url(path='@/docs/getting-started.md') | safe }}">Get started</a>
+      <a class="btn ghost" href="{{ config.extra.repo }}" rel="noopener">View on GitHub</a>
+    </div>
+
+    <dl class="stats">
+      <div><dt>Real records tested</dt><dd>{{ config.extra.corpus_records }}</dd></div>
+      <div><dt>Signature algorithms</dt><dd>{{ config.extra.algorithms }} / {{ config.extra.algorithms }}</dd></div>
+      <div><dt>Conformance cases</dt><dd>{{ config.extra.conformance_cases }}</dd></div>
+      <div><dt>Required dependencies</dt><dd>2</dd></div>
+    </dl>
+  </section>
+
+  <section class="section" aria-labelledby="rule">
+    <div class="section-head">
+      <h2 id="rule">The rule everything else follows from</h2>
+      <p>
+        The signature is ECDSA over SHA-256 of the payload section
+        <em>exactly as it was written</em>. Parse into a struct, serialise it
+        back, and the hash has already changed.
+      </p>
+    </div>
+    <div class="split">
+      <div>
+        <p>
+          Key order, whitespace, number formatting and Unicode escapes are all
+          free to change on a round trip through a typed value — and every one
+          of them changes the digest. So <code>Record::signed_bytes()</code>
+          returns a <strong>slice of the input</strong>, and no API in this crate
+          produces signable bytes from a typed value.
+        </p>
+        <p>
+          Nine records in the reference corpus are pretty-printed. Any
+          implementation that re-serialises destroys them.
+        </p>
+        <p><a href="{{ get_url(path='@/docs/the-signed-bytes-rule.md') | safe }}">How the section scanner finds the span →</a></p>
+      </div>
+      <div>
+{{ section.content | safe }}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="what">
+    <div class="section-head">
+      <h2 id="what">What it does</h2>
+      <p>One crate for the whole life of a record: read it, judge it, check it, produce it, move it.</p>
+    </div>
+    <div class="grid three">
+      <article class="card">
+        <h3>Reads what meters emit</h3>
+        <p>Every record in the S.A.F.E. reference corpus parses and reproduces
+           itself byte for byte — padded quoted numbers, unpadded DER integers,
+           bare public keys and all.</p>
+      </article>
+      <article class="card">
+        <h3>Says how it deviates</h3>
+        <p>Every departure from the specification is a typed value with the table
+           it is measured against, and a flag saying whether it breaches the
+           document or is merely worth knowing.</p>
+      </article>
+      <article class="card">
+        <h3>Verifies all seven algorithms</h3>
+        <p>Four curves in pure Rust, all seven through OpenSSL. An algorithm a
+           build cannot check is reported as unsupported, never as
+           &ldquo;does not verify&rdquo;.</p>
+      </article>
+      <article class="card">
+        <h3>Signs, safely by default</h3>
+        <p>RFC 6979 deterministic ECDSA — no nonce, no RNG — low-<code>s</code>
+           output, an HSM seam, and every record re-read and re-verified before
+           it is returned.</p>
+      </article>
+      <article class="card">
+        <h3>Checks a whole session</h3>
+        <p>Continuous pagination, one begin and one end in their places, one
+           source, error states fatal: every rule the specification assigns to a
+           check component.</p>
+      </article>
+      <article class="card">
+        <h3>Moves it, both ways</h3>
+        <p>OCPP&rsquo;s <code>SignedMeterValueType</code> with the
+           <code>oca:</code> key composition, and a S.A.F.E. transparency file
+           grouped into the transactions its verifier pairs on.</p>
+      </article>
+      <article class="card">
+        <h3>Runs where the meter is</h3>
+        <p><code>#![no_std]</code> with <code>alloc</code>,
+           <code>#![forbid(unsafe_code)]</code>, no I/O, no clock and no
+           randomness &mdash; so it builds for a charge controller and for
+           <code>wasm32</code> alike.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="explain">
+    <div class="section-head">
+      <h2 id="explain">Written from the data, not only from the document</h2>
+      <p>
+        Every design decision is anchored in a measurement over 256 real records
+        from eleven vendors, each carrying OpenSSL&rsquo;s independent verdict.
+      </p>
+    </div>
+    <div class="split">
+      <div>
+        <p>
+          89&nbsp;% of real records omit a field the specification marks
+          mandatory. A strict parser rejects nine records in ten; a lenient one
+          never tells an operator their fleet emits records the official tool
+          will reject. So parsing runs in a <strong>profile</strong>, and every
+          departure is reported rather than swallowed.
+        </p>
+        <p>
+          Twenty-six of those records carry a value no closed table defines — a
+          unit called <code>sec</code>, a charge-point identifier written as a
+          JSON number, RFID UIDs of the wrong width. They parse clean everywhere
+          else.
+        </p>
+        <p><a href="{{ get_url(path='@/docs/deviations-and-profiles.md') | safe }}">Deviations, departures and profiles →</a></p>
+      </div>
+      <div>
+<pre><code class="language-console">$ ocmf explain record.ocmf
+record.ocmf
+  format version   1.0
+  gateway          KEBA_KCP30 / 17619300 / 2.8.5
+  meter            - - serial (absent) fw -
+  pagination       T32
+  algorithm        ECDSA-secp256r1-SHA256  (defaulted; SA absent)
+  payload bytes    391
+  readings         2
+    [0] 2019-08-13T10:03:15,000+0000 I    0.2596 kWh  1-b:1.8.0   billable
+    [1] 2019-08-13T10:03:36,000+0000 R    0.2597 kWh  1-b:1.8.0   billable
+    01-0B:01.08.00       &#916; 0.0001 kWh
+  deviations       3 (3 breach the specification, 0 advisory)
+    ! `MS` is absent although it is mandatory at byte 5 [OCMF Tab. 3]
+    ! OBIS code is not in the canonical form: "1-b:1.8.0" at RD[0].RI [OCMF Tab. 25]
+    ! OBIS code is not in the canonical form: "1-b:1.8.0" at RD[1].RI [OCMF Tab. 25]</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="start">
+    <div class="section-head">
+      <h2 id="start">Start here</h2>
+    </div>
+    <div class="card-list">
+      {% set docs = get_section(path="docs/_index.md") %}
+      {% for p in docs.pages %}{% if loop.index <= 6 %}
+      <a href="{{ p.permalink | safe }}">
+        <strong>{{ p.title }}</strong>
+        <span>{{ p.description }}</span>
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+  </section>
+
+</div>
+{% endblock %}

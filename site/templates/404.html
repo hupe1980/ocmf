@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% set t = "Page not found" %}
+  {% set d = "That page does not exist. Try the documentation index." %}
+  {% set u = config.base_url ~ "/404.html" %}
+  {% set is_article = false %}
+  {% include "partials/head.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="wrap section">
+  <h1>404</h1>
+  <p class="description">That page does not exist.</p>
+  <p><a href="{{ get_url(path='@/docs/_index.md') | safe }}">Go to the documentation →</a></p>
+</div>
+{% endblock %}

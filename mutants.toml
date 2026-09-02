@@ -1,0 +1,41 @@
+# `cargo mutants` — mutation testing.
+#
+# The point is not a score. It is that the modules where a surviving mutant is a
+# silent wrong answer *about money* are covered by tests that would actually
+# notice: the section scanner, carry-forward resolution, verification, the
+# scalar arithmetic verification is decided by, and the session rules.
+#
+#     cargo install cargo-mutants
+#     cargo mutants --package ocmf -- --features full,backend-openssl
+
+exclude_globs = [
+    # Generated or generator-adjacent.
+    "xtask/**",
+    "ocmf-cli/**",
+    "fuzz/**",
+]
+
+exclude_re = [
+    # Formatting has no semantics worth mutating; a wrong word in a message is
+    # a documentation bug, not a correctness one.
+    r"impl .*Display for",
+    r"fn fmt\(",
+    # `Debug` on a signer is deliberately lossy; mutating it proves nothing.
+    r"fn label\(",
+]
+
+# The modules where a surviving mutant matters most. Run these first.
+examine_re = [
+    r"ocmf/src/record\.rs",
+    r"ocmf/src/json\.rs",
+    r"ocmf/src/payload/reading\.rs",
+    r"ocmf/src/verify\.rs",
+    r"ocmf/src/session\.rs",
+    r"ocmf/src/der\.rs",
+    # Every question about `s` — in range, high half, the malleable twin — is
+    # decided here, from one constant per curve. A flipped comparison changes
+    # which signatures a policy refuses (D40).
+    r"ocmf/src/scalar\.rs",
+]
+
+timeout_multiplier = 5.0

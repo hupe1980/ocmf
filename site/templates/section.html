@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% set t = section.title %}
+  {% set d = section.description %}
+  {% set u = section.permalink %}
+  {% set is_article = false %}
+  {% include "partials/head.html" %}
+{% endblock %}
+
+{% block nav_docs %} aria-current="page"{% endblock %}
+
+
+{% block content %}
+<div class="wrap docs">
+  {% set current = section.permalink %}{% include "partials/sidebar.html" %}
+  <article class="doc">
+    <h1>{{ section.title }}</h1>
+    <p class="description">{{ section.description }}</p>
+    {{ section.content | safe }}
+
+    <div class="card-list">
+      {% for p in section.pages %}
+      <a href="{{ p.permalink | safe }}">
+        <strong>{{ p.title }}</strong>
+        <span>{{ p.description }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </article>
+  <div></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ get_url(path='search.js') | safe }}" defer></script>
+{% endblock %}

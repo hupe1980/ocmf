@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% set t = page.title %}
+  {% set d = page.description %}
+  {% set u = page.permalink %}
+  {% set is_article = true %}
+  {% include "partials/head.html" %}
+{% endblock %}
+
+{% block nav_docs %} aria-current="page"{% endblock %}
+
+
+{% block structured_data %}{% include "partials/ld_article.html" %}{% endblock %}
+
+{% block content %}
+<div class="wrap docs">
+  {% set current = page.permalink %}{% include "partials/sidebar.html" %}
+
+  <article class="doc">
+    <h1>{{ page.title }}</h1>
+    <p class="description">{{ page.description }}</p>
+    {{ page.content | safe }}
+
+    <nav class="pager" aria-label="Documentation">
+      {% if page.lower %}
+      <a class="prev" href="{{ page.lower.permalink | safe }}" rel="prev">
+        <span>Previous</span><strong>{{ page.lower.title }}</strong>
+      </a>
+      {% endif %}
+      {% if page.higher %}
+      <a class="next" href="{{ page.higher.permalink | safe }}" rel="next">
+        <span>Next</span><strong>{{ page.higher.title }}</strong>
+      </a>
+      {% endif %}
+    </nav>
+  </article>
+
+  {% include "partials/toc.html" %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ get_url(path='search.js') | safe }}" defer></script>
+{% endblock %}

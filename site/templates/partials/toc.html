@@ -1,0 +1,14 @@
+{# On-page contents, one level deep: a page with more nesting than that wants to
+   be two pages. The empty div keeps the three-column grid honest. #}
+{% if page.toc | length > 1 %}
+<aside class="toc" aria-label="On this page">
+  <p class="side-title">On this page</p>
+  <ul>
+    {% for h in page.toc %}
+    <li><a href="#{{ h.id }}">{{ h.title }}</a></li>
+    {% endfor %}
+  </ul>
+</aside>
+{% else %}
+<div></div>
+{% endif %}

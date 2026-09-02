@@ -1,0 +1,44 @@
+[package]
+name    = "ocmf-fuzz"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+ocmf = { path = "../ocmf", features = ["full", "backend-openssl"] }
+
+[[bin]]
+name = "parse"
+path = "fuzz_targets/parse.rs"
+test = false
+doc  = false
+
+[[bin]]
+name = "round_trip"
+path = "fuzz_targets/round_trip.rs"
+test = false
+doc  = false
+
+[[bin]]
+name = "der"
+path = "fuzz_targets/der.rs"
+test = false
+doc  = false
+
+[[bin]]
+name = "key"
+path = "fuzz_targets/key.rs"
+test = false
+doc  = false
+
+[[bin]]
+name = "verify"
+path = "fuzz_targets/verify.rs"
+test = false
+doc  = false
+
+[workspace]

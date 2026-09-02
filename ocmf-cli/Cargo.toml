@@ -1,0 +1,32 @@
+[package]
+name        = "ocmf-cli"
+description = "Command-line tool for the Open Charge Metering Format: parse, explain, verify, sign and convert OCMF records"
+version.workspace      = true
+authors.workspace      = true
+edition.workspace      = true
+license.workspace      = true
+repository.workspace   = true
+rust-version.workspace = true
+
+[[bin]]
+name = "ocmf"
+path = "src/main.rs"
+
+[features]
+default = []
+# Statically link OpenSSL rather than finding it on the machine. What the
+# release binaries are built with: `[OCMF Tab. 22]` has seven algorithms, three
+# of them have no pure-Rust implementation, and a downloaded binary that cannot
+# check three of them is not the tool this is.
+vendored-openssl = ["ocmf/vendored-openssl"]
+
+[dependencies]
+ocmf   = { workspace = true, features = ["full", "backend-openssl"] }
+clap   = { workspace = true }
+anyhow = { workspace = true }
+serde = { workspace = true }
+serde_json = "1"
+rust_decimal = { workspace = true, features = ["std"] }
+
+[dev-dependencies]
+serde_json = "1"

@@ -1,0 +1,14 @@
+[package]
+name    = "xtask"
+version.workspace      = true
+edition.workspace      = true
+license.workspace      = true
+publish = false
+
+[dependencies]
+anyhow = { workspace = true }
+# The conformance generator signs its own cases and re-verifies every one of
+# them before writing, so it needs the crate it generates cases for.
+ocmf = { workspace = true, features = ["full", "backend-openssl"] }
+rust_decimal = { workspace = true, features = ["std"] }
+sha2 = { workspace = true, features = ["std"] }

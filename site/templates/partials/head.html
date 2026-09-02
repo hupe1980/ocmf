@@ -1,0 +1,23 @@
+{# Everything inside <head> that varies per page.
+   The includer sets: `t` (title, or false for the home page), `d` (description),
+   `u` (canonical URL) and `is_article`. Tera 2 forbids `set` at the top level of
+   a child template, so the values are set inside the `head` block and this
+   partial reads them from that context. #}
+<title>{% if t %}{{ t }} · {{ config.title }}{% else %}{{ config.title }} — Open Charge Metering Format for Rust{% endif %}</title>
+<meta name="description" content="{{ d }}">
+<link rel="canonical" href="{{ u | safe }}">
+
+<meta property="og:type" content="{% if is_article %}article{% else %}website{% endif %}">
+<meta property="og:site_name" content="{{ config.title }}">
+<meta property="og:title" content="{% if t %}{{ t }}{% else %}{{ config.title }} — Open Charge Metering Format for Rust{% endif %}">
+<meta property="og:description" content="{{ d }}">
+<meta property="og:url" content="{{ u | safe }}">
+<meta property="og:image" content="{{ get_url(path=config.extra.og_image) | safe }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ocmf — signed meter records, read without disturbing the bytes.">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{% if t %}{{ t }}{% else %}{{ config.title }}{% endif %}">
+<meta name="twitter:description" content="{{ d }}">
+<meta name="twitter:image" content="{{ get_url(path=config.extra.og_image) | safe }}">

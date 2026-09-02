@@ -1,0 +1,78 @@
+{
+ "generator": "openssl 3.6.3, see tests/vectors/README.md",
+ "vectors": [
+  {
+   "curve": "secp192k1",
+   "algorithm": "ECDSA-secp192k1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-01\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E001\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp192k1-SHA256\",\"SD\":\"3036021900EBEDDA68C004BCDC22AF12BB6598E5B1C445286C2200D7A3021900AF144552D444A8AFDE37AE7295CBD5BED0A89E413FAB14EC\"}",
+   "key_spki_hex": "3046301006072A8648CE3D020106052B8104001F033200044181F41532330EB91E3FF3E712AAA7C431BC58A932F5A93B5392B2D1F3A57964B79579C29929054F692D8DE627B8EB6D",
+   "note": "generated with OpenSSL 3.6.3; verified by OpenSSL before checking in"
+  },
+  {
+   "curve": "secp256k1",
+   "algorithm": "ECDSA-secp256k1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-02\",\"GV\":\"0.1.0\",\"PG\":\"T2\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000002\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E002\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256k1-SHA256\",\"SD\":\"30440220017E9FC07A7D680E85F938023245742E0ECBB29EE47279AE1A1B5F59C48F0C8C0220273DD9B4136FDE5C73F5BC4C9E257CBF2135876DBC6C7AE1B5780F2D9D530F4B\"}",
+   "key_spki_hex": "3056301006072A8648CE3D020106052B8104000A034200040B1E50BD226E021776C9D6EEAC2C28A44BDEE21E08050F4A1FAAEB5A644D45F072D3EE463610B90851AFCA0939D40C75DD5E3AE3CF3A70F239C0CA3DB622E286",
+   "note": "generated with OpenSSL 3.6.3; verified by OpenSSL before checking in"
+  },
+  {
+   "curve": "secp192r1",
+   "algorithm": "ECDSA-secp192r1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-03\",\"GV\":\"0.1.0\",\"PG\":\"T3\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000003\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E003\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp192r1-SHA256\",\"SD\":\"30350218503FF658382AF81681FD4A3493CED93BFB1545457027A48C0219009C9AC9493FFD0A93D3541394AB89EB5B1B8241B4CA9D05BD\"}",
+   "key_spki_hex": "3049301306072A8648CE3D020106082A8648CE3D03010103320004D18C7ED4B63ACB6F51DD103AF5CCF946BF31130B1BA19BC3D35A8DA1DDEFB458067F021C725AA51877E71111A503BAFD",
+   "note": "generated with OpenSSL 3.6.3; verified by OpenSSL before checking in"
+  },
+  {
+   "curve": "secp256r1",
+   "algorithm": "ECDSA-secp256r1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-04\",\"GV\":\"0.1.0\",\"PG\":\"T4\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000004\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E004\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304502201165AC02C5BCB96DA86641CEE4858AC58A0638055B13DA7B83CA7536F24FAD620221009110A6FBF409F8764512278D032EB866FA3A343E581B74450322928FD1DD0260\"}",
+   "key_spki_hex": "3059301306072A8648CE3D020106082A8648CE3D03010703420004C803EBE536BFFAE4154F14AC3C87F0E52E2B9E3F07CCE91D8EF031525FB934249CE71468E4DA7AE64622A1B308D7297DF2C8AD68D31898B2C6A1A371C85E9219",
+   "note": "generated with OpenSSL 3.6.3; verified by OpenSSL before checking in"
+  },
+  {
+   "curve": "brainpoolP256r1",
+   "algorithm": "ECDSA-brainpool256r1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-05\",\"GV\":\"0.1.0\",\"PG\":\"T5\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000005\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E005\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-brainpool256r1-SHA256\",\"SD\":\"3045022100888D1ABE4BB89C305C65BDE1D74D1A0B093BA717214BFBB183AE7AEDFA2EBE69022027A912C1FF973DE03B60D765A4C9A3C72783320266AD9F7C9C76D594899C217C\"}",
+   "key_spki_hex": "305A301406072A8648CE3D020106092B24030302080101070342000448130A2DB30EEC0F5FB3826A484CB14E03D7F1BA43AB318AFD9D4A119B63716F07A108A3AB51C47B8FF4C6439C125083D13711347E2BBFF4C99906FD3B5C3281",
+   "note": "generated with OpenSSL 3.6.3; verified by OpenSSL before checking in"
+  },
+  {
+   "curve": "secp384r1",
+   "algorithm": "ECDSA-secp384r1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-06\",\"GV\":\"0.1.0\",\"PG\":\"T6\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000006\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E006\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp384r1-SHA256\",\"SD\":\"3066023100E2AB8FA88E6B4211E96BABDC514E22BBCFAD7A3BE9FA6EC4B15EEE3DB2F3369E5EEBEDE8273C26912354B8B159C58C9A0231008169A0EA34E00BE76ABFDDCE4745620880794E3124C966C46EE6F064C9F4286218333C223CEFADCFED384824B8B41CAE\"}",
+   "key_spki_hex": "3076301006072A8648CE3D020106052B810400220362000417D7B627EF61B89ADF4B45C63992BEBCAC0F966D2E2644E8A1F3C3C682BB946DE302A14C2160DC68B23C8FDEE82F53458725CB0AA1F8E429CEE6EF06E0C0225CF939C980AEB9C7B0E1C164AEC8D1AF34C902DC31D3B7D8E1DF7C2A3BFB9886ED",
+   "note": "generated with OpenSSL 3.6.3; verified by OpenSSL before checking in"
+  },
+  {
+   "curve": "brainpoolP384r1",
+   "algorithm": "ECDSA-brainpool384r1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-07\",\"GV\":\"0.1.0\",\"PG\":\"T7\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000007\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E007\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-brainpool384r1-SHA256\",\"SD\":\"306502310080A3396890311BFF1E08A365E1CDB186BE848CB87173922A7734AC368FFA6820B768B6366E95C7C849F04E14E480134102306FF424B60978F17B32953B9C7C1E1854F09A8C493B7EC283F628E3A3498D69C096BEBCB250D9B1B644D092A1F5089EDA\"}",
+   "key_spki_hex": "307A301406072A8648CE3D020106092B240303020801010B0362000415B7EBF81A7A876559C1EE1464AE4E9EF929F14822FB4353A86D1492033AEDF3D7ACBF9D3E6DDF719D7C7E1623B0941621DEC2F872B8C02EFF24A85D0CC8CF16A01285194323E6BC6597668D5B2B47E1E8B792131031748A49676BE75547DA0B",
+   "note": "generated with OpenSSL 3.6.3; verified by OpenSSL before checking in"
+  },
+  {
+   "curve": "secp256r1",
+   "algorithm": "ECDSA-secp256r1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-04\",\"GV\":\"0.1.0\",\"PG\":\"T4\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000004\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E004\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304502201165AC02C5BCB96DA86641CEE4858AC58A0638055B13DA7B83CA7536F24FAD620221009110A6FBF409F8764512278D032EB866FA3A343E581B74450322928FD1DD0260\"}",
+   "key_spki_hex": "C803EBE536BFFAE4154F14AC3C87F0E52E2B9E3F07CCE91D8EF031525FB934249CE71468E4DA7AE64622A1B308D7297DF2C8AD68D31898B2C6A1A371C85E9219",
+   "shape": "bare-xy-key",
+   "note": "the Isabellenhuette public key shape: X||Y, no SEC1 prefix, no SPKI"
+  },
+  {
+   "curve": "secp256r1",
+   "algorithm": "ECDSA-secp256r1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-04\",\"GV\":\"0.1.0\",\"PG\":\"T4\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000004\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E004\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"1165AC02C5BCB96DA86641CEE4858AC58A0638055B13DA7B83CA7536F24FAD629110A6FBF409F8764512278D032EB866FA3A343E581B74450322928FD1DD0260\"}",
+   "key_spki_hex": "3059301306072A8648CE3D020106082A8648CE3D03010703420004C803EBE536BFFAE4154F14AC3C87F0E52E2B9E3F07CCE91D8EF031525FB934249CE71468E4DA7AE64622A1B308D7297DF2C8AD68D31898B2C6A1A371C85E9219",
+   "shape": "raw-rs-signature",
+   "note": "the Isabellenhuette signature shape: 64-byte r||s where SM claims DER"
+  },
+  {
+   "curve": "secp256r1",
+   "algorithm": "ECDSA-secp256r1-SHA256",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-04\",\"GV\":\"0.1.0\",\"PG\":\"T4\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000004\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E004\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SE\":\"base64\",\"SD\":\"MEUCIBFlrALFvLltqGZBzuSFisWKBjgFWxPae4PKdTbyT61iAiEAkRCm+/QJ+HZFEieNAy64Zvo6ND5YG3RFAyKSj9HdAmA=\"}",
+   "key_spki_hex": "3059301306072A8648CE3D020106082A8648CE3D03010703420004C803EBE536BFFAE4154F14AC3C87F0E52E2B9E3F07CCE91D8EF031525FB934249CE71468E4DA7AE64622A1B308D7297DF2C8AD68D31898B2C6A1A371C85E9219",
+   "shape": "base64-signature",
+   "note": "SE=base64 [OCMF Tab. 8]"
+  }
+ ]
+}

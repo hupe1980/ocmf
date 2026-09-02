@@ -1,0 +1,51 @@
+# `cargo deny check` — licences, advisories and duplicate dependencies.
+#
+# The library's non-optional dependency surface is two crates. That is not
+# minimalism for its own sake: this code decides whether a kilowatt-hour may be
+# billed, and every crate in the tree is a crate somebody has to trust.
+
+[graph]
+all-features = true
+
+[advisories]
+version = 2
+yanked = "deny"
+
+[licenses]
+version = 2
+allow = [
+    "Apache-2.0",
+    "MIT",
+    "BSD-3-Clause",
+    "ISC",
+    "Unicode-3.0",
+    "Zlib",
+]
+confidence-threshold = 0.9
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+# A second elliptic-curve implementation in the tree would mean two answers to
+# the same question — and the question is whether a kilowatt-hour was signed.
+# The workspace pins every curve crate on one RustCrypto generation for exactly
+# this reason; these turn that comment into a check.
+[[bans.deny]]
+crate = "elliptic-curve"
+deny-multiple-versions = true
+
+[[bans.deny]]
+crate = "ecdsa"
+deny-multiple-versions = true
+
+[[bans.deny]]
+crate = "signature"
+deny-multiple-versions = true
+
+[[bans.deny]]
+crate = "sha2"
+deny-multiple-versions = true
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

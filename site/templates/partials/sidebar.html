@@ -1,0 +1,18 @@
+{# Documentation sidebar. The caller sets `current` to the permalink of the page
+   being rendered; Tera 2 has no macros, and an included template sees whatever
+   the includer has `set`. #}
+{% set docs = get_section(path="docs/_index.md") %}
+<nav class="sidebar" aria-label="Documentation">
+  <div class="search">
+    <label class="visually-hidden" for="q">Search the documentation</label>
+    <input type="search" id="q" placeholder="Search…" autocomplete="off" spellcheck="false">
+    <ul class="search-results" id="search-results"></ul>
+  </div>
+  <p class="side-title">Documentation</p>
+  <ul>
+    <li><a href="{{ docs.permalink | safe }}"{% if current == docs.permalink %} aria-current="page"{% endif %}>Overview</a></li>
+    {% for p in docs.pages %}
+    <li><a href="{{ p.permalink | safe }}"{% if current == p.permalink %} aria-current="page"{% endif %}>{{ p.title }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>

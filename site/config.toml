@@ -1,0 +1,66 @@
+# Zola configuration for the ocmf documentation site.
+#
+# Built and deployed by .github/workflows/site.yml. `zola check` runs in CI, so
+# a dead internal link fails the build rather than the reader.
+
+base_url = "https://hupe1980.github.io/ocmf"
+title = "ocmf"
+description = "The Rust implementation of the Open Charge Metering Format: signed EV-charging meter records parsed without disturbing the bytes the signature covers, verified across all seven algorithms the specification defines, and built and signed the same way."
+default_language = "en"
+author = "hupe1980"
+
+compile_sass = true
+build_search_index = true
+# No feed: this is reference documentation, not a stream of posts.
+generate_feeds = false
+
+minify_html = true
+
+taxonomies = []
+
+[markdown]
+render_emoji = false
+insert_anchor_links = "heading"
+github_alerts = true
+bottom_footnotes = true
+external_links_target_blank = true
+external_links_no_referrer = true
+smart_punctuation = true
+
+# Highlighted at build time by syntect: no client-side JS, no flash of
+# unstyled code, and a light and a dark theme chosen by the reader's own
+# `prefers-color-scheme`.
+[markdown.highlighting]
+style = "class"
+light_theme = "ayu-light"
+dark_theme = "ayu-dark"
+
+[search]
+index_format = "elasticlunr_json"
+include_title = true
+include_description = true
+include_content = true
+
+[link_checker]
+# Links into the repository's own tree resolve only once a commit is pushed, and
+# the releases page only once a tag is cut, so checking them here would make the
+# site build depend on the push that follows it. Everything outside the
+# repository is still checked.
+skip_prefixes = [
+    "https://github.com/hupe1980/ocmf/tree/",
+    "https://github.com/hupe1980/ocmf/blob/",
+    "https://github.com/hupe1980/ocmf/releases",
+]
+skip_anchor_prefixes = ["https://github.com/"]
+
+[extra]
+repo = "https://github.com/hupe1980/ocmf"
+crate = "https://crates.io/crates/ocmf"
+api_docs = "https://docs.rs/ocmf"
+# Rendered into <meta property="og:image">. Kept as a real raster file because
+# no major social crawler renders SVG.
+og_image = "/og.png"
+# Shown in the header; a single source of truth for the numbers the site quotes.
+corpus_records = 256
+conformance_cases = 162
+algorithms = 7

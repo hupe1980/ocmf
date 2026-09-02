@@ -1,0 +1,123 @@
+name: CI
+
+on:
+  push: { branches: [main] }
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"   # spec-sync: the specification is a living document
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-D warnings"
+
+jobs:
+  test:
+    name: test (${{ matrix.features }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The feature matrix is a correctness matrix: a test that only passes
+        # with every feature on is a test that does not know what it asserts.
+        features:
+          - "full,backend-openssl"
+          - "full"
+          - "std,verify,curves-pure"
+          - "std,verify,curve-p256"
+          - "std"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test -p ocmf --no-default-features --features "${{ matrix.features }}"
+      - run: cargo test --workspace --features "full,backend-openssl"
+        if: matrix.features == 'full,backend-openssl'
+
+  targets:
+    name: bare metal and the browser
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: thumbv7em-none-eabihf, wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      # The embedded promise is a CI job, not a sentence in the README.
+      - run: |
+          cargo build -p ocmf --no-default-features \
+            --features alloc,verify,curve-p256,sign,session,ocpp \
+            --target thumbv7em-none-eabihf
+      # And the browser one. It builds only because nothing here asks for
+      # randomness: `std` deliberately leaves `ecdsa/std` off, which is what
+      # would otherwise drag `getrandom` in and demand a JS backend feature.
+      - run: cargo build -p ocmf --features full --target wasm32-unknown-unknown
+      - run: cargo test -p ocmf --no-default-features --features std
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --features "full,backend-openssl"
+      - run: cargo doc --no-deps -p ocmf --features full
+        env:
+          RUSTDOCFLAGS: "-D warnings"
+
+  xtask:
+    name: house rules
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      # A reading is money: no f32/f64 anywhere in the library.
+      - run: cargo xtask no-floats
+      - run: cargo xtask corpus-report
+      # The published conformance suite must be exactly what the generator
+      # produces: a hand-edited suite is a suite nobody can trust.
+      - run: cargo xtask conformance-gen
+      - run: git diff --exit-code conformance/suite.json
+      # And this implementation must pass the suite it publishes.
+      - run: cargo run -p ocmf-cli -- conformance conformance/suite.json
+      # The specification is a living document with no release tags; fetch it
+      # and check that every value in its tables exists in the code.
+      - run: cargo xtask spec-sync
+        continue-on-error: true   # upstream drift is a PR, not a red build
+      - run: cargo xtask spec-coverage
+
+  bench:
+    name: benchmarks compile and run once
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      # Not a performance gate — a compile gate. A benchmark that stops
+      # building is a budget nobody is measuring.
+      - run: cargo bench -p ocmf --features "full,backend-openssl" -- --sample-count 1
+
+  semver:
+    name: semver-checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: obi1kenobi/cargo-semver-checks-action@v2
+        continue-on-error: true   # nothing is published yet; this is a dry run
+
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.88.0
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo check -p ocmf --features full
+
+  deny:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: EmbarkStudios/cargo-deny-action@v2

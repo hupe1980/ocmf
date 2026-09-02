@@ -1,0 +1,287 @@
+# Cuts a release: crates.io, and binaries somebody can download.
+#
+# A tag is a promise that cannot be withdrawn — crates.io has no unpublish — so
+# nothing here trusts the tag. The version in the tag is checked against the
+# workspace manifest, the whole CI gate runs again on the tagged tree, and only
+# then does anything leave the machine. `workflow_dispatch` runs everything
+# except the two irreversible steps, so a release can be rehearsed.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  # ── 1. Does the tag say what the manifest says? ──────────────────────────
+  #
+  # The classic release bug: `v0.2.0` on a tree that still says `0.1.0`. It is
+  # invisible until somebody reports that the crates.io page and the tag
+  # disagree, and by then both are permanent.
+  verify:
+    name: tag matches the manifest
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      publish: ${{ steps.version.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: version
+        run: |
+          manifest=$(grep -m1 '^version *=' Cargo.toml | cut -d'"' -f2)
+          echo "version=$manifest" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Dry run for $manifest; nothing will be published."
+            exit 0
+          fi
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "$tag" != "$manifest" ]; then
+            echo "::error::tag v$tag does not match workspace version $manifest"
+            exit 1
+          fi
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+
+  # ── 2. The same gate CI runs, on the tagged tree ─────────────────────────
+  #
+  # Not "CI was green on main". A tag can point anywhere, and the tree that is
+  # published is this one.
+  gate:
+    name: full gate
+    needs: verify
+    runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: "-D warnings"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+          targets: thumbv7em-none-eabihf, wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --features "full,backend-openssl"
+      - run: cargo test --workspace --features "full,backend-openssl"
+      # A test that only passes with every feature on is a test that does not
+      # know what it asserts.
+      - name: every feature combination
+        run: |
+          for f in "std" "std,verify,curve-p256" "std,verify,curves-pure" "full"; do
+            cargo test -q -p ocmf --no-default-features --features "$f"
+          done
+      - name: the two targets that are not this machine
+        run: |
+          cargo build -p ocmf --no-default-features \
+            --features alloc,verify,curve-p256,sign,session,ocpp \
+            --target thumbv7em-none-eabihf
+          cargo build -p ocmf --features full --target wasm32-unknown-unknown
+      - run: RUSTDOCFLAGS="-D warnings" cargo doc --no-deps -p ocmf --features full
+
+      # A hand-edited suite is a suite nobody can trust, and this build must
+      # pass the one it publishes.
+      - run: cargo xtask no-floats
+      - run: cargo xtask conformance-gen
+      - run: git diff --exit-code conformance/suite.json
+      - run: cargo run -p ocmf-cli -- conformance conformance/suite.json
+
+      # The library packages and its packaged form compiles. `ocmf-cli` cannot
+      # be dry-run the same way — it depends on `ocmf` by version, and that
+      # version is not on crates.io until step 6 — so the CLI's packaging is
+      # exercised for the first time by the publish itself. The library is the
+      # one with anything to get wrong: a README outside its own directory and
+      # a 200 KiB test fixture.
+      - run: cargo publish -p ocmf --dry-run --locked
+
+  # ── 3. Licences and advisories, before anything is distributed ───────────
+  deny:
+    name: cargo deny
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: EmbarkStudios/cargo-deny-action@v2
+
+  # ── 4. API drift, blocking here rather than advisory ─────────────────────
+  #
+  # CI treats this as a dry run because nothing is published yet. A release is
+  # the moment it starts to mean something: the first tag establishes the
+  # baseline, and every later one is checked against the crates.io version.
+  semver:
+    name: semver-checks
+    needs: verify
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ needs.verify.outputs.version == '0.1.0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: obi1kenobi/cargo-semver-checks-action@v2
+        with:
+          package: ocmf
+          feature-group: all-features
+
+  # ── 5. Binaries ─────────────────────────────────────────────────────────
+  #
+  # `cargo install ocmf-cli` needs a Rust toolchain and OpenSSL headers. A
+  # notified body checking a manufacturer's output, or a driver checking a
+  # receipt, should need neither — so the artefacts link OpenSSL statically and
+  # can check all seven algorithms of [OCMF Tab. 22] out of the box.
+  binaries:
+    name: ${{ matrix.target }}
+    needs: [verify, gate]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
+          - target: aarch64-unknown-linux-gnu
+            os: ubuntu-24.04-arm
+          - target: x86_64-apple-darwin
+            os: macos-latest
+          - target: aarch64-apple-darwin
+            os: macos-latest
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.target }}
+      - name: Install NASM (OpenSSL needs an assembler on Windows)
+        if: runner.os == 'Windows'
+        uses: ilammy/setup-nasm@v1
+
+      - run: cargo build -p ocmf-cli --release --locked
+             --features vendored-openssl --target ${{ matrix.target }}
+
+      # The binary must answer the question it exists for before it is offered
+      # to anybody. `macos-latest` is Apple Silicon, so the x86_64 artefact is
+      # the cross-built one here and is taken on the strength of the gate job.
+      - name: it runs, and it can check every algorithm
+        if: matrix.target != 'x86_64-apple-darwin'
+        shell: bash
+        run: |
+          bin="target/${{ matrix.target }}/release/ocmf"
+          if [ "${{ runner.os }}" = "Windows" ]; then bin="$bin.exe"; fi
+          "$bin" --version
+          curves=$("$bin" curves)
+          echo "$curves"
+          # Seven, or the artefact is not the tool this claims to ship.
+          available=$(printf '%s\n' "$curves" | grep -c '^  yes' || true)
+          if [ "$available" != "7" ]; then
+            echo "::error::binary can check $available of 7 algorithms"
+            exit 1
+          fi
+          "$bin" conformance conformance/suite.json
+
+      - name: package
+        shell: bash
+        run: |
+          name="ocmf-${{ needs.verify.outputs.version }}-${{ matrix.target }}"
+          mkdir -p "dist/$name"
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            cp "target/${{ matrix.target }}/release/ocmf.exe" "dist/$name/"
+          else
+            cp "target/${{ matrix.target }}/release/ocmf" "dist/$name/"
+          fi
+          cp README.md LICENSE-APACHE LICENSE-MIT "dist/$name/"
+          # The suite travels with the tool: a binary that can run it and no
+          # file to run it against is half a deliverable.
+          cp conformance/suite.json "dist/$name/"
+          cd dist
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            7z a "$name.zip" "$name" > /dev/null
+          else
+            tar czf "$name.tar.gz" "$name"
+          fi
+          rm -rf "$name"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.target }}
+          path: dist/*
+          if-no-files-found: error
+
+  # ── 6. crates.io, in dependency order ────────────────────────────────────
+  #
+  # `ocmf-cli` depends on `ocmf` by version, so the library goes first and the
+  # binary waits for the index to catch up. Neither step can be taken back.
+  publish:
+    name: crates.io
+    needs: [verify, gate, deny, semver, binaries]
+    if: needs.verify.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    environment: crates-io
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo publish -p ocmf --locked
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      - name: wait for the index
+        run: |
+          for _ in $(seq 1 30); do
+            if cargo info "ocmf@${{ needs.verify.outputs.version }}" > /dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::ocmf ${{ needs.verify.outputs.version }} did not appear in the index"
+          exit 1
+      - run: cargo publish -p ocmf-cli --locked
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+  # ── 7. The GitHub release ────────────────────────────────────────────────
+  release:
+    name: github release
+    needs: [verify, binaries, publish]
+    if: needs.verify.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: checksums
+        working-directory: dist
+        run: sha256sum -- *.tar.gz *.zip > SHA256SUMS
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true
+          body: |
+            `ocmf ${{ needs.verify.outputs.version }}` — the Open Charge Metering
+            Format, read without disturbing the bytes its signature covers.
+
+            **Library:** `cargo add ocmf` ·
+            [docs.rs](https://docs.rs/ocmf/${{ needs.verify.outputs.version }})
+
+            **Tool:** the archives below hold a self-contained `ocmf` binary and
+            the conformance suite it can run. OpenSSL is linked statically, so
+            all seven `[OCMF Tab. 22]` algorithms — brainpool and secp192k1
+            included — work with nothing else installed.
+
+            ```console
+            $ ocmf explain record.ocmf
+            $ ocmf verify record.ocmf --key @key.hex
+            $ ocmf conformance suite.json
+            ```
+
+            Verify a download against `SHA256SUMS`.
+
+            > Independent and unofficial. Not affiliated with, endorsed by or
+            > certified by S.A.F.E. e.V. or the Open Charge Alliance.

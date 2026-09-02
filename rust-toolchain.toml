@@ -1,0 +1,13 @@
+[toolchain]
+# The channel everything here is built and tested with. It is deliberately not
+# the same number as the MSRV. `rust-version = "1.88"` in Cargo.toml is the
+# promise made to consumers, and `just msrv` proves it against that toolchain
+# rather than asserting it here.
+#
+# 1.88 and not edition 2024's 1.85 floor, for one reason: let-chains
+# (`if let Some(x) = a && …`) stabilised there, and `session.rs` reads better
+# with them than with the nested `if let` they replace. `quick-xml` 0.42 —
+# behind the optional `xml` feature — independently requires 1.86.
+channel    = "1.98"
+components = ["rustfmt", "clippy"]
+targets    = ["thumbv7em-none-eabihf", "wasm32-unknown-unknown"]

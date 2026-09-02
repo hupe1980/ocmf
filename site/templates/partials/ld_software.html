@@ -1,0 +1,16 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "ocmf",
+  "description": {{ config.description | json_encode | safe }},
+  "url": {{ config.base_url | json_encode | safe }},
+  "codeRepository": {{ config.extra.repo | json_encode | safe }},
+  "programmingLanguage": { "@type": "ComputerLanguage", "name": "Rust" },
+  "runtimePlatform": "Rust 1.88+",
+  "license": "https://spdx.org/licenses/Apache-2.0.html",
+  "author": { "@type": "Person", "name": {{ config.author | json_encode | safe }} },
+  "applicationCategory": "DeveloperApplication",
+  "keywords": "OCMF, Open Charge Metering Format, Eichrecht, EV charging, signed meter values, OCPP, ECDSA, Rust"
+}
+</script>

@@ -1,0 +1,60 @@
+[workspace]
+resolver = "3"
+members = ["ocmf", "ocmf-cli", "xtask"]
+
+[workspace.package]
+version      = "0.1.0"
+authors      = ["hupe1980"]
+edition      = "2024"
+license      = "MIT OR Apache-2.0"
+repository   = "https://github.com/hupe1980/ocmf"
+rust-version = "1.88"
+keywords     = ["ocmf", "eichrecht", "ev-charging", "metering", "ecdsa"]
+categories   = ["parser-implementations", "cryptography", "no-std", "encoding"]
+
+[workspace.dependencies]
+# ── Core: kept deliberately tiny ────────────────────────────────────────────
+# The library's non-optional dependency surface is *two* crates. Hex, Base64,
+# DER, SPKI and JSON are all implemented in-crate — not out of pride, but
+# because every one of them has to be lenient in a way the general-purpose
+# crates are (correctly) not: OCMF records in the field carry non-canonical
+# DER, bare public-key points, whitespace inside hex, and JSON whose exact
+# bytes must survive a round trip. A strict library would have to be fought.
+#
+# A meter reading is money. `2935.600` states three valid decimal places and
+# an `f64` cannot hold it: `cargo xtask no-floats` fails the build on an
+# `f32`/`f64` anywhere in the library.
+rust_decimal = { version = "1.43", default-features = false }
+thiserror    = { version = "2", default-features = false }
+
+# ── Cryptography (feature `verify` / `sign`) ────────────────────────────────
+# All four pinned on the RustCrypto 0.13 line so the workspace resolves a
+# single `elliptic-curve`/`ecdsa` tree. p192 has no 0.14 release, and pulling
+# two generations of curve arithmetic into a crate whose job is to be trusted
+# is a worse trade than being one minor version behind on three of them.
+sha2  = { version = "0.10", default-features = false }
+ecdsa = { version = "0.16", default-features = false }
+p192  = { version = "0.13", default-features = false, features = ["ecdsa", "arithmetic"] }
+p256  = { version = "0.13", default-features = false, features = ["ecdsa", "arithmetic"] }
+p384  = { version = "0.13", default-features = false, features = ["ecdsa", "arithmetic"] }
+k256  = { version = "0.13", default-features = false, features = ["ecdsa", "arithmetic"] }
+
+# ── Optional backends and transports ───────────────────────────────────────
+# OpenSSL covers all seven Table 22 algorithms including brainpool and
+# secp192k1, for which no usable pure-Rust implementation is published.
+openssl   = { version = "0.10" }
+quick-xml = { version = "0.42" }
+serde     = { version = "1", default-features = false, features = ["derive"] }
+
+# ── Binaries and tooling ───────────────────────────────────────────────────
+ocmf   = { path = "ocmf", version = "0.1.0" }
+clap   = { version = "4.6", features = ["derive"] }
+anyhow = "1"
+
+[profile.release]
+lto           = "thin"
+codegen-units = 1
+
+[profile.bench]
+lto           = "thin"
+codegen-units = 1

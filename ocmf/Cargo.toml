@@ -1,0 +1,133 @@
+[package]
+name        = "ocmf"
+description = "Open Charge Metering Format (OCMF): signed EV-charging meter records parsed without disturbing the bytes the signature covers, verified across every algorithm the specification defines, and built and signed the same way"
+readme      = "../README.md"
+version.workspace      = true
+authors.workspace      = true
+edition.workspace      = true
+license.workspace      = true
+repository.workspace   = true
+rust-version.workspace = true
+keywords.workspace     = true
+categories.workspace   = true
+
+[dependencies]
+rust_decimal = { workspace = true }
+thiserror    = { workspace = true }
+
+sha2  = { workspace = true, optional = true }
+ecdsa = { workspace = true, optional = true }
+p192  = { workspace = true, optional = true }
+p256  = { workspace = true, optional = true }
+p384  = { workspace = true, optional = true }
+k256  = { workspace = true, optional = true }
+
+openssl   = { workspace = true, optional = true }
+quick-xml = { workspace = true, optional = true }
+serde     = { workspace = true, optional = true }
+
+[features]
+default = ["std", "verify", "sign", "session", "curve-p256"]
+
+# `alloc` is required; the crate is `no_std` + `alloc`, never `no_alloc`.
+# `std` deliberately does **not** turn on `ecdsa/std` or `sha2/std`. Those pull
+# `rand_core/std` -> `getrandom`, an operating-system randomness source, into a
+# crate that never asks for randomness: RFC 6979 signing is deterministic and
+# verification is arithmetic over public data. Keeping them off is what makes
+# `wasm32-unknown-unknown` build without a `getrandom` backend feature, and it
+# costs nothing — the only thing those features add is `std::error::Error` on
+# error types this crate never surfaces.
+std = ["alloc", "rust_decimal/std", "thiserror/std", "serde?/std"]
+alloc = []
+
+# Hashing is needed for `Record::payload_digest` as well as for verification,
+# so it is its own feature rather than something `verify` owns.
+digest = ["dep:sha2"]
+
+verify = ["digest", "dep:ecdsa"]
+sign   = ["verify"]
+
+# One feature per curve, because an embedded verifier that only ever sees
+# secp256r1 should not carry four field implementations it cannot use.
+curve-p192 = ["verify", "dep:p192"]
+curve-p256 = ["verify", "dep:p256"]
+curve-p384 = ["verify", "dep:p384"]
+curve-k256 = ["verify", "dep:k256"]
+curves-pure = ["curve-p192", "curve-p256", "curve-p384", "curve-k256"]
+
+# The OpenSSL backend is the only way to check brainpoolP256r1,
+# brainpoolP384r1 and secp192k1 today: no audited pure-Rust implementation of
+# any of the three is published on a stable release. With it, all seven
+# algorithms of [OCMF Tab. 22] verify.
+backend-openssl = ["std", "verify", "dep:openssl"]
+
+# The same backend, statically linked from source. For a *distributable binary*
+# — a release artefact a notified body or a driver downloads — where "install
+# the OpenSSL development headers first" is not an acceptable instruction. It
+# needs a C compiler and perl at build time and takes minutes; for a library
+# consumer, `backend-openssl` against the system OpenSSL is the right choice.
+vendored-openssl = ["backend-openssl", "openssl/vendored"]
+
+session = ["alloc"]
+ocpp     = ["alloc"]
+xml      = ["std", "dep:quick-xml"]
+# Deliberately **not** `rust_decimal/serde`. That impl writes a `Decimal` as a
+# JSON *number*, which goes through `f64` in most consumers — and `f64` cannot
+# hold `9.2`. Every quantity this crate serialises goes out as the decimal's
+# exact text instead, so there is no path by which a kilowatt-hour becomes a
+# float. Leaving the impl unavailable is what keeps that true.
+serde    = ["dep:serde", "serde/alloc", "alloc"]
+
+# Everything that can be switched on at once, for docs.rs and CI.
+full = ["std", "curves-pure", "sign", "session", "ocpp", "xml", "serde"]
+
+[dev-dependencies]
+rust_decimal = { workspace = true, features = ["std", "macros"] }
+proptest = "1"
+serde_json = "1"
+divan = "0.1"
+
+[[test]]
+name = "properties"
+required-features = ["sign", "curve-p256"]
+
+[[test]]
+name = "corpus"
+required-features = ["std"]
+
+[[test]]
+name = "conformance"
+required-features = ["std"]
+
+[[test]]
+name = "vectors"
+required-features = ["std"]
+
+[[bench]]
+name = "parse"
+harness = false
+required-features = ["std", "verify", "curve-p256"]
+
+[[example]]
+name = "verify_record"
+required-features = ["std", "verify", "curve-p256"]
+
+[[example]]
+name = "sign_record"
+required-features = ["std", "sign", "curve-p256"]
+
+[package.metadata.docs.rs]
+all-features    = true
+rustdoc-args    = ["--cfg", "docsrs"]
+
+[lints.rust]
+missing_docs                = "deny"
+unsafe_code                 = "forbid"
+missing_debug_implementations = "warn"
+
+[lints.clippy]
+pedantic     = { level = "warn", priority = -1 }
+# Every `f32`/`f64` in this crate is a bug; see the workspace manifest.
+float_arithmetic = "deny"
+cast_possible_truncation = "warn"
+module_name_repetitions = "allow"

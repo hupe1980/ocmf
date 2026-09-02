@@ -19,3 +19,22 @@ target
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# Vendored specifications and reference implementations (CC BY-ND / third-party licences).
+# Fetched by `xtask spec-sync`; never committed.
+/specs/
+
+# Internal architecture documentation, not published with the crate.
+# `CONCEPT.md` is the pre-split single-file form; both are ignored so a draft
+# in either shape stays local.
+/concepts/
+/CONCEPT.md
+
+# Zola build output
+/site/public/
+
+# cargo-fuzz artefacts and corpora
+/fuzz/target/
+/fuzz/corpus/
+/fuzz/artifacts/
+/fuzz/coverage/
