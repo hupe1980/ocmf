@@ -221,7 +221,9 @@ fn spec_coverage() -> Result<()> {
 /// The library's dependency graph under a feature set, one `name vX.Y.Z` per line.
 fn graph(features: &str) -> Result<BTreeSet<String>> {
     let out = Command::new(env!("CARGO"))
-        .args(["tree", "-p", "ocmf", "-e", "normal", "--prefix", "none"])
+        .args([
+            "tree", "-p", "ocmf", "-e", "normal", "--prefix", "none", "--color", "never",
+        ])
         .args(["-f", "{p}", "--no-default-features", "--features", features])
         .current_dir(root())
         .output()
@@ -234,7 +236,8 @@ fn graph(features: &str) -> Result<BTreeSet<String>> {
     }
     Ok(String::from_utf8_lossy(&out.stdout)
         .lines()
-        .map(|l| l.trim_end_matches(" (*)").to_string())
+        // `name vX.Y.Z`, dropping cargo's `(*)` and `(proc-macro)` annotations.
+        .map(|l| l.split(' ').take(2).collect::<Vec<_>>().join(" "))
         .collect())
 }
 
