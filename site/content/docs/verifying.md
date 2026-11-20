@@ -1,13 +1,12 @@
 +++
 title = "Verifying"
-description = "Check an OCMF signature: reading public keys in five shapes, all seven ECDSA algorithms, the pure-Rust and OpenSSL backends, and what each error actually means."
+description = "Check an OCMF signature: reading public keys in six shapes, all seven ECDSA algorithms, the pure-Rust and OpenSSL backends, and what each error actually means."
 weight = 5
 +++
 
 ## What a verification proves
 
-That the holder of one private key produced *these bytes*. Nothing else. Three
-things it does **not** prove, each answered elsewhere:
+That the holder of one private key produced *these bytes*. Nothing else:
 
 | Question | Answered by |
 |---|---|
@@ -16,14 +15,10 @@ things it does **not** prove, each answered elsewhere:
 | Were records removed from the session? | [`ocmf::session`](@/docs/sessions.md) |
 | May these values be billed? | law, tariffs and a key registry — not this crate |
 
-Conflating the four is how a "verified" charging session turns out to be a
-signed fragment of a session somebody edited.
-
 ## Reading a public key
 
-OCMF deliberately does not carry the key: the specification puts that binding
-out of band. Keys therefore arrive in whatever shape the source uses, and this
-crate reads five of them:
+OCMF does not carry the key; it arrives out of band in whatever shape the source
+uses. `PublicKey` reads six:
 
 | Shape | Where it comes from |
 |---|---|
@@ -67,8 +62,8 @@ let verified = ocmf::verify_with(
 
 ## The errors mean different things
 
-Exactly one variant means the record is not authentic. The others say whose
-fault it is:
+Only `NotVerified` means the record is not authentic. The other `VerifyError`
+variants say what else went wrong:
 
 | Error | What actually went wrong |
 |---|---|
@@ -79,13 +74,14 @@ fault it is:
 | `SignatureEncoding` | `SD` is absent, or is not readable as the encoding `SE` names |
 | `SignatureShape` | the bytes are neither DER nor a raw `r‖s` of the right size |
 | `SignatureScalars` | `r` or `s` is outside `[1, n)` — a signature nothing produced |
-| `HighSSignature` | the low form was required by policy; both halves of a malleable pair are the same statement |
+| `HighSSignature` | `Malleability::RejectHighS` is set and `s` is in the high half |
+| `Key` | the key text could not be read (a `KeyError`) |
 | **`NotVerified`** | **the signature is well-formed and does not match** |
 
 ## All seven algorithms
 
 The specification defines seven, all ECDSA over SHA-256 — including on the
-384-bit curves, which rules out the convenient path through a default digest.
+384-bit curves.
 
 | `SA` identifier | Curve | Pure Rust | OpenSSL |
 |---|---|:--:|:--:|
@@ -93,17 +89,20 @@ The specification defines seven, all ECDSA over SHA-256 — including on the
 | `ECDSA-secp192r1-SHA256` | secp192r1 (NIST P-192) | ✓ | ✓ |
 | `ECDSA-secp256k1-SHA256` | secp256k1 | ✓ | ✓ |
 | `ECDSA-secp256r1-SHA256` *(default)* | secp256r1 (P-256) | ✓ | ✓ |
-| `ECDSA-brainpool256r1-SHA256` | brainpoolP256r1 | — | ✓ |
+| `ECDSA-brainpool256r1-SHA256` | brainpoolP256r1 | ✓ | ✓ |
 | `ECDSA-secp384r1-SHA256` | secp384r1 (P-384) | ✓ | ✓ |
-| `ECDSA-brainpool384r1-SHA256` | brainpoolP384r1 | — | ✓ |
+| `ECDSA-brainpool384r1-SHA256` | brainpoolP384r1 | ✓ | ✓ |
 
-secp192k1 and brainpoolP256r1 **appear in the reference corpus**, so "recognise
-and refuse" was not an option. Build with `--features backend-openssl` for all
-seven; an algorithm a build cannot check is reported as `Unsupported`, never as
-"does not verify".
+Six curves verify in pure Rust, so WebAssembly and embedded builds check them
+too; each needs its `curve-*` feature (see
+[Feature flags](@/docs/feature-flags.md)). secp192k1 has no pure-Rust
+implementation: build with `--features backend-openssl` for all seven. Both
+backends are tested to agree on every brainpool input, tampered ones included.
+An algorithm a build cannot check is reported as `Unsupported`, never as "does
+not verify".
 
 ```rust
-ocmf::is_supported(ocmf::Curve::BrainpoolP256r1);  // a const fn over the features
+ocmf::is_supported(ocmf::Curve::Secp192k1);  // a const fn over the features
 ocmf::supported_curves();
 ```
 
@@ -116,18 +115,17 @@ $ ocmf curves
 
 ## Signature encodings in the wild
 
-`SM` announces a MIME type and defaults to `application/x-der`. It is never
-present in the reference corpus, and two records are not DER at all.
+`SM` announces a MIME type and defaults to `application/x-der`, but not every
+record's signature is DER. `SD` is read in this order:
 
-- **DER first.** Parsed as `SEQUENCE { INTEGER r, INTEGER s }`, leniently:
-  BouncyCastle — and therefore the legally recognised verifier — accepts
-  non-minimal lengths, trailing bytes and `INTEGER`s whose top bit is set with no
-  `0x00` pad. Real eBZ meters emit the last of those and OpenSSL refuses to parse
-  it. This crate reads it and reports `NonCanonicalDer`.
+- **DER** — `SEQUENCE { INTEGER r, INTEGER s }`, read as leniently as the
+  S.A.F.E. reference verifier (BouncyCastle) reads it: non-minimal lengths,
+  trailing bytes and unpadded high-bit `INTEGER`s, which eBZ meters emit and
+  OpenSSL refuses. Reported as `NonCanonicalDer`.
 - **Raw `r‖s`** on an exact length match, reported as `RawSignatureNotDer`.
 - **Otherwise** an error naming the length.
 
-`s` is normalised before the backend sees it. `(r, s)` and `(r, n − s)` are the
-same statement; some pure-Rust curves verify only the low form, while
-BouncyCastle accepts either — and two authentic secp256k1 records in the corpus
-are high-`s`. The deviation is still reported.
+`s` is normalised to the low form before the backend sees it, because some
+pure-Rust curves verify only that form while the reference verifier accepts
+either, and authentic high-`s` records exist. The `HighSSignature` deviation is
+still reported.

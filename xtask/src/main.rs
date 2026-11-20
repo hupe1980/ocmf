@@ -5,11 +5,16 @@
 //!
 //! - `no-floats`  — "money is never a float", proved over the library sources.
 //! - `spec-coverage` — every value in the specification's tables is represented
-//!   in code, checked against the vendored specification itself.
+//!   in code, checked against the fetched specification itself.
 //! - `corpus-report` — reproduces the field measurements the design rests on.
+//! - `deps` — one generation of the curve stack, and no pre-release crate
+//!   unless `curve-p192` asks for one.
 //! - `spec-sync` — re-fetches the pinned sources and reports drift, including
 //!   the OCA application note, which is a PDF and is therefore pinned by
 //!   content hash rather than by commit.
+//!
+//! The fetched sources are not redistributable, so they live in a git-ignored
+//! reference directory (see [`reference_dir`]) and never in the repository.
 
 use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
@@ -35,18 +40,21 @@ fn main() -> Result<()> {
         Some("no-floats") => no_floats(),
         Some("spec-coverage") => spec_coverage(),
         Some("corpus-report") => corpus_report(),
+        Some("deps") => deps(),
         Some("spec-sync") => spec_sync(),
         Some("conformance-gen") => conformance::generate(&root()),
         Some("ci") => {
             no_floats()?;
             corpus_report()?;
-            // `spec-coverage` needs `specs/`, which is not present in a clean
-            // clone; it is a separate CI job that runs `spec-sync` first.
+            deps()?;
+            // `spec-coverage` needs the fetched reference directory, which is
+            // not present in a clean clone; it is a separate CI job that runs
+            // `spec-sync` first.
             Ok(())
         }
         _ => {
             eprintln!(
-                "usage: cargo xtask <no-floats|spec-coverage|corpus-report|spec-sync|conformance-gen|ci>"
+                "usage: cargo xtask <no-floats|spec-coverage|corpus-report|deps|spec-sync|conformance-gen|ci>"
             );
             bail!("no task given");
         }
@@ -58,6 +66,15 @@ fn root() -> PathBuf {
         .parent()
         .expect("xtask lives one level below the workspace root")
         .to_path_buf()
+}
+
+/// Where the fetched specifications live: `$OCMF_REFERENCE` when set, else the
+/// git-ignored `concepts/reference/` of this checkout. `spec-sync` writes there
+/// and `spec-coverage` reads from there.
+fn reference_dir() -> PathBuf {
+    std::env::var_os("OCMF_REFERENCE")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| root().join("concepts/reference"))
 }
 
 fn rust_sources(dir: &Path) -> Result<Vec<PathBuf>> {
@@ -125,7 +142,7 @@ fn no_floats() -> Result<()> {
 /// The specification is the oracle for completeness, mechanically: if S.A.F.E.
 /// adds an identification type or a curve, this fails until the code has it.
 fn spec_coverage() -> Result<()> {
-    let spec = root().join("specs/OCMF-Open-Charge-Metering-Format/OCMF-en.md");
+    let spec = reference_dir().join("OCMF-Open-Charge-Metering-Format/OCMF-en.md");
     if !spec.exists() {
         bail!(
             "{} not found — run `cargo xtask spec-sync` first",
@@ -187,7 +204,7 @@ fn spec_coverage() -> Result<()> {
     }
     if missing.is_empty() {
         println!(
-            "spec-coverage: all {} table values from the vendored specification are represented",
+            "spec-coverage: all {} table values from the pinned specification are represented",
             wanted.len()
         );
         return Ok(());
@@ -199,6 +216,73 @@ fn spec_coverage() -> Result<()> {
         "{} value(s) from the specification's tables have no representation in the code",
         missing.len()
     );
+}
+
+/// The library's dependency graph under a feature set, one `name vX.Y.Z` per line.
+fn graph(features: &str) -> Result<BTreeSet<String>> {
+    let out = Command::new(env!("CARGO"))
+        .args(["tree", "-p", "ocmf", "-e", "normal", "--prefix", "none"])
+        .args(["-f", "{p}", "--no-default-features", "--features", features])
+        .current_dir(root())
+        .output()
+        .context("running cargo tree")?;
+    if !out.status.success() {
+        bail!(
+            "cargo tree: {}",
+            String::from_utf8_lossy(&out.stderr).trim()
+        );
+    }
+    Ok(String::from_utf8_lossy(&out.stdout)
+        .lines()
+        .map(|l| l.trim_end_matches(" (*)").to_string())
+        .collect())
+}
+
+/// One generation of the curve stack, and no pre-release outside `curve-p192`.
+///
+/// Two generations of curve arithmetic in a crate whose job is to be trusted
+/// is two places to be wrong — and the last time the workspace sat on an old
+/// one, every consumer inherited its advisory. `p192` has only a pre-release
+/// on the current line, so it is fenced behind its own feature: a consumer
+/// who does not ask for secp192r1 never compiles a pre-release.
+fn deps() -> Result<()> {
+    const STACK: &[&str] = &[
+        "elliptic-curve",
+        "ecdsa",
+        "sha2",
+        "crypto-bigint",
+        "primeorder",
+    ];
+    const ALL: &str = "std,curves-pure,sign,session,ocpp,xml,serde,backend-openssl";
+    const NO_P192: &str = "std,verify,sign,session,curve-p256,curve-p384,curve-k256,\
+                           curve-bp256,curve-bp384,ocpp,xml,serde,backend-openssl";
+    let mut problems = Vec::new();
+    let all = graph(ALL)?;
+    for name in STACK {
+        let versions: Vec<_> = all
+            .iter()
+            .filter(|p| p.split(' ').next() == Some(name))
+            .collect();
+        if versions.len() > 1 {
+            problems.push(format!("two generations of {name}: {versions:?}"));
+        }
+    }
+    let is_pre = |p: &&String| {
+        p.split(' ')
+            .nth(1)
+            .is_some_and(|v| v.trim_start_matches('v').contains('-'))
+    };
+    for p in graph(NO_P192)?.iter().filter(is_pre) {
+        problems.push(format!("pre-release outside `curve-p192`: {p}"));
+    }
+    if problems.is_empty() {
+        println!("deps: one curve-stack generation; no pre-release outside `curve-p192`");
+        return Ok(());
+    }
+    for p in &problems {
+        eprintln!("  {p}");
+    }
+    bail!("{} dependency-graph problem(s)", problems.len());
 }
 
 /// Reproduces the field measurements the design rests on.
@@ -229,7 +313,7 @@ fn spec_sync() -> Result<()> {
         (
             "OCMF-Open-Charge-Metering-Format",
             "https://github.com/SAFE-eV/OCMF-Open-Charge-Metering-Format.git",
-            "34c4add5c3363e04d0468671c53b31ae3341bb17",
+            "e0a26beff725a6d4636d43da691b4a39af59f99b",
         ),
         (
             "transparenzsoftware",
@@ -255,7 +339,7 @@ fn spec_sync() -> Result<()> {
         "https://openchargealliance.org/wp-content/uploads/2025/05/signed_meter_values-v10-1.pdf",
         "9cd628544c8e4feda3fa23421613fd129d509de582464f414f4fb979c9914a6f",
     )];
-    let specs = root().join("specs");
+    let specs = reference_dir();
     std::fs::create_dir_all(&specs)?;
     let git = |dir: &Path, args: &[&str]| -> Result<std::process::Output> {
         let out = Command::new("git")

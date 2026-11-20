@@ -10,8 +10,8 @@
 //!
 //! All functions are total, allocation-light and constant in *shape* rather
 //! than in time. They run on public data only — a signature and a group order
-//! are both public — so timing is not a concern here; see
-//! [`SECURITY.md`](https://github.com/hupe1980/ocmf/blob/main/concepts/SECURITY.md).
+//! are both public — so timing is not a concern here: there is no secret for a
+//! timing side channel to leak.
 
 use alloc::vec::Vec;
 

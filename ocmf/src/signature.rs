@@ -663,29 +663,34 @@ mod tests {
         feature = "curve-p192",
         feature = "curve-p256",
         feature = "curve-p384",
-        feature = "curve-k256"
+        feature = "curve-k256",
+        feature = "curve-bp256",
+        feature = "curve-bp384"
     ))]
     fn the_orders_agree_with_rustcryptos_own_constants() {
-        // `elliptic-curve` 0.13 exposes the order as the curve's `ORDER`
-        // constant, a `Uint` whose big-endian bytes are what this crate stores.
-        // The trait import is scoped per arm: each curve crate re-exports its
-        // own copy of `ArrayEncoding`, and two of them in one scope collide.
+        // `elliptic-curve` exposes the order as the curve's `ORDER` constant,
+        // a `Uint` whose big-endian bytes are what this crate stores. Every
+        // curve crate is on the one `elliptic-curve` the workspace resolves.
+        use ecdsa::elliptic_curve::Curve as _;
+        use ecdsa::elliptic_curve::bigint::ArrayEncoding as _;
         macro_rules! same_order {
-            ($krate:ident, $curve_ty:ty, $ours:expr) => {{
-                use $krate::elliptic_curve::Curve as _;
-                use $krate::elliptic_curve::bigint::ArrayEncoding as _;
+            ($curve_ty:ty, $ours:expr) => {{
                 let theirs = <$curve_ty>::ORDER.to_be_byte_array();
                 assert_eq!($ours.order(), &theirs[..], "{}", $ours);
             }};
         }
         #[cfg(feature = "curve-p192")]
-        same_order!(p192, p192::NistP192, Curve::Secp192r1);
+        same_order!(p192::NistP192, Curve::Secp192r1);
         #[cfg(feature = "curve-p256")]
-        same_order!(p256, p256::NistP256, Curve::Secp256r1);
+        same_order!(p256::NistP256, Curve::Secp256r1);
         #[cfg(feature = "curve-p384")]
-        same_order!(p384, p384::NistP384, Curve::Secp384r1);
+        same_order!(p384::NistP384, Curve::Secp384r1);
         #[cfg(feature = "curve-k256")]
-        same_order!(k256, k256::Secp256k1, Curve::Secp256k1);
+        same_order!(k256::Secp256k1, Curve::Secp256k1);
+        #[cfg(feature = "curve-bp256")]
+        same_order!(bp256::BrainpoolP256r1, Curve::BrainpoolP256r1);
+        #[cfg(feature = "curve-bp384")]
+        same_order!(bp384::BrainpoolP384r1, Curve::BrainpoolP384r1);
     }
 
     #[test]

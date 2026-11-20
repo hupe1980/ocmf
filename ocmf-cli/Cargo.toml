@@ -6,6 +6,10 @@ authors.workspace      = true
 edition.workspace      = true
 license.workspace      = true
 repository.workspace   = true
+readme                 = "../README.md"
+homepage.workspace     = true
+keywords               = ["ocmf", "eichrecht", "ev-charging", "cli", "ecdsa"]
+categories             = ["command-line-utilities", "cryptography"]
 rust-version.workspace = true
 
 [[bin]]

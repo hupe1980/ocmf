@@ -20,27 +20,31 @@ default = ["std", "verify", "sign", "session", "curve-p256"]
 | `verify` | signature checking |
 | `sign` | `RecordBuilder`, the RFC 6979 signers, `ExternalSigner` |
 | `session` | the check-component rules |
-| `curve-p192` / `curve-p256` / `curve-p384` / `curve-k256` | one pure-Rust curve each |
-| `curves-pure` | all four |
-| `backend-openssl` | **all seven** algorithms, including brainpool and secp192k1, against the system OpenSSL |
-| `vendored-openssl` | the same, built from source and linked statically — what the release binaries use, and not what a library consumer wants |
+| `curve-p256` *(default)* | secp256r1, verify and sign |
+| `curve-p384` / `curve-k256` / `curve-bp256` / `curve-bp384` | secp384r1 / secp256k1 / brainpoolP256r1 / brainpoolP384r1, verify and sign |
+| `curve-p192` | secp192r1, verify only. The one feature that pulls a pre-release crate (`p192`), so nothing else enables it |
+| `curves-pure` | all six pure-Rust curves above |
+| `backend-openssl` | **all seven** algorithms against the system OpenSSL — the only way to check secp192k1. The pure-Rust backend is still tried first |
+| `vendored-openssl` | the same, built from source and linked statically. For distributable binaries; needs a C compiler and perl and takes minutes to build |
 | `ocpp` | `SignedMeterValueType` and the `oca:` public-key composition |
 | `xml` | the S.A.F.E. transparency container, read and write |
 | `serde` | `Serialize` on the derived report and the session report, and `Serialize`/`Deserialize` on the OCPP container |
-| `full` | everything except `backend-openssl` |
+| `full` | everything except the OpenSSL backends |
 
-One feature per curve, because an embedded verifier that only ever sees
-secp256r1 should not carry four field implementations it cannot use. The matrix
-is a **correctness** matrix, not a packaging convenience: CI runs the test suite
-under five combinations, because a test that only passes with every feature on is
-a test that does not know what it asserts.
+Curves are separate features so an embedded verifier that only sees secp256r1
+carries one field implementation. CI runs the test suite under five feature
+combinations.
 
-## Running where the meter is — and where the driver is
+```console
+$ cargo add ocmf --features curve-bp256,curve-bp384   # add brainpool to the defaults
+$ cargo add ocmf --features curves-pure               # all six pure-Rust curves
+```
+
+## Embedded and WebAssembly
 
 `#![no_std]` with `alloc`, `#![forbid(unsafe_code)]`, no I/O, no clock **and no
-randomness**. Nothing here opens a socket, reads a file or asks the time — every
-instant is an argument — so a fleet's worth of verification is a deterministic
-unit test, and a dispute from four years ago replays exactly as it happened.
+randomness**. Every instant is an argument, so verification is deterministic and
+an old dispute replays exactly.
 
 ```console
 $ cargo build -p ocmf --no-default-features \
@@ -49,35 +53,23 @@ $ cargo build -p ocmf --no-default-features \
 $ cargo build -p ocmf --features full --target wasm32-unknown-unknown
 ```
 
-Both are CI jobs, not sentences in a README. The same crate signs on the charge
-controller, verifies in the CSMS and runs in the browser a driver checks a
-receipt in, so the three sides cannot drift.
+Both builds run in CI. `alloc` is required: the resolved reading list and the
+deviation report need it.
 
-`alloc` is required: the resolved reading list and the deviation report need it.
+`std` does **not** enable `ecdsa/std` or `sha2/std`, which would pull in
+`getrandom`. The crate never needs randomness (RFC 6979 signing is
+deterministic), and leaving it out is what lets `wasm32-unknown-unknown` build
+without configuring a `getrandom` backend.
 
-### Why the browser one works
-
-**`std` deliberately does not enable `ecdsa/std` or `sha2/std`.** Those pull
-`rand_core/std` → `getrandom`, an operating-system randomness source, into a
-crate that never asks for randomness: RFC 6979 signing consults none, and
-verification is arithmetic over public data. On `wasm32-unknown-unknown`
-`getrandom` refuses to build without a JS backend feature, so leaving it out is
-the difference between "builds" and "configure this transitive dependency
-first". What it costs is `std::error::Error` on two error types this crate never
-surfaces.
-
-For the same reason the `serde` feature does **not** enable
-`rust_decimal/serde`: that impl writes a `Decimal` as a JSON *number*, which
-goes through `f64` in most consumers, and `f64` cannot hold `9.2`. Every
-quantity this crate serialises goes out as the decimal's exact text instead, and
-leaving the impl unavailable is what keeps that true.
+The `serde` feature does **not** enable `rust_decimal/serde`, which writes a
+`Decimal` as a JSON number (and so through `f64` in most consumers). Every
+quantity this crate serialises is the decimal's exact text.
 
 ## The dependency budget
 
 The library's non-optional dependencies are **`rust_decimal` and `thiserror`**.
-Hex, Base64, DER, `SubjectPublicKeyInfo` and JSON are implemented in-crate — not
-out of pride, but because each has to be lenient in a way a general-purpose crate
-is right to refuse:
+Hex, Base64, DER, `SubjectPublicKeyInfo` and JSON are implemented in-crate,
+because each has to be lenient in a way a general-purpose crate rightly refuses:
 
 | In-crate | Why not the obvious crate |
 |---|---|
@@ -91,9 +83,10 @@ Cryptography is not in-crate: `sha2` and the RustCrypto curve crates do that.
 ## Limits
 
 Parsing is bounded, and every bound is a named error rather than a truncation.
-The defaults come from measurement — the largest payload in the reference corpus
-is 932 bytes with 6 readings — so they reject nothing real while bounding the
-worst case at something a charge controller can hold.
+The defaults are sized well above the largest payload in the reference corpus
+(932 bytes, 6 readings) and small enough for a charge controller: 128 KiB per
+record, 64 KiB per payload, 4096 readings, nesting depth 8, 256 members per
+object, 4096 `<value>` elements in a transparency container.
 
 ```rust
 use ocmf::{Limits, Profile, Record};
@@ -106,11 +99,9 @@ let tight = Limits::DEFAULT.payload(4 * 1024).readings(64);
 ```
 
 `Limits::UNLIMITED` removes the size bounds for a server that has already bounded
-its input. It does **not** remove the nesting bound: the reader recurses, and in
-a `forbid(unsafe_code)` crate a stack overflow is the one failure that cannot be
-returned as a `Result`.
+its input. Nesting stays capped at `Limits::HARD_DEPTH` (512), because the reader recurses and a stack
+overflow cannot be returned as a `Result`.
 
 ## Supported Rust version
 
-**1.88.** Proved in CI against a 1.88 toolchain rather than asserted. A bump is a
-minor version bump of the crate.
+**1.88**, checked in CI. Raising it is a minor version bump of the crate.

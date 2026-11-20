@@ -12,8 +12,6 @@ cargo +nightly fuzz run verify
 Seed the corpus from the real records the crate ships:
 
 ```console
-mkdir -p fuzz/corpus/parse
-cargo run -q -p xtask -- corpus-report   # prints where the fixture lives
 python3 - <<'PY'
 import json, pathlib
 d = json.load(open("ocmf/tests/corpus/records.json"))
@@ -23,10 +21,10 @@ for i, e in enumerate(d["entries"]):
 PY
 ```
 
-`round_trip` is the target that matters most: it asserts the property the whole
-design exists to make true, on inputs nobody wrote deliberately.
-
-`der` asserts that a signature read out and written back is the same two
-scalars, in canonical DER. A writer that saturates a length does not emit
-garbage, it emits a *different, well-formed* structure — which is why the
-assertion is a round trip and not a length check (D31).
+| Target | Asserts |
+|---|---|
+| `parse` | parsing under every profile never panics or allocates without bound |
+| `round_trip` | a parsed record prints back to its exact input, and its signed span matches a naive `split('|')` whenever no pipe sits inside a string |
+| `der` | a signature read and re-written as canonical DER reads back as the same two scalars — a round trip, because a length bug can produce a different but well-formed structure |
+| `key` | `PublicKey::from_bytes`, `from_text` and `from_oca` never panic |
+| `verify` | verification against a fixed corpus key never panics |

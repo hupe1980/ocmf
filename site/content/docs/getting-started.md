@@ -6,23 +6,29 @@ weight = 1
 
 ## Install
 
-```toml
-[dependencies]
-ocmf = "0.1"
+```console
+$ cargo add ocmf
 
-# All seven curves, both transports, the session rules:
-ocmf = { version = "0.1", features = ["full", "backend-openssl"] }
+# Six curves in pure Rust, both transports, the session rules:
+$ cargo add ocmf --features full
+
+# All seven curves (secp192k1 through the system OpenSSL):
+$ cargo add ocmf --features full,backend-openssl
 ```
 
-The command-line tool is a separate crate, and ships as a self-contained binary
-on every [release](https://github.com/hupe1980/ocmf/releases):
+The command-line tool is a separate crate. Install it with Homebrew, download a
+self-contained binary from the [releases](https://github.com/hupe1980/ocmf/releases),
+or build it:
 
 ```console
+$ brew install hupe1980/tap/ocmf
 $ cargo install ocmf-cli
 ```
 
 The library needs Rust 1.88 or newer. It is `#![no_std]` with `alloc`,
-`#![forbid(unsafe_code)]`, and has two non-optional dependencies.
+`#![forbid(unsafe_code)]`, and has two non-optional dependencies. The default
+build verifies and signs secp256r1; the other curves are opt-in — see
+[Feature flags](@/docs/feature-flags.md).
 
 ## Parse a record
 
@@ -40,9 +46,8 @@ println!("meter {:?}", payload.meter_serial());
 println!("{} reading(s)", payload.readings().len());
 ```
 
-`Record<'a>` borrows the text it was parsed from; nothing is copied.
-`RecordBuf` owns a `String` and re-borrows on demand when you need an owned
-value.
+`Record<'a>` borrows the text it was parsed from; nothing is copied. Use
+`RecordBuf`, which owns a `String`, when you need an owned value.
 
 ## Read the meter values
 
@@ -61,9 +66,9 @@ Every quantity is an exact decimal that remembers how it was written.
 
 ## Check a signature
 
-OCMF deliberately does not carry the public key: it reaches a verifier out of
-band, from a register, a transparency file or a label on the station. Give the
-crate the key and it will tell you whether that key signed those bytes.
+OCMF does not carry the public key: it reaches a verifier out of band, from a
+register, a transparency file or a label on the station. `verify` checks whether
+that key signed these bytes.
 
 ```rust
 use ocmf::{PublicKey, verify};
@@ -77,9 +82,8 @@ for d in verified.deviations() {
 }
 ```
 
-`Verified` has no public constructor. The only way to hold one is to have run
-`verify`, which stops a `-> bool` from being checked in one function and ignored
-in another.
+`Verified` has no public constructor: holding one proves `verify` ran, so a
+function that takes a `Verified` cannot be handed an unchecked record.
 
 > [!NOTE]
 > A successful verification proves that the holder of one private key produced

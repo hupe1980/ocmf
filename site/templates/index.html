@@ -25,6 +25,7 @@
       <a class="btn primary" href="{{ get_url(path='@/docs/getting-started.md') | safe }}">Get started</a>
       <a class="btn ghost" href="{{ config.extra.repo }}" rel="noopener">View on GitHub</a>
     </div>
+    <p class="lede"><code>cargo add ocmf</code> &middot; <code>brew install hupe1980/tap/ocmf</code></p>
 
     <dl class="stats">
       <div><dt>Real records tested</dt><dd>{{ config.extra.corpus_records }}</dd></div>
@@ -84,8 +85,8 @@
       </article>
       <article class="card">
         <h3>Verifies all seven algorithms</h3>
-        <p>Four curves in pure Rust, all seven through OpenSSL. An algorithm a
-           build cannot check is reported as unsupported, never as
+        <p>Six in pure Rust, brainpool included; secp192k1 through OpenSSL. An
+           algorithm a build cannot check is reported as unsupported, never as
            &ldquo;does not verify&rdquo;.</p>
       </article>
       <article class="card">

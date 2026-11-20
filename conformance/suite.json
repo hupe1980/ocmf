@@ -374,7 +374,7 @@
    "id": "table/id-type-EVCCID",
    "group": "table",
    "description": "IT = EVCCID, with an ID of the shape that row prescribes [OCMF Tab. 17]",
-   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"EVCCID\",\"ID\":\"ABC123\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402206BAB0C4DBB9127BC08421D45F7167D07447F9E9C45A03D2C9A7310AD868CB24B02201F7C7AAE2BEECB2CA48503FE68F033C5756D4E9C393D2D5FA8DEEA764AE5CE08\"}",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"EVCCID\",\"ID\":\"0A1B2C3D4E5F\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"},{\"TM\":\"2024-03-01T09:30:00,000+0100 S\",\"TX\":\"E\",\"RV\":129.500,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402201E9BCEE47E4EAB994C41A4A8D653826589B2A9F1A5768C9BDF718DD680862C1102200208195085ED1584C2A9A197B0B7401F4ECCC1BC7A56286AB3072472D43A3EEE\"}",
    "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
    "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": [], "readings": 2, "billable_readings": 2 }
   },
@@ -959,6 +959,14 @@
    "group": "deviation",
    "description": "IT = ISO14443 with an ID that is not 4 or 7 bytes of hex [OCMF Tab. 17]",
    "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"ISO14443\",\"ID\":\"NOT-A-UID\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"304402201B1BB1BA4862F580908551A20BEBD2CA6AE8E90969FBD09FE1926704F675BDAD0220136E19B974EEBA53371A9D7CCACA7CE5452CC3B49A2CC5CA4A0DA4C6962E03DC\"}",
+   "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
+   "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["IdentificationDataFormat"], "readings": 1, "billable_readings": 1 }
+  },
+  {
+   "id": "deviation/identification-data-format-evccid",
+   "group": "deviation",
+   "description": "IT = EVCCID with an ID that is not at most 6 bytes of hex [OCMF Tab. 17]",
+   "record": "OCMF|{\"FV\":\"1.3\",\"GI\":\"ocmf conformance\",\"GS\":\"CONF-1\",\"GV\":\"0.1.0\",\"PG\":\"T1\",\"MV\":\"ACME\",\"MM\":\"M-100\",\"MS\":\"1CONF00000001\",\"MF\":\"1.0\",\"IS\":true,\"IL\":\"VERIFIED\",\"IF\":[\"RFID_PLAIN\"],\"IT\":\"EVCCID\",\"ID\":\"VEHICLE-1\",\"RD\":[{\"TM\":\"2024-03-01T08:00:00,000+0100 S\",\"TX\":\"B\",\"RV\":100.000,\"RI\":\"01-00:B1.08.00*FF\",\"RU\":\"kWh\",\"RT\":\"DC\",\"EF\":\"\",\"ST\":\"G\"}]}|{\"SA\":\"ECDSA-secp256r1-SHA256\",\"SD\":\"30450221009D3F2949351A4DE7E71C693500C95CF4D3B371D753316FB449C544D7A7FA421E022017A535A1AB27DC1E43EAD3802F5FE9A4659202D8BDB777C7B242D51E3E3B97ED\"}",
    "key": "3059301306072A8648CE3D020106082A8648CE3D030107034200040C901D423C831CA85E27C73C263BA132721BB9D7A84C4F0380B2A6756FD601331C8870234DEC878504C174144FA4B14B66A651691606D8173E55BD37E381569E",
    "expect": { "parses": true, "round_trips": true, "verifies": true, "deviations": ["IdentificationDataFormat"], "readings": 1, "billable_readings": 1 }
   },

@@ -62,5 +62,5 @@ api_docs = "https://docs.rs/ocmf"
 og_image = "/og.png"
 # Shown in the header; a single source of truth for the numbers the site quotes.
 corpus_records = 256
-conformance_cases = 162
+conformance_cases = 163
 algorithms = 7

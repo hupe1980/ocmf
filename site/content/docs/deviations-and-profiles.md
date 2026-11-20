@@ -4,25 +4,16 @@ description = "How ocmf reports departures from the OCMF specification: the Depa
 weight = 4
 +++
 
-## Two ways to be wrong
+Parsing runs in a **profile**, and every departure from the specification
+becomes a typed `Deviation` carrying the offending value and the table it is
+measured against. A profile decides which deviations are fatal; the default
+reports them all and refuses none — 89&nbsp;% of the reference corpus omits a
+field the specification marks mandatory, so a strict-only parser would reject
+most real records.
 
-A strict parser rejects nine real records in ten — 89&nbsp;% of the reference
-corpus omits a field the specification marks mandatory — and a lawful charging
-session becomes unbillable for a schema reason.
+## Breaches and advisories
 
-A lenient parser accepts everything, and an operator never learns that their
-fleet emits records the official tool will reject.
-
-So parsing runs in a **profile**, and every departure becomes a typed
-`Deviation` carrying the offending value and the table it is measured against.
-Nobody has to choose between working and knowing.
-
-## Not every finding is a fault
-
-A report that flags everything flags nothing. Whitespace inside the payload is
-*explicitly permitted* and still worth reporting, because re-serialising such a
-record destroys it. Carry-forward is the rule the specification states, not a
-breach of it. Each deviation says which it is:
+Each deviation says whether it breaches the specification:
 
 | `Departure` | Means |
 |---|---|
@@ -39,17 +30,15 @@ for d in record.deviations() {
 }
 ```
 
-Deviations arrive in the order they appear in the record, and each carries the
-value that caused it — quoted, escaped and bounded to 48 characters, because
-every field in a record is attacker-influenced text that ends up in somebody's
-log.
+Deviations arrive in record order. Each carries the value that caused it,
+quoted, escaped and truncated to 48 characters so attacker-controlled text is
+safe to log.
 
-Eight kinds are advisory: a pretty-printed payload, a duplicate JSON key,
-carry-forward of a mandatory field, an absent `FV`, a high-`s` signature, a
-format version newer than the reference verifier dispatches on, readings dropped
-by a `Limits` bound, and two `IF` flags from the same group — which the table
-implies and does not state, so reporting it as a breach would be reporting a
-deviation from a rule nobody wrote. Everything else is a breach.
+Eight kinds are advisory: a pretty-printed payload (lawful, but destroyed by
+re-serialising), a duplicate JSON key, carry-forward of a mandatory field, an
+absent `FV`, a high-`s` signature, an `FV` newer than the reference verifier
+reads, readings dropped by a `Limits` bound, and two `IF` flags from the same
+group. Everything else is a breach.
 
 ## The profiles
 
@@ -65,34 +54,29 @@ use ocmf::{Limits, Profile, Record};
 let record = Record::parse_with(&text, Profile::Strict, &Limits::DEFAULT)?;
 ```
 
-`Reference` refuses exactly five things, read out of the Java rather than
-guessed: a missing `FV`, an `FV` above 1.3, a bare `r‖s` signature, an
-undecodable `SD`, and an `SD` that is not there at all.
+`Reference` refuses exactly five things, matching the reference verifier's
+source: a missing `FV`, an `FV` above 1.3, a bare `r‖s` signature, an
+undecodable `SD`, and a missing `SD`. `DeviationKind::rejected_by_reference_verifier()`
+answers the same question per kind.
 
-## Where the specification's *prose* states a rule
+## Rules from the specification's prose
 
-Most of what a reader checks comes out of the tables. Two rules live in the
-prose instead, and nothing surveyed checks them:
+Two checks come from the prose rather than the tables:
 
-- **`IF` is `0..4`** because there are four flag groups. More than four elements
-  breaches the cardinality; two flags from *one* group state two things about
-  the same assignment, which the table implies rather than says — so that one
-  is advisory.
-- **The serial numbers are *conditionally* mandatory**, and
-  `[OCMF §Relation of Serial Numbers, Charge Point and Public Key]` gives the
-  condition: the meter's serial, or the gateway's, or — "alternatively, a direct
-  identification of the charge point" — `CT` with `CI`. With none of the three,
-  no route the specification describes can bind a key to the record.
-  `SourceUnidentifiable`.
+- **`IF` holds at most four elements**, one per flag group
+  (`IdentificationFlagsCardinality`). Two flags from the same group is advisory
+  (`IdentificationFlagsDuplicateGroup`), because the table implies that rule
+  rather than stating it.
+- **A record must identify its source**:
+  `[OCMF §Relation of Serial Numbers, Charge Point and Public Key]` requires the
+  meter serial, the gateway serial, or `CT` with `CI`. With none of them no key
+  can be bound to the record (`SourceUnidentifiable`).
 
-Both hold across the whole reference corpus (measured: 0, 0 and 0).
+## Undefined table values
 
-## What nothing else reports
-
-Every closed table in OCMF has values it does not define. Keeping such a value
-and refusing it a billing decision is half the job; saying so is the other half.
-These 30 findings, spread over 26 records of the S.A.F.E. reference corpus,
-parse clean everywhere else:
+A value outside a closed table is kept verbatim, reported as
+`UndefinedTableValue` (or a format mismatch), and never treated as billable.
+Examples from the S.A.F.E. reference corpus — 30 findings in 26 records:
 
 | Found in the corpus | Records | What it is |
 |---|---:|---|
@@ -105,6 +89,8 @@ parse clean everywhere else:
 
 `DeviationKind` is `#[non_exhaustive]`; every variant carries a citation, a
 stable machine-readable name and a one-sentence message.
+
+Grouped by where they occur:
 
 **Structure.** `PrettyPrintedPayload`, `FourthSectionPublicKey`,
 `DuplicateKey`, `ControlCharacterInString`, `NonCanonicalNumber`,
@@ -130,20 +116,13 @@ stable machine-readable name and a one-sentence message.
 `AlgorithmIdentifierSpelling`, `SignatureDataUndecodable`,
 `SignatureDataMissing`, `HighSSignature`.
 
-Every one of them has a case in the [conformance suite](@/docs/conformance.md);
-a kind with no case fails the build.
+Every kind has a case in the [conformance suite](@/docs/conformance.md).
 
-## Losing the payload is the bug
+## What is fatal
 
-A junk signature, an unknown meter state, a unit nobody defined: each is a reason
-to refuse *something*, and the temptation is to refuse the record. The record is
-the evidence a dispute turns on — and a caller who cannot parse it cannot
-**verify** it either, so refusing it throws away the one thing that was never in
-doubt.
-
-So the line is drawn at structure. A byte sequence that is not
-`OCMF|<JSON object>|<JSON object>` is not a record and is an error. Everything
-inside those objects is data:
+Only structure. A byte sequence that is not `OCMF|<JSON object>|<JSON object>`
+is not a record and is a `ParseError`; everything inside those objects is
+reported, so a record with a bad field can still be parsed and verified:
 
 | Fatal — `ParseError` | Reported — `Deviation` |
 |---|---|
@@ -153,11 +132,7 @@ inside those objects is data:
 | a `Limits` bound was reached | `TM`, `RI` or `RV` unreadable |
 | the profile in force refuses a deviation | a scalar field holding an object |
 
-An undecodable `SD` costs the signature and not the payload. A string field that
-arrives as a JSON number is read as the literal text it was written with. A `TM`
-nobody can read costs the reading its clock. Values outside a closed table are
-kept verbatim, reported, and refused every predicate that could authorise money.
-
-The one exception is a `Limits` bound on `RD`, because the point of a bound is
-to bound the work: the surplus readings are dropped and `ReadingsTruncated` says
-so.
+An undecodable `SD` costs the signature, not the payload. A string field that
+arrives as a JSON number is read as its literal text. An unreadable `TM` costs
+the reading its clock. The one non-fatal loss is a `Limits` bound on `RD`: the
+surplus readings are dropped and reported as `ReadingsTruncated`.

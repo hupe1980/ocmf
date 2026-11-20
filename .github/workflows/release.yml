@@ -79,7 +79,7 @@ jobs:
       - name: the two targets that are not this machine
         run: |
           cargo build -p ocmf --no-default-features \
-            --features alloc,verify,curve-p256,sign,session,ocpp \
+            --features alloc,verify,curve-p256,curve-bp256,curve-bp384,sign,session,ocpp \
             --target thumbv7em-none-eabihf
           cargo build -p ocmf --features full --target wasm32-unknown-unknown
       - run: RUSTDOCFLAGS="-D warnings" cargo doc --no-deps -p ocmf --features full
@@ -258,14 +258,26 @@ jobs:
     needs: [verify, gate, deny, semver, binaries]
     if: needs.verify.outputs.publish == 'true'
     runs-on: ubuntu-latest
+    # Trusted Publishing: no token is stored. The job's GitHub OIDC token is
+    # exchanged for a short-lived crates.io token, revoked when the job ends.
+    # crates.io → ocmf and ocmf-cli → Settings → Trusted Publishing name this
+    # repository, `release.yml` and the environment `crates-io`.
     environment: crates-io
+    permissions:
+      contents: read
+      id-token: write
     env:
       VERSION: ${{ needs.verify.outputs.version }}
-      CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: dtolnay/rust-toolchain@stable
+      - uses: rust-lang/crates-io-auth-action@c6f97d42243bad5fab37ca0427f495c86d5b1a18 # v1.0.5
+        id: auth
       - name: publish ocmf, then ocmf-cli
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
         run: |
           # Where cargo looks a crate up. 1-, 2- and 3-character names are
           # special-cased by the sparse-index layout; everything else is
@@ -335,7 +347,8 @@ jobs:
             **Library:** `cargo add ocmf` ·
             [docs.rs](https://docs.rs/ocmf/${{ needs.verify.outputs.version }})
 
-            **Tool:** the archives below hold a self-contained `ocmf` binary and
+            **Tool:** `brew install hupe1980/tap/ocmf`, or the archives below:
+            a self-contained `ocmf` binary and
             the conformance suite it can run. OpenSSL is linked statically, so
             all seven `[OCMF Tab. 22]` algorithms — brainpool and secp192k1
             included — work with nothing else installed.
@@ -350,3 +363,65 @@ jobs:
 
             > Independent and unofficial. Not affiliated with, endorsed by or
             > certified by S.A.F.E. e.V. or the Open Charge Alliance.
+
+  # ── 8. Homebrew: Formula/ocmf.rb in hupe1980/homebrew-tap ────────────────
+  #
+  # Rendered from the release's own SHA256SUMS, so the formula can only name
+  # bytes the release actually holds. Needs the GitHub environment `homebrew`
+  # with HOMEBREW_APP_ID and HOMEBREW_APP_PRIVATE_KEY: a GitHub App installed on
+  # the tap only, with contents: write. Actions are pinned by commit because this
+  # job holds that token. Pre-release tags (`v0.2.0-rc.1`) do not reach the tap.
+  tap:
+    name: homebrew tap
+    needs: [verify, release]
+    if: needs.verify.outputs.publish == 'true' && !contains(github.ref_name, '-')
+    runs-on: ubuntu-latest
+    environment: homebrew
+    env:
+      VERSION: ${{ needs.verify.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: download SHA256SUMS from the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download "v$VERSION" --repo "$GITHUB_REPOSITORY" --pattern SHA256SUMS
+      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        id: app-token
+        with:
+          app-id: ${{ secrets.HOMEBREW_APP_ID }}
+          private-key: ${{ secrets.HOMEBREW_APP_PRIVATE_KEY }}
+          owner: hupe1980
+          repositories: homebrew-tap
+          permission-contents: write
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: hupe1980/homebrew-tap
+          token: ${{ steps.app-token.outputs.token }}
+          path: tap
+          persist-credentials: true
+      - name: update the formula
+        run: |
+          mkdir -p tap/Formula
+          packaging/homebrew/formula.sh "$VERSION" SHA256SUMS > tap/Formula/ocmf.rb
+          cd tap
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "ocmf release"
+            git config user.email "ocmf-release@users.noreply.github.com"
+            git add Formula/ocmf.rb
+            git commit -m "ocmf $VERSION"
+            git push
+          fi
+
+  # The published formula installs, and passes its own test: the version, all
+  # seven algorithms, and the conformance suite it ships.
+  brew:
+    name: homebrew install
+    needs: [verify, tap]
+    runs-on: macos-latest
+    steps:
+      - run: |
+          brew install hupe1980/tap/ocmf
+          brew test ocmf
+          [ "$(ocmf --version)" = "ocmf ${{ needs.verify.outputs.version }}" ]

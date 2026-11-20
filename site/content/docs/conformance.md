@@ -1,23 +1,19 @@
 +++
 title = "Conformance suite"
-description = "A published OCMF conformance suite: 162 records with stated expected outcomes, meant to be run by any implementation in any language."
+description = "A published OCMF conformance suite: 163 records with stated expected outcomes, meant to be run by any implementation in any language."
 weight = 10
 +++
 
-The OCMF specification ships no conformance suite. Every implementation
-therefore decides on its own what "reads an OCMF record" means, and the
-disagreements only surface years later, in a dispute, when two parties both
-believe they are right.
-
 [`conformance/suite.json`](https://github.com/hupe1980/ocmf/tree/main/conformance)
-is an attempt at the missing artefact: **162 records with a stated expected
-outcome**, meant to be run by *any* implementation. Nothing in it depends on
-Rust, and the records in it are ordinary OCMF text.
+holds **163 OCMF records, each with a stated expected outcome**, for *any*
+implementation to run. Nothing in it depends on Rust; the records are ordinary
+OCMF text. Table citations refer to OCMF revision 1.4.1 (specification commit
+`e0a26be`), which ships no conformance suite of its own.
 
 | Group | Cases | What it pins down |
 |---|---:|---|
 | `table/*` | 94 | One case per value of every closed table, plus the fiscal pagination context and two `\uXXXX`-escaped table values |
-| `deviation/*` | 54 | One per departure real meters make, and one per field a record can render unreadable |
+| `deviation/*` | 55 | One per departure real meters make, and one per field a record can render unreadable |
 | `curve/*` | 7 | One per algorithm, brainpool and secp192k1 included |
 | `reject/*` | 7 | Byte sequences that are not records at all, and a valid record with one digit changed |
 
@@ -46,7 +42,7 @@ Rust, and the records in it are ordinary OCMF text.
 }
 ```
 
-Two properties of that schema are load-bearing:
+Three rules for reading it:
 
 - **`deviations` is the post-verification set.** A bare `r‖s`, a non-canonical
   DER encoding and a high-`s` signature are only discoverable while checking a
@@ -60,46 +56,40 @@ Two properties of that schema are load-bearing:
   `deviations` field. Only a byte sequence that is not
   `OCMF|<JSON object>|<JSON object>` fails `parses`.
 
-An implementation that models no deviations at all can ignore that field and
-still run the other five expectations, which is most of the value.
+An implementation that models no deviations can ignore that field and still
+run the other five expectations.
 
 ## Running it
 
 ```console
 $ ocmf conformance conformance/suite.json
-162 case(s): 162 passed, 0 failed, 0 skipped
+163 case(s): 163 passed, 0 failed, 0 skipped
 ```
 
 Against your own implementation: read `suite.json`, run each case, compare.
+Deviation names are `DeviationKind::name()` strings, a stable mapping rather
+than a `Debug` rendering.
 
-## It cannot drift
+## How it is kept correct
 
-The suite is generated, and every signed case is re-verified before it is
-written — a generation that produces a record which does not verify fails there
-rather than in somebody else's CI. CI then regenerates and diffs the result, so a
-hand-edited suite is impossible. A deviation kind with no case fails the build.
+The suite is generated (`cargo xtask conformance-gen`), and every signed case is
+re-verified before it is written. CI regenerates and diffs it, so a hand edit
+fails the build, as does a deviation kind with no case.
 
 Every record says `"FV":"1.3"` unless the case is about `FV` itself: 1.3 is the
-newest version the S.A.F.E. Transparenzsoftware's own dispatch reads, so the
-suite can be run against the reference implementation as well as against yours.
+newest version the S.A.F.E. Transparenzsoftware reads, so the suite can be run
+against the reference implementation too.
 
 ## The data behind it
 
-Three independent bodies of test data, doing different jobs:
+Besides the suite, the crate is tested against:
 
-**The reference corpus.** Every OCMF record inside the S.A.F.E.
-Transparenzsoftware test resources — 256 records, 705 readings, from eleven
-vendors — each carrying **OpenSSL's verdict on it**. The oracle is deliberately
-not this crate: a bug shared between an implementation and its test data is
-invisible. The tests assert agreement on all 251 records where a verdict exists.
-
-**Cross-curve vectors.** One record per algorithm, plus three that repeat the
-secp256r1 record in the encodings the field emits — a bare `X‖Y` key, a raw
-`r‖s` signature, and a Base64 `SD`. Generated *and verified* with OpenSSL before
-being checked in.
-
-**The published suite**, above.
-
-On top of those: property tests (round trip is the identity; one changed byte
-always breaks the signature; parsing is total), five fuzz targets, and unit tests
-beside the rule each one checks.
+- **The reference corpus** — every OCMF record in the S.A.F.E.
+  Transparenzsoftware test resources: 256 records, 705 readings, eleven vendors,
+  each with **OpenSSL's verdict** as the oracle rather than this crate's. The
+  tests assert agreement on all 251 records that have a verdict.
+- **Cross-curve vectors** — one record per algorithm, plus the secp256r1 record
+  with a bare `X‖Y` key, a raw `r‖s` signature and a Base64 `SD`, all generated
+  and verified with OpenSSL.
+- **Property tests** (round trip is the identity; one changed byte breaks the
+  signature; parsing is total), five fuzz targets, and unit tests.

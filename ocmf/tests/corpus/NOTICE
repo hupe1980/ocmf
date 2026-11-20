@@ -21,4 +21,4 @@ data: it is this project's own measurement, recorded with
 and is used as an oracle independent of the crate under test.
 
 The OCMF specification itself (CC BY-ND 4.0) is *not* redistributed here; it is
-fetched into the gitignored `specs/` directory by `cargo xtask spec-sync`.
+fetched into a gitignored reference directory by `cargo xtask spec-sync`.

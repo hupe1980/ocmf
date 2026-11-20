@@ -125,21 +125,35 @@ fn this_crate_and_openssl_agree_on_every_record() {
         disagreements.join("\n")
     );
 
-    // Without the OpenSSL backend, brainpool and secp192k1 records are named
-    // as unsupported rather than failed — and there are exactly five of them.
+    // A record this build cannot check is *named* unsupported, never failed —
+    // and exactly the records on curves the build lacks are. With the six
+    // pure-Rust curves that is the secp192k1 pair; with OpenSSL, none.
+    let lacking = corpus()
+        .iter()
+        .filter(|e| e.key.is_some() && e.openssl_verified.is_some())
+        .filter(|e| {
+            let curve = Record::parse(&e.record).unwrap().signature().curve();
+            curve.is_some_and(|c| !ocmf::verify::is_supported(c))
+        })
+        .count();
+    // At most those: a record on a lacking curve may still be refused earlier,
+    // for a reason of its own that needs no arithmetic.
+    assert!(
+        skipped_unsupported <= lacking,
+        "{skipped_unsupported} skipped, but only {lacking} records are on curves this build lacks"
+    );
+    assert_eq!(
+        agreed + skipped_unsupported,
+        251,
+        "247 authentic records and 4 that are not"
+    );
     #[cfg(feature = "backend-openssl")]
-    {
-        assert_eq!(skipped_unsupported, 0, "every curve is available");
-        assert_eq!(agreed, 251, "247 authentic records and 4 that are not");
-    }
-    #[cfg(not(feature = "backend-openssl"))]
-    {
-        assert!(
-            skipped_unsupported >= 4,
-            "brainpool and secp192k1 need the OpenSSL backend"
-        );
-        assert_eq!(agreed + skipped_unsupported, 251);
-    }
+    assert_eq!(skipped_unsupported, 0, "every curve is available");
+    #[cfg(all(feature = "curves-pure", not(feature = "backend-openssl")))]
+    assert_eq!(
+        skipped_unsupported, 2,
+        "the two secp192k1 records need OpenSSL"
+    );
 }
 
 #[test]

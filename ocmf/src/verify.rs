@@ -379,9 +379,6 @@ fn backend_verify(
 #[cfg(not(feature = "backend-openssl"))]
 const fn unsupported_reason(curve: Curve) -> &'static str {
     match curve {
-        Curve::BrainpoolP256r1 | Curve::BrainpoolP384r1 => {
-            "no pure-Rust brainpool arithmetic on a stable release; enable `backend-openssl`"
-        }
         Curve::Secp192k1 => {
             "no pure-Rust secp192k1 implementation is published; enable `backend-openssl`"
         }
@@ -408,7 +405,9 @@ pub const fn is_supported(curve: Curve) -> bool {
         Curve::Secp256r1 => cfg!(feature = "curve-p256"),
         Curve::Secp384r1 => cfg!(feature = "curve-p384"),
         Curve::Secp256k1 => cfg!(feature = "curve-k256"),
-        Curve::Secp192k1 | Curve::BrainpoolP256r1 | Curve::BrainpoolP384r1 => false,
+        Curve::BrainpoolP256r1 => cfg!(feature = "curve-bp256"),
+        Curve::BrainpoolP384r1 => cfg!(feature = "curve-bp384"),
+        Curve::Secp192k1 => false,
     }
 }
 
@@ -421,14 +420,15 @@ pub fn supported_curves() -> Vec<Curve> {
         .collect()
 }
 
-/// The pure-Rust backend: `RustCrypto`, four of the seven curves.
+/// The pure-Rust backend: `RustCrypto`, six of the seven curves.
 mod pure {
     use super::{Curve, VerifyError, pad};
 
     macro_rules! curve_arm {
-        ($krate:ident, $curve:expr, $key:expr, $digest:expr, $r:expr, $s:expr) => {{
-            use $krate::ecdsa::signature::hazmat::PrehashVerifier;
-            use $krate::ecdsa::{Signature, VerifyingKey};
+        ($ty:ty, $curve:expr, $key:expr, $digest:expr, $r:expr, $s:expr) => {{
+            use ecdsa::signature::hazmat::PrehashVerifier;
+            type Signature = ecdsa::Signature<$ty>;
+            type VerifyingKey = ecdsa::VerifyingKey<$ty>;
 
             let (Ok(r), Ok(s)) = (pad($r, $curve), pad($s, $curve)) else {
                 return Some(Err(VerifyError::SignatureScalars));
@@ -458,13 +458,35 @@ mod pure {
     ) -> Option<Result<bool, VerifyError>> {
         match curve {
             #[cfg(feature = "curve-p192")]
-            Curve::Secp192r1 => curve_arm!(p192, Curve::Secp192r1, key, digest, r, s),
+            Curve::Secp192r1 => curve_arm!(p192::NistP192, Curve::Secp192r1, key, digest, r, s),
             #[cfg(feature = "curve-p256")]
-            Curve::Secp256r1 => curve_arm!(p256, Curve::Secp256r1, key, digest, r, s),
+            Curve::Secp256r1 => curve_arm!(p256::NistP256, Curve::Secp256r1, key, digest, r, s),
             #[cfg(feature = "curve-p384")]
-            Curve::Secp384r1 => curve_arm!(p384, Curve::Secp384r1, key, digest, r, s),
+            Curve::Secp384r1 => curve_arm!(p384::NistP384, Curve::Secp384r1, key, digest, r, s),
             #[cfg(feature = "curve-k256")]
-            Curve::Secp256k1 => curve_arm!(k256, Curve::Secp256k1, key, digest, r, s),
+            Curve::Secp256k1 => curve_arm!(k256::Secp256k1, Curve::Secp256k1, key, digest, r, s),
+            #[cfg(feature = "curve-bp256")]
+            Curve::BrainpoolP256r1 => {
+                curve_arm!(
+                    bp256::BrainpoolP256r1,
+                    Curve::BrainpoolP256r1,
+                    key,
+                    digest,
+                    r,
+                    s
+                )
+            }
+            #[cfg(feature = "curve-bp384")]
+            Curve::BrainpoolP384r1 => {
+                curve_arm!(
+                    bp384::BrainpoolP384r1,
+                    Curve::BrainpoolP384r1,
+                    key,
+                    digest,
+                    r,
+                    s
+                )
+            }
             _ => None,
         }
     }
@@ -594,8 +616,8 @@ mod tests {
 
     #[test]
     fn an_unavailable_curve_is_reported_as_unsupported() {
-        // brainpool without the OpenSSL backend: named, not guessed at.
-        let out = backend_verify(Curve::BrainpoolP256r1, &[4u8; 65], &[0u8; 32], &[1], &[1]);
+        // secp192k1 without the OpenSSL backend: named, not guessed at.
+        let out = backend_verify(Curve::Secp192k1, &[4u8; 49], &[0u8; 32], &[1], &[1]);
         #[cfg(feature = "backend-openssl")]
         assert!(matches!(out, Err(VerifyError::KeyNotOnCurve { .. })));
         #[cfg(not(feature = "backend-openssl"))]
@@ -612,10 +634,78 @@ mod tests {
         assert_eq!(listed.len(), 7, "OpenSSL covers every algorithm");
         #[cfg(all(not(feature = "backend-openssl"), feature = "curves-pure"))]
         assert_eq!(
-            listed.len(),
-            4,
-            "four curves have a pure-Rust implementation"
+            listed,
+            Curve::ALL
+                .into_iter()
+                .filter(|c| *c != Curve::Secp192k1)
+                .collect::<Vec<_>>(),
+            "six curves have a pure-Rust implementation; secp192k1 is the one that needs OpenSSL"
         );
+    }
+
+    /// OpenSSL's brainpool is the one the corpus was judged by; the pure-Rust
+    /// one must agree with it. Both must give the same answer — on a genuine signature,
+    /// on a tampered digest, on a key off the curve, on a scalar equal to `n` —
+    /// and both over the SHA-256 digest `[OCMF Tab. 22]` fixes, P-384 included.
+    #[test]
+    #[cfg(all(
+        feature = "sign",
+        feature = "curve-bp256",
+        feature = "curve-bp384",
+        feature = "backend-openssl"
+    ))]
+    fn the_brainpool_backends_agree_on_every_kind_of_input() {
+        use crate::sign::{BrainpoolP256r1Signer, BrainpoolP384r1Signer, Signer};
+        fn check<S: Signer>(signer: &S) {
+            let curve = signer.curve();
+            let key = signer.public_key().unwrap();
+            let key = key.sec1_bytes();
+            for seed in 0u8..16 {
+                let digest = sha256(&[seed; 7]);
+                let (r, s) = signer.sign_prehash(&digest).unwrap();
+                let both = |k: &[u8], d: &[u8; 32], r: &[u8], s: &[u8]| {
+                    let pure = pure::verify(curve, k, d, r, s).expect("compiled in");
+                    let ossl = openssl_backend::verify(curve, k, d, r, s);
+                    assert_eq!(pure, ossl, "{curve}, seed {seed}");
+                    pure
+                };
+                assert_eq!(both(key, &digest, &r, &s), Ok(true));
+                let mut tampered = digest;
+                tampered[seed as usize % 32] ^= 1;
+                assert_eq!(both(key, &tampered, &r, &s), Ok(false));
+                let mut off = key.to_vec();
+                let last = off.len() - 1;
+                off[last] ^= 1;
+                assert!(matches!(
+                    both(&off, &digest, &r, &s),
+                    Err(VerifyError::KeyNotOnCurve { .. })
+                ));
+                let n = curve.order();
+                assert_eq!(
+                    both(key, &digest, &r, n),
+                    Err(VerifyError::SignatureScalars)
+                );
+            }
+        }
+        check(&BrainpoolP256r1Signer::from_bytes(&[0x11; 32]).unwrap());
+        check(&BrainpoolP384r1Signer::from_bytes(&[0x22; 48]).unwrap());
+    }
+
+    /// Brainpool keys go through the same point check as every other curve:
+    /// a key off the curve is the key's fault, not the station's.
+    #[test]
+    #[cfg(all(feature = "curve-bp256", feature = "curve-bp384"))]
+    fn a_brainpool_key_off_the_curve_is_not_a_failed_signature() {
+        for (curve, len) in [(Curve::BrainpoolP256r1, 65), (Curve::BrainpoolP384r1, 97)] {
+            let out = pure::verify(curve, &alloc::vec![4u8; len], &[0u8; 32], &[1], &[1]);
+            assert_eq!(
+                out,
+                Some(Err(VerifyError::KeyNotOnCurve {
+                    curve: curve.name()
+                })),
+                "{curve}"
+            );
+        }
     }
 
     #[test]
