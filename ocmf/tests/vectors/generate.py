@@ -83,7 +83,7 @@ out.append({"curve": "secp256r1", "algorithm": "ECDSA-secp256r1-SHA256",
             "shape": "base64-signature",
             "note": "SE=base64 [OCMF Tab. 8]"})
 
-path = "/Users/hupe/Workspaces/hupe1980/ocmf/ocmf/tests/vectors/curves.json"
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "curves.json")
 os.makedirs(os.path.dirname(path), exist_ok=True)
 json.dump({"generator": "openssl 3.6.3, see tests/vectors/README.md", "vectors": out},
           open(path, "w"), indent=1)

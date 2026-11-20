@@ -92,8 +92,8 @@ enum Command {
         /// The private scalar, hex, or `@path`. **A test key, not a meter's.**
         #[arg(long)]
         key: String,
-        /// The curve to sign on. `p192` is verify-only: `p192` 0.13 publishes
-        /// no signer, and a 192-bit curve is not one to build new hardware on.
+        /// The curve to sign on. The 192-bit curves are verify-only: they are
+        /// not curves to build new hardware on.
         #[arg(long, value_enum, default_value_t = SignCurve::Secp256r1)]
         curve: SignCurve,
         /// `PG` counter value.
@@ -133,6 +133,10 @@ enum SignCurve {
     Secp384r1,
     /// secp256k1.
     Secp256k1,
+    /// brainpoolP256r1.
+    BrainpoolP256r1,
+    /// brainpoolP384r1, hashing with SHA-256 as the table requires.
+    BrainpoolP384r1,
 }
 
 #[derive(Copy, Clone, PartialEq, Eq, ValueEnum)]
@@ -196,8 +200,9 @@ fn main() -> Result<()> {
             }
             if supported.len() < Curve::ALL.len() {
                 println!(
-                    "\nThe missing curves have no pure-Rust implementation on a stable\n\
-                     release. Build with `--features backend-openssl` for all seven."
+                    "\nsecp192k1 has no pure-Rust implementation; any other curve marked NO\n\
+                     is a curve feature this build left out. Build with\n\
+                     `--features backend-openssl` for all seven."
                 );
             }
             Ok(())
@@ -737,7 +742,8 @@ fn sign_cmd(
     end: &str,
 ) -> Result<()> {
     use ocmf::sign::{
-        ReadingSpec, RecordBuilder, Secp256k1Signer, Secp256r1Signer, Secp384r1Signer, Signer,
+        BrainpoolP256r1Signer, BrainpoolP384r1Signer, ReadingSpec, RecordBuilder, Secp256k1Signer,
+        Secp256r1Signer, Secp384r1Signer, Signer,
     };
     use ocmf::{IdentificationLevel, IdentificationType, Location, OcmfTime, Pagination, Unit};
     use rust_decimal::Decimal;
@@ -798,6 +804,14 @@ fn sign_cmd(
         }
         SignCurve::Secp256k1 => {
             let s = Secp256k1Signer::from_bytes(&scalar).map_err(bad)?;
+            (builder.sign(&s).map_err(bad)?, s.public_key().map_err(bad)?)
+        }
+        SignCurve::BrainpoolP256r1 => {
+            let s = BrainpoolP256r1Signer::from_bytes(&scalar).map_err(bad)?;
+            (builder.sign(&s).map_err(bad)?, s.public_key().map_err(bad)?)
+        }
+        SignCurve::BrainpoolP384r1 => {
+            let s = BrainpoolP384r1Signer::from_bytes(&scalar).map_err(bad)?;
             (builder.sign(&s).map_err(bad)?, s.public_key().map_err(bad)?)
         }
     };

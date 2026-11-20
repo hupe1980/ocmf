@@ -4,10 +4,10 @@ description = "Check a whole charging transaction: continuous pagination, one be
 weight = 7
 +++
 
-## Beyond one signature
+## Check a sequence
 
 A valid signature on each record says nothing about the sequence. The
-specification assigns that to a *check component*:
+specification assigns that check to a *check component*:
 
 > The cohesion between several individual data records is ensured by continuous
 > pagination. […] The first record must be marked as the start of a charging
@@ -16,10 +16,10 @@ specification assigns that to a *check component*:
 > error during the test. Furthermore, all data records must come from the same
 > source.
 
-Every sentence of that is a check here, plus the four the reference verifier
-adds: exactly one start and one stop reading, `RV(start) ≤ RV(stop)`,
+`ocmf::session::validate` checks each of those, plus the reference verifier's
+additions: exactly one start and one stop reading, `RV(start) ≤ RV(stop)`,
 `t(start) ≤ t(stop)`, `ST == "G"` on both, and an identification level outside
-the four error states.
+the error states.
 
 ```rust
 let report = ocmf::session::validate(&records);
@@ -34,18 +34,14 @@ for t in report.totals() {
 }
 ```
 
-The records must be in the order the station produced them; the function checks
-that the pagination agrees, it does not sort.
+Pass the records in the order the station produced them; `validate` checks the
+pagination, it does not sort.
 
 ## Which rules a sequence is subject to
 
 `[OCMF Tab. 2]` defines the `F` pagination context as "fiscal readings,
-**independent of transactions**", and `[OCMF Tab. 7]` makes an absent `TX` mean
-the same thing. A fiscal record is therefore *forbidden* to carry a begin or an
-end marker — so asking one for a marker reports a fault against a record for
-obeying the specification.
-
-`SessionReport::kind()` says which rule set ran:
+independent of transactions", so a fiscal record must not carry begin or end
+markers. `SessionReport::kind()` says which rule set ran:
 
 | `SequenceKind` | Marker rules | `RegisterTotal` ends are |
 |---|---|---|
@@ -56,14 +52,11 @@ Everything else applies to both: continuous pagination, one source, no repeats,
 meter state, error flags, identification, the clock, and a register that does
 not run backwards.
 
-No record in the reference corpus is fiscal — measured, 0 of 256 — which makes
-this the path most worth being explicit about, not the least.
-
 ## Where signatures fit
 
-`validate` answers "do these records hang together", never "is this session
-real". When you hold verified records, thread them through instead — the two
-questions then stay visibly answered rather than visibly conflated:
+`validate` answers "do these records hang together", not "are they authentic".
+When you hold verified records, pass them to `validate_verified` so both
+questions are answered:
 
 ```rust
 let verified: Vec<_> = records.iter()
@@ -90,18 +83,15 @@ values involved.
 - `DuplicateRecord` — the same payload twice, caught on the digest even when the
   pagination is valid
 
-`RegisterEndWithoutBegin` is where this parts company with the reference
-verifier deliberately. `Meter.validateListStartStop` compares the **largest**
-start against the **smallest** stop across every law-relevant register at once,
-as Java `double`s — which on the interleaved records LEM meters write pairs an
-import start with an export stop. Asked per register, with exact decimals, the
-question either has an answer or it does not, and "it does not" is a finding.
+Start and stop are compared **per register**, with exact decimals. The
+reference verifier compares across all registers at once, which pairs an import
+start with an export stop on interleaved records; a register with an end but no
+begin is reported as `RegisterEndWithoutBegin`.
 
 ## A report a pipeline can read
 
-Under the `serde` feature the whole report serialises, with every quantity as
-the decimal's **exact text** — a JSON number goes through `f64` in most
-consumers, and these are kilowatt-hours somebody is invoiced for.
+Under the `serde` feature the report serialises, with every quantity as the
+decimal's **exact text** rather than a JSON number:
 
 ```console
 $ ocmf session start.ocmf end.ocmf --json
@@ -117,27 +107,21 @@ $ ocmf session start.ocmf end.ocmf --json
 }
 ```
 
-A finding names itself — `{"finding": "PaginationBroken", "from": 1, "to": 3,
-"index": 1}` — so another tool can match on the name rather than on prose.
+A finding serialises with its name — `{"finding": "PaginationBroken", "from": 1,
+"to": 3, "index": 1}` — so tools can match on the name rather than the message.
 
 ## The weakest clock decides
 
 `SessionReport::clock()` is the **lowest** clock status anywhere in the
-sequence, not the best. One synchronised reading does not vouch for twenty
-unsynchronised ones, and the error of taking the best one always runs towards
-billing.
+sequence: one synchronised reading does not vouch for unsynchronised ones.
 
 ```rust
 report.clock();       // the weakest — what a decision should use
 report.best_clock();  // reported for completeness; authorise nothing on it
 ```
 
-That matches every other rule in the crate: an unknown meter state is not `OK`,
-an unknown unit is not energy, an omitted error flag is still set.
+## Scope
 
-## This module does not decide money
-
-It reports findings. Whether a session may be invoiced depends on tariffs, on a
-key registry binding each record to *this* charge point, and on law — none of
-which is in scope. What it does guarantee is that no finding is silently absent:
-a clean report means every rule above held.
+The module reports findings; it does not decide whether a session may be
+invoiced, which depends on tariffs, a key registry and law. A clean report means
+every rule above held.

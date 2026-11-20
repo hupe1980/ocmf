@@ -165,12 +165,12 @@ where
 }
 
 macro_rules! rfc6979_signer {
-    ($(#[$m:meta])* $name:ident, $krate:ident, $curve:expr, $feature:literal) => {
+    ($(#[$m:meta])* $name:ident, $ty:ty, $curve:expr, $feature:literal) => {
         $(#[$m])*
         #[cfg(feature = $feature)]
         #[cfg_attr(docsrs, doc(cfg(feature = $feature)))]
         #[derive(Clone)]
-        pub struct $name($krate::ecdsa::SigningKey);
+        pub struct $name(ecdsa::SigningKey<$ty>);
 
         #[cfg(feature = $feature)]
         impl $name {
@@ -180,7 +180,7 @@ macro_rules! rfc6979_signer {
             ///
             /// [`BuildError::Signer`] when the scalar is not a valid key.
             pub fn from_bytes(scalar: &[u8]) -> Result<Self, BuildError> {
-                $krate::ecdsa::SigningKey::from_slice(scalar)
+                ecdsa::SigningKey::<$ty>::from_slice(scalar)
                     .map(Self)
                     .map_err(|_| BuildError::Signer)
             }
@@ -201,22 +201,22 @@ macro_rules! rfc6979_signer {
             }
 
             fn public_key(&self) -> Result<PublicKey, BuildError> {
-                use $krate::elliptic_curve::sec1::ToEncodedPoint;
+                use ecdsa::elliptic_curve::sec1::ToSec1Point;
                 let vk = self.0.verifying_key();
-                let point = vk.as_affine().to_encoded_point(false);
+                let point = vk.as_affine().to_sec1_point(false);
                 PublicKey::from_sec1($curve, point.as_bytes()).map_err(|_| BuildError::Signer)
             }
 
             fn sign_prehash(&self, digest: &[u8; 32]) -> Result<(Vec<u8>, Vec<u8>), BuildError> {
-                use $krate::ecdsa::signature::hazmat::PrehashSigner;
-                let sig: $krate::ecdsa::Signature =
+                use ecdsa::signature::hazmat::PrehashSigner;
+                let sig: ecdsa::Signature<$ty> =
                     self.0.sign_prehash(digest).map_err(|_| BuildError::Signer)?;
                 // Emit the low-`s` form. OCMF permits either — `(r, s)` and
                 // `(r, n - s)` are the same statement — but a verifier that
                 // enforces low-`s` (k256's default, and every Bitcoin-adjacent
                 // stack) refuses the high one. Choosing the form everybody
                 // accepts costs nothing.
-                let sig = sig.normalize_s().unwrap_or(sig);
+                let sig = sig.normalize_s();
                 let bytes = sig.to_bytes();
                 let width = $curve.field_bytes();
                 Ok((bytes[..width].to_vec(), bytes[width..].to_vec()))
@@ -227,17 +227,25 @@ macro_rules! rfc6979_signer {
 
 rfc6979_signer!(
     /// RFC 6979 deterministic ECDSA on secp256r1 — the OCMF default curve.
-    Secp256r1Signer, p256, Curve::Secp256r1, "curve-p256");
+    Secp256r1Signer, p256::NistP256, Curve::Secp256r1, "curve-p256");
 rfc6979_signer!(
     /// RFC 6979 deterministic ECDSA on secp384r1, hashing with SHA-256 as
     /// `[OCMF Tab. 22]` requires.
-    Secp384r1Signer, p384, Curve::Secp384r1, "curve-p384");
+    Secp384r1Signer, p384::NistP384, Curve::Secp384r1, "curve-p384");
 rfc6979_signer!(
     /// RFC 6979 deterministic ECDSA on secp256k1.
-    Secp256k1Signer, k256, Curve::Secp256k1, "curve-k256");
-// There is deliberately no secp192r1 signer. `p192` 0.13 publishes the
-// verifying half of ECDSA and not the signing half, and a 192-bit curve is not
-// something new hardware should be signing with in any case: it is here so that
+    Secp256k1Signer, k256::Secp256k1, Curve::Secp256k1, "curve-k256");
+rfc6979_signer!(
+    /// RFC 6979 deterministic ECDSA on brainpoolP256r1.
+    BrainpoolP256r1Signer, bp256::BrainpoolP256r1, Curve::BrainpoolP256r1, "curve-bp256");
+rfc6979_signer!(
+    /// RFC 6979 deterministic ECDSA on brainpoolP384r1, hashing with SHA-256 as
+    /// `[OCMF Tab. 22]` requires.
+    BrainpoolP384r1Signer, bp384::BrainpoolP384r1, Curve::BrainpoolP384r1, "curve-bp384");
+// There is deliberately no secp192r1 signer: a 192-bit curve is not something
+// new hardware should be signing with, and `p192` is a pre-release on this
+// RustCrypto line, which is acceptable for checking and not for signing. It is
+// here so that
 // eBZ LD3 records — which the Transparenzsoftware ships as reference data — can
 // be *checked*, which is the direction that matters for a curve on its way out.
 
@@ -1333,6 +1341,33 @@ mod tests {
         // With it, the record says what it is and verifies.
         let buf = builder().sign(&k).unwrap();
         assert!(buf.as_str().contains("ECDSA-secp256k1-SHA256"));
+    }
+
+    /// The brainpool signers carry every guarantee the others do: the same
+    /// bytes every time, the low-`s` form, and a record that reads back under
+    /// `Profile::Strict` and verifies against the signer's own key.
+    #[test]
+    #[cfg(all(feature = "curve-bp256", feature = "curve-bp384"))]
+    fn brainpool_signers_are_deterministic_low_s_and_self_verifying() {
+        fn check<S: Signer>(signer: &S) {
+            let curve = signer.curve();
+            let a = builder().sign(signer).unwrap();
+            let b = builder().sign(signer).unwrap();
+            assert_eq!(a.as_str(), b.as_str(), "{curve}: RFC 6979");
+            let record = a.record().unwrap();
+            assert!(a.as_str().contains(curve.algorithm().as_str()));
+            let key = signer.public_key().unwrap();
+            crate::verify::verify(&record, &key).expect("its own signature");
+            for seed in 0u8..32 {
+                let (_, s) = signer.sign_prehash(&[seed; 32]).unwrap();
+                assert!(
+                    !crate::scalar::is_high(&s, curve.order()),
+                    "{curve}: high s"
+                );
+            }
+        }
+        check(&BrainpoolP256r1Signer::from_bytes(&[0x11; 32]).unwrap());
+        check(&BrainpoolP384r1Signer::from_bytes(&[0x22; 48]).unwrap());
     }
 
     #[test]

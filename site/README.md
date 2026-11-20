@@ -18,10 +18,10 @@ deploys `main` to GitHub Pages.
 config.toml            base URL, SEO defaults, the numbers the site quotes
 content/_index.md      the landing page
 content/docs/*.md      one page per topic, ordered by `weight`
-templates/             base, home, section, page, 404
+templates/             base, index (home), section, page, 404
 templates/partials/    sidebar, table of contents, JSON-LD
 sass/main.scss         the whole design system: tokens, layout, components
-static/                favicon, Open Graph image, robots.txt, search
+static/                favicons, Open Graph image, search script
 ```
 
 ## Conventions

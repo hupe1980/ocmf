@@ -4,11 +4,11 @@ description = "Build and sign OCMF records in Rust: RFC 6979 deterministic ECDSA
 weight = 6
 +++
 
-## Text first, always
+## Build and sign
 
-The builder produces the payload *text*, hashes those exact bytes, and signs the
-hash. There is no path from a typed value to a signature that does not go
-through the bytes that will be transmitted.
+`RecordBuilder` writes the payload *text*, hashes those exact bytes, and signs
+the hash — there is no path from a typed value to a signature that skips the
+bytes that will be transmitted.
 
 ```rust
 use ocmf::sign::{ReadingSpec, RecordBuilder, Secp256r1Signer};
@@ -32,32 +32,31 @@ let record = RecordBuilder::new()
     .sign(&signer)?;
 ```
 
-`RecordBuilder::payload_text()` gives you the exact bytes before they are
-committed to, which is worth looking at at least once.
+`RecordBuilder::payload_text()` returns the exact payload bytes before signing.
 
-## Deterministic by default
+## Signers
 
-ECDSA leaks the private key if a nonce is ever reused across two signatures. On
-a charge controller with a weak entropy source that is not a theoretical risk,
-and the consequence is not one bad record but a fleet's worth of evidence voided
-at once.
+| Signer | Feature |
+|---|---|
+| `Secp256r1Signer` | `curve-p256` (default) |
+| `Secp384r1Signer` | `curve-p384` |
+| `Secp256k1Signer` | `curve-k256` |
+| `BrainpoolP256r1Signer` | `curve-bp256` |
+| `BrainpoolP384r1Signer` | `curve-bp384` |
 
-The default signers are **RFC 6979 deterministic**: they consult no randomness
-at all. And every record this crate signs carries the **low-`s`** form, which
-every verifier accepts — the normalisation happens in `sign()`, over the curve's
-own order, so it covers `ExternalSigner` too. An HSM is precisely the signer
-whose output this crate does not control.
+All are pure Rust and **RFC 6979 deterministic**: they use no randomness, so a
+weak entropy source on a charge controller cannot cause the nonce reuse that
+leaks an ECDSA key. There is **no secp192r1 or secp192k1 signer**; 192-bit
+curves are supported for verifying records from deployed meters only.
 
-`Secp256r1Signer`, `Secp384r1Signer` and `Secp256k1Signer` are available behind
-their curve features. There is deliberately **no secp192r1 signer**: the
-underlying crate publishes only the verifying half of ECDSA on that curve, and a
-192-bit curve is not something new hardware should be signing with. It is here
-so that records from deployed meters can be *checked*.
+Every signature this crate emits is in **low-`s`** form, which every verifier
+accepts. The normalisation happens in `sign()`, so it applies to
+`ExternalSigner` too.
 
 ## Secure elements and HSMs
 
-A certified measuring capsule keeps its private key inside a secure element.
-`ExternalSigner` hands that device the prehashed 32 bytes and nothing else:
+`ExternalSigner` hands a secure element or HSM the 32-byte SHA-256 digest and
+nothing else:
 
 ```rust
 use ocmf::sign::ExternalSigner;
@@ -70,10 +69,9 @@ let record = builder.sign(&signer)?;
 
 ## What the builder refuses
 
-**A record this crate writes passes `Profile::Strict`** — and that is checked on
-the emitted bytes, not merely intended. Validation runs before anything is
-signed, and refuses every input that would become a `Departure::Specification`
-deviation on the reading side:
+**A record this crate writes passes `Profile::Strict`.** Validation runs before
+anything is signed and refuses, with a `BuildError`, every input that would be a
+`Departure::Specification` deviation when read:
 
 - `|` in any field — the specification forbids it in a section;
 - a missing `PG`, a `PG` in a context letter the table does not define, an empty
@@ -85,9 +83,7 @@ deviation on the reading side:
   match its `CT`;
 - an `ST`, `TX`, `RU`, `RT`, `IL`, `IT`, `CT` or `IF` flag outside its table, or
   an `EF` character other than `E` and `t`;
-- an `RI` that is not in the `[Tab. 25]` form — the builder writes the one
-  spelling the specification gives, even though no record in the reference
-  corpus uses it;
+- an `RI` that is not in the `[Tab. 25]` form (`01-00:B1.08.00*FF`);
 - a `TM` whose fields are not a real date, or that carries no synchronisation
   letter;
 - an `RV` with no `RU`;
@@ -98,12 +94,12 @@ deviation on the reading side:
   misstates itself.
 
 Then the record is **re-parsed under `Profile::Strict`** and verified against the
-signer's own public key before it is returned. The list above is the promise; the
-self-check is the proof.
+signer's own public key before it is returned; a failure is
+`BuildError::SelfCheck`.
 
-Reading the field and writing the specification are different jobs, and this
-crate does not blur them: `Record::parse` reads `"RI":"1-b:1.8.0"` — the spelling
-705 of 705 corpus readings use — and `RecordBuilder` refuses to write it.
+Reading and writing differ on purpose: `Record::parse` accepts field spellings
+such as `"RI":"1-b:1.8.0"`, which no reference-corpus reading writes in the
+`[Tab. 25]` form, while `RecordBuilder` writes only the specified form.
 
 ## The format version is derived
 
@@ -116,15 +112,10 @@ crate does not blur them: `Record::parse` reads `"RI":"1-b:1.8.0"` — the spell
 | `TT` tariff text | 1.1 |
 | anything else | 1.0 |
 
-Stamping the newest revision on every record is the obvious default and the
-wrong one: the legally recognised verifier dispatches on `version <= 1.3` and
-answers "not compatible" above it. `FV: "1.4"` on a record using nothing newer
-than 1.0 makes a station's own evidence unreadable by the tool a driver runs,
-for no benefit at all.
-
-`RecordBuilder::format_version()` overrides the derived value; a record that
-claims more than the reference reads is reported as
-`FormatVersionAheadOfReference`.
+The lowest sufficient version is used because the S.A.F.E. Transparenzsoftware
+refuses any `FV` above 1.3. `RecordBuilder::required_format_version()` shows the
+derived value and `RecordBuilder::format_version()` overrides it; a record above
+1.3 is reported as `FormatVersionAheadOfReference`.
 
 ## Cable-loss compensation
 
@@ -136,5 +127,5 @@ let builder = builder.loss_compensation(
 );
 ```
 
-`LR` and `LU` are mandatory inside the block; `LN` and `LI` are the traceability
-fields that let an auditor find the characteristics used.
+`LR` and `LU` are mandatory; `LN` (at most 20 characters) and `LI` are optional
+traceability fields identifying the cable characteristics used.

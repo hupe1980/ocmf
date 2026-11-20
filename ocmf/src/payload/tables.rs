@@ -801,8 +801,14 @@ impl<'a> IdentificationType<'a> {
             Self::Iso15693 => hex([16, 16]),
             // "string with length 14 or 15"
             Self::Emaid => matches!(data.chars().count(), 14 | 15),
-            // "maximum length 6 characters"
-            Self::Evccid => data.chars().count() <= 6,
+            // "maximum length is 12 bytes in hexadecimal notation" — read as
+            // ISO 15118-2 `hexBinary` of at most 6 bytes, which is what the
+            // change that introduced the wording says it means.
+            Self::Evccid => {
+                data.len() <= 12
+                    && data.len().is_multiple_of(2)
+                    && data.bytes().all(|c| c.is_ascii_hexdigit())
+            }
             // "International phone number with leading \"+\"."
             Self::PhoneNumber => data.starts_with('+'),
             _ => return None,
@@ -1058,6 +1064,17 @@ impl fmt::Display for ChargePointIdType<'_> {
 mod tests {
     use super::*;
     use alloc::string::ToString;
+
+    #[test]
+    fn an_evccid_is_up_to_six_bytes_of_hex() {
+        let well_formed = |id| IdentificationType::Evccid.data_is_well_formed(id);
+        for id in ["0A1B2C3D4E5F", "0a1b2c", ""] {
+            assert_eq!(well_formed(id), Some(true), "{id:?}");
+        }
+        for id in ["0A1B2C3D4E5F01", "ABC", "NOT-HEX!", "ABC123 "] {
+            assert_eq!(well_formed(id), Some(false), "{id:?}");
+        }
+    }
 
     #[test]
     fn every_meter_state_letter_round_trips() {

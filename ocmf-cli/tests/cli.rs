@@ -137,8 +137,14 @@ fn a_record_that_is_not_ocmf_fails_rather_than_reporting_nothing() {
 
 #[test]
 fn sign_then_verify_is_a_round_trip_through_the_tool() {
+    for curve in ["secp256r1", "brainpool-p256r1", "brainpool-p384r1"] {
+        round_trip(curve);
+    }
+}
+
+fn round_trip(curve: &str) {
     let key = "2a".repeat(32);
-    let signed = run(&["sign", "--key", &key], "");
+    let signed = run(&["sign", "--key", &key, "--curve", curve], "");
     assert!(
         signed.status.success(),
         "{:?}",

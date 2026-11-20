@@ -8,6 +8,8 @@ edition.workspace      = true
 license.workspace      = true
 repository.workspace   = true
 rust-version.workspace = true
+homepage.workspace     = true
+documentation          = "https://docs.rs/ocmf"
 keywords.workspace     = true
 categories.workspace   = true
 
@@ -21,6 +23,8 @@ p192  = { workspace = true, optional = true }
 p256  = { workspace = true, optional = true }
 p384  = { workspace = true, optional = true }
 k256  = { workspace = true, optional = true }
+bp256 = { workspace = true, optional = true }
+bp384 = { workspace = true, optional = true }
 
 openssl   = { workspace = true, optional = true }
 quick-xml = { workspace = true, optional = true }
@@ -53,12 +57,16 @@ curve-p192 = ["verify", "dep:p192"]
 curve-p256 = ["verify", "dep:p256"]
 curve-p384 = ["verify", "dep:p384"]
 curve-k256 = ["verify", "dep:k256"]
-curves-pure = ["curve-p192", "curve-p256", "curve-p384", "curve-k256"]
+curve-bp256 = ["verify", "dep:bp256"]
+curve-bp384 = ["verify", "dep:bp384"]
+# `curve-p192` is the one feature that compiles a pre-release: `p192` has no
+# stable release on the RustCrypto 0.14 line. It verifies only — there is no
+# secp192r1 signer — for the eBZ LD3 records still in the field.
+curves-pure = ["curve-p192", "curve-p256", "curve-p384", "curve-k256", "curve-bp256", "curve-bp384"]
 
-# The OpenSSL backend is the only way to check brainpoolP256r1,
-# brainpoolP384r1 and secp192k1 today: no audited pure-Rust implementation of
-# any of the three is published on a stable release. With it, all seven
-# algorithms of [OCMF Tab. 22] verify.
+# The OpenSSL backend is the only way to check secp192k1: no pure-Rust
+# implementation of it is published. With it, all seven algorithms of
+# [OCMF Tab. 22] verify; the pure backend is still tried first.
 backend-openssl = ["std", "verify", "dep:openssl"]
 
 # The same backend, statically linked from source. For a *distributable binary*

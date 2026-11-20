@@ -20,15 +20,31 @@ target
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Vendored specifications and reference implementations (CC BY-ND / third-party licences).
-# Fetched by `xtask spec-sync`; never committed.
-/specs/
-
-# Internal architecture documentation, not published with the crate.
-# `CONCEPT.md` is the pre-split single-file form; both are ignored so a draft
-# in either shape stays local.
+# Internal architecture notes (see concepts/README.md), anchored to the repository
+# root. ROADMAP.md is the spec of specs: every open item names its feature
+# specification. `CONCEPT.md` is the pre-split single-file form; both are ignored
+# so a draft in either shape stays local.
+#
+# The third-party corpus — the OCMF specification (CC BY-ND 4.0), the S.A.F.E.
+# Transparenzsoftware and the OCA application note — lives at `concepts/reference/`
+# and is covered by this line: fetched at its pins by `cargo xtask spec-sync`
+# (`$OCMF_REFERENCE` overrides the location), never committed, and indexed in
+# `concepts/REFERENCES.md`.
 /concepts/
 /CONCEPT.md
+
+# This project's own feature specifications, and the Spec Kit machinery that
+# produces them: one `specs/NNN-slug/` per ROADMAP item, `.specify/memory/constitution.md`,
+# the threatspec extension, and the `/speckit-*` skills. Same rule as `concepts/` —
+# internal, and the published tree may not cite a path its reader does not have;
+# `scripts/concepts-check.sh` fails on one that does.
+#
+# Until 2026-11-20 `specs/` held the corpus now under `concepts/reference/`; a stale
+# copy is ignored by the same line. Matches ocpp-kit, eebus and metering.
+/specs/
+/.specify/
+/.claude/
+.DS_Store
 
 # Zola build output
 /site/public/

@@ -46,7 +46,7 @@ jobs:
       # The embedded promise is a CI job, not a sentence in the README.
       - run: |
           cargo build -p ocmf --no-default-features \
-            --features alloc,verify,curve-p256,sign,session,ocpp \
+            --features alloc,verify,curve-p256,curve-bp256,curve-bp384,sign,session,ocpp \
             --target thumbv7em-none-eabihf
       # And the browser one. It builds only because nothing here asks for
       # randomness: `std` deliberately leaves `ecdsa/std` off, which is what
@@ -79,6 +79,7 @@ jobs:
       # A reading is money: no f32/f64 anywhere in the library.
       - run: cargo xtask no-floats
       - run: cargo xtask corpus-report
+      - run: cargo xtask deps
       # The published conformance suite must be exactly what the generator
       # produces: a hand-edited suite is a suite nobody can trust.
       - run: cargo xtask conformance-gen

@@ -360,7 +360,7 @@ fn cases() -> Result<Vec<Case>> {
         ("ISO14443", "1F2D3A4F5506C7"),   // 7 bytes hex
         ("ISO15693", "1F2D3A4F5506C7A9"), // 8 bytes hex
         ("EMAID", "DE8ACC12E4F3R7"),      // 14 characters
-        ("EVCCID", "ABC123"),             // at most 6
+        ("EVCCID", "0A1B2C3D4E5F"),       // ≤ 6 bytes hex
         ("EVCOID", "DE-8AC-C12E4F3R7-2"),
         ("ISO7812", "4111111111111111"),
         ("CARD_TXN_NR", "0000012345"),
@@ -711,6 +711,13 @@ fn cases() -> Result<Vec<Case>> {
         "IT = ISO14443 with an ID that is not 4 or 7 bytes of hex [OCMF Tab. 17]",
         payload_with("", &reading_json(""))
             .replace(r#""ID":"1F2D3A4F5506C7""#, r#""ID":"NOT-A-UID""#),
+    )?);
+    out.push(dev(
+        "identification-data-format-evccid",
+        "IT = EVCCID with an ID that is not at most 6 bytes of hex [OCMF Tab. 17]",
+        payload_with("", &reading_json(""))
+            .replace(r#""IT":"ISO14443""#, r#""IT":"EVCCID""#)
+            .replace(r#""ID":"1F2D3A4F5506C7""#, r#""ID":"VEHICLE-1""#),
     )?);
     out.push(dev(
         "charge-point-id-format",

@@ -18,7 +18,7 @@ matrix:
         echo "── $f"; cargo test -q -p ocmf --no-default-features --features "$f"; \
     done
     cargo build -p ocmf --no-default-features \
-        --features alloc,verify,curve-p256,sign,session,ocpp \
+        --features alloc,verify,curve-p256,curve-bp256,curve-bp384,sign,session,ocpp \
         --target thumbv7em-none-eabihf
     cargo build -p ocmf --features full --target wasm32-unknown-unknown
 
@@ -26,7 +26,7 @@ matrix:
 test-pure:
     cargo test --workspace --features full
     cargo build -p ocmf --no-default-features \
-        --features alloc,verify,curve-p256,sign,session,ocpp \
+        --features alloc,verify,curve-p256,curve-bp256,curve-bp384,sign,session,ocpp \
         --target thumbv7em-none-eabihf
     cargo build -p ocmf --features full --target wasm32-unknown-unknown
 
@@ -39,6 +39,7 @@ lint:
 house:
     cargo xtask no-floats
     cargo xtask corpus-report
+    cargo xtask deps
     cargo xtask conformance-gen
     git diff --exit-code conformance/suite.json
     cargo run -q -p ocmf-cli -- conformance conformance/suite.json
